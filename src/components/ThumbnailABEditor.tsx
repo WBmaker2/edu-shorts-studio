@@ -5,6 +5,7 @@ import {
   Check,
 } from 'lucide-react';
 import type { HookingVariant, ScriptScene } from '../types';
+import { generateBrowserHookingVariants } from '../utils/browserEduEngine';
 
 interface ThumbnailABEditorProps {
   topic: string;
@@ -45,10 +46,16 @@ export const ThumbnailABEditor: React.FC<ThumbnailABEditorProps> = ({
         if (res && res.length > 0) {
           setVariants(res);
           setSelectedVariantId(res[res.length - 1].id);
+          return;
         }
       }
+      const webRes = generateBrowserHookingVariants(targetTopic);
+      setVariants(webRes);
+      setSelectedVariantId(webRes[webRes.length - 1].id);
     } catch (err) {
       console.warn('Failed to generate hooking variants:', err);
+      const fallbackRes = generateBrowserHookingVariants(targetTopic);
+      setVariants(fallbackRes);
     } finally {
       setIsLoading(false);
     }

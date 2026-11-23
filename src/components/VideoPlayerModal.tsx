@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useEscapeKey } from '../hooks/useEscapeKey';
-import { X, FolderOpen, Play, CheckCircle2, Upload, Sparkles } from 'lucide-react';
+import { X, FolderOpen, Play, CheckCircle2, Upload, Sparkles, Download } from 'lucide-react';
 import type { ShortsProject } from '../types';
 
 interface VideoPlayerModalProps {
@@ -239,11 +239,22 @@ export const VideoPlayerModal: React.FC<VideoPlayerModalProps> = ({
         {/* Actions */}
         <div className="flex items-center justify-between gap-3 pt-1">
           <div className="text-xs text-gray-400 line-clamp-1 flex-1 font-mono">
-            {project.videoPath}
+            {project.videoPath || '브라우저 합성 9:16 수업 쇼츠'}
           </div>
 
-          <div className="flex items-center gap-2 shrink-0">
-            {project.videoPath && (
+          <div className="flex items-center gap-2 shrink-0 flex-wrap justify-end">
+            {project.videoUrl && (
+              <a
+                href={project.videoUrl}
+                download={project.videoPath?.endsWith('.webm') ? project.videoPath : `${(project.title || 'edu_shorts').replace(/[^0-9A-Za-z\uAC00-\uD7A3_-]/g, '_')}.webm`}
+                className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-blue-600 hover:bg-blue-500 text-white transition-all active:scale-95"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>영상 다운로드</span>
+              </a>
+            )}
+
+            {typeof window !== 'undefined' && Boolean((window as any).electronAPI) && project.videoPath && (
               <>
                 <button
                   type="button"
@@ -286,16 +297,16 @@ export const VideoPlayerModal: React.FC<VideoPlayerModalProps> = ({
                     </>
                   )}
                 </button>
-
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className="px-3.5 py-2 rounded-xl text-xs font-medium bg-gray-800/80 hover:bg-gray-700 text-gray-300 hover:text-white border border-gray-700 transition-all active:scale-95"
-                >
-                  닫기
-                </button>
               </>
             )}
+
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-3.5 py-2 rounded-xl text-xs font-medium bg-gray-800/80 hover:bg-gray-700 text-gray-300 hover:text-white border border-gray-700 transition-all active:scale-95"
+            >
+              닫기
+            </button>
           </div>
         </div>
 

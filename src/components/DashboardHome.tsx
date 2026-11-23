@@ -124,13 +124,15 @@ export const DashboardHome: React.FC<DashboardHomeProps> = ({
           <div className="space-y-2">
             <div className="flex flex-wrap items-center gap-2.5">
               <h1 className="text-xl md:text-2xl font-black tracking-tight text-[#14213D]">
-                {/(선생님|강사|교사|교수)$/.test(userName.trim())
+                {!userName || userName === '우리 교실'
+                  ? 'Edu-Shorts 수업 쇼츠 연구실'
+                  : /(선생님|강사|교사|교수)$/.test(userName.trim())
                   ? `${userName.trim()}의 수업 쇼츠 연구실`
                   : `${userName.trim()} 선생님의 수업 쇼츠 연구실`}
               </h1>
               <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-[#FEF3C7] border border-[#FCD34D] text-[#78350F] text-xs font-extrabold">
                 <GraduationCap className="w-3.5 h-3.5 text-[#B45309]" />
-                <span>단원 개념 노트 에디션</span>
+                <span>로그인·API 없이 무료 사용</span>
               </span>
             </div>
             <p className="text-xs md:text-sm text-[#3D4B66] max-w-2xl leading-relaxed font-medium">

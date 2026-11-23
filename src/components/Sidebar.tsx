@@ -86,71 +86,28 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </div>
         </div>
 
-        {/* Educator Profile & Token Ledger */}
-        <div className="p-3 mx-3 my-3 rounded-lg bg-[#1A2B4E] border border-[#293E6D] space-y-2.5">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2.5 min-w-0">
-              <div
-                className={`w-8 h-8 rounded-md flex items-center justify-center font-bold text-xs shrink-0 border ${
-                  isAdmin
-                    ? 'bg-[#3B2F14] border-[#D97706] text-[#FDE68A]'
-                    : 'bg-[#1E3A8A] border-[#3B63D6] text-[#DBEAFE]'
-                }`}
-              >
-                {isAdmin ? <Crown className="w-4 h-4" /> : <User className="w-4 h-4" />}
-              </div>
-              <div className="min-w-0">
-                <p className="text-xs font-bold text-white truncate flex items-center gap-1.5">
-                  <span className="truncate">{userName}</span>
-                  {isAdmin && (
-                    <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#D97706] text-[#14213D] font-black">
-                      MASTER
-                    </span>
-                  )}
-                </p>
-                <div className="text-[10px] text-[#86EFAC] font-semibold flex items-center gap-1.5 truncate">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#4ADE80] shrink-0" />
-                  <span className="truncate">{isAdmin ? '마스터 교사 권한' : '인증 교사 워크스페이스'}</span>
-                </div>
+        {/* Open Classroom Mode Card (No login, No tokens, No API required) */}
+        <div className="p-3 mx-3 my-3 rounded-lg bg-[#1A2B4E] border border-[#293E6D] space-y-2">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="w-8 h-8 rounded-md flex items-center justify-center font-bold text-xs shrink-0 border bg-[#1E3A8A] border-[#3B63D6] text-[#DBEAFE]">
+              <BookOpen className="w-4 h-4" />
+            </div>
+            <div className="min-w-0">
+              <p className="text-xs font-bold text-white truncate">
+                오픈 교실 스튜디오
+              </p>
+              <div className="text-[10px] text-[#86EFAC] font-semibold flex items-center gap-1.5 truncate">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#4ADE80] shrink-0" />
+                <span className="truncate">로그인 없이 무료 이용</span>
               </div>
             </div>
           </div>
 
-          <div className="pt-2 border-t border-[#293E6D] flex items-center justify-between text-[11px]">
-            <span className="text-[#B6C7E6] flex items-center gap-1 font-semibold">
-              <Coins className="w-3.5 h-3.5 text-[#FBBF24]" />
-              <span>보유 토큰</span>
+          <div className="pt-2 border-t border-[#293E6D] flex items-center justify-between text-[10px]">
+            <span className="text-[#B6C7E6] font-semibold">교안·음성·영상 엔진</span>
+            <span className="font-extrabold text-[#FDE68A] bg-[#3B2F14] px-2 py-0.5 rounded border border-[#B45309]">
+              API 없이 바로 제작
             </span>
-            {isAdmin ? (
-              <span className="font-extrabold text-[#FDE68A] bg-[#3B2F14] px-2 py-0.5 rounded text-[10px] border border-[#B45309] flex items-center gap-1">
-                <Crown className="w-2.5 h-2.5" />
-                <span>무제한 (∞)</span>
-              </span>
-            ) : (
-              <div className="flex items-center gap-1.5">
-                <span
-                  className={`font-bold px-2 py-0.5 rounded text-[10px] border tabular-nums ${
-                    (tokens ?? 0) < 100
-                      ? 'text-[#FECACA] bg-[#7F1D1D] border-[#DC2626] font-extrabold'
-                      : 'text-[#DBEAFE] bg-[#1E3A8A] border-[#3B63D6]'
-                  }`}
-                  title={(tokens ?? 0) < 100 ? '포인트 부족: 쇼츠 제작 시 최소 100P 필요' : `${(tokens ?? 0).toLocaleString()} P 보유`}
-                >
-                  {(tokens ?? 0).toLocaleString()} P
-                  {(tokens ?? 0) < 100 && ' (부족)'}
-                </span>
-                {onOpenRechargeModal && (
-                  <button
-                    type="button"
-                    onClick={onOpenRechargeModal}
-                    className="px-1.5 py-0.5 rounded bg-[#F59E0B] hover:bg-[#D97706] text-[#14213D] text-[10px] font-extrabold transition-colors"
-                    title="토큰 추가 충전"
-                  >
-                    +충전
-                  </button>
-                )}
-              </div>
-            )}
           </div>
         </div>
 
@@ -229,11 +186,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </span>
           </div>
           <div className="text-[10px] text-[#9FB2D4] tabular-nums">
-            FFmpeg 9:16 · 무료 Neural TTS
+            {typeof window !== 'undefined' && (window as any).electronAPI
+              ? 'FFmpeg 9:16 · 무료 Neural TTS'
+              : '브라우저 내장 엔진 · WebM 9:16'}
           </div>
         </div>
 
-        {onOpenUpdate && (() => {
+        {onOpenUpdate && typeof window !== 'undefined' && (window as any).electronAPI && (() => {
           const isRealUpdate = Boolean(
             hasUpdate &&
             latestVersion &&
@@ -264,15 +223,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </button>
           );
         })()}
-
-        <button
-          type="button"
-          onClick={onLogout}
-          className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold text-[#B6C7E6] hover:text-[#FCA5A5] hover:bg-[#3B1824] border border-transparent hover:border-[#7F1D1D] transition-colors"
-        >
-          <LogOut className="w-3.5 h-3.5" />
-          <span>교사 전환 / 나가기</span>
-        </button>
       </div>
     </aside>
   );

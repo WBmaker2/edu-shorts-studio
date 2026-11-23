@@ -254,10 +254,10 @@ export const AISettingsPage: React.FC<AISettingsPageProps> = ({
         <div className="p-4 rounded-xl bg-blue-50/70 border border-blue-200 text-xs text-slate-700 space-y-1">
           <div className="font-bold text-blue-800 flex items-center gap-1.5">
             <Info className="w-4 h-4 text-blue-600" />
-            <span>처음 사용하시나요?</span>
+            <span>API 키 연결 없이도 바로 제작할 수 있습니다 (100% 선택 사항)</span>
           </div>
           <p className="text-[11px] text-slate-600 leading-relaxed font-medium">
-            무료로 사용할 수 있는 Google Gemini API 키 및 Pexels/Pixabay 무료 미디어 키를 아래에 입력하면 쇼츠 퀄리티가 대폭 상승합니다. 키가 없어도 기본 내장 모드로 즉시 생성이 가능합니다.
+            Google Gemini·OpenAI·Pexels API 키를 등록하지 않아도 내장 교과 대본 엔진·무료 음성·내장 시각 자료로 즉시 수업 쇼츠를 제작할 수 있습니다. 외부 AI 화질·검색을 추가 연동하고 싶을 때만 아래 키를 선택 입력해 주세요.
           </p>
         </div>
 

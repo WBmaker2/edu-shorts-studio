@@ -118,39 +118,6 @@ export const BatchGeneratorModal: React.FC<BatchGeneratorModalProps> = ({
       return;
     }
 
-    // Check token balance for non-admin creators
-    try {
-      const authStr = localStorage.getItem('kshorts_auth');
-      let isAdmin = false;
-      if (authStr) {
-        const parsed = JSON.parse(authStr);
-        isAdmin = Boolean(parsed.isAdmin);
-      }
-      const tokenStr = localStorage.getItem('kshorts_tokens');
-      const currentTokens = tokenStr ? parseInt(tokenStr, 10) : 0;
-      if (!isAdmin && currentTokens < 100) {
-        alert(
-          `⚠️ [포인트 부족 안내]\n\n` +
-          `포인트를 모두 소진하셨거나 잔여 포인트가 100P 미만(${currentTokens.toLocaleString()} P)으로 쇼츠를 제작할 수 없습니다.\n\n` +
-          `• 쇼츠 1편 제작 필요 포인트: 100 P\n` +
-          `• 현재 보유 포인트: ${currentTokens.toLocaleString()} P\n\n` +
-          `사이드바의 [+충전] 버튼 또는 관리자에게 문의하여 포인트를 충전해주세요.`
-        );
-        return;
-      }
-      const requiredTokens = topics.length * 100;
-      if (!isAdmin && currentTokens < requiredTokens) {
-        if (!confirm(
-          `⚠️ [포인트 잔여량 확인]\n\n` +
-          `쇼츠 ${topics.length}편 제작에는 ${requiredTokens.toLocaleString()} P가 필요하지만, 현재 보유 포인트는 ${currentTokens.toLocaleString()} P입니다.\n` +
-          `(보유 포인트로 최대 ${Math.floor(currentTokens / 100)}편까지 제작 가능)\n\n` +
-          `보유한 포인트 한도 내에서 제작을 계속 진행하시겠습니까?`
-        )) {
-          return;
-        }
-      }
-    } catch {}
-
     setIsRunning(true);
     setIsFinished(false);
     setTotalCount(topics.length);

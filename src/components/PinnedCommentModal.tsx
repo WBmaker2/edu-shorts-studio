@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useEscapeKey } from '../hooks/useEscapeKey';
 import { X, MessageSquare, Copy, Check, RefreshCw } from 'lucide-react';
 import type { PinnedCommentSuggestion } from '../types';
+import { generateBrowserPinnedComments } from '../utils/browserEduEngine';
 
 interface PinnedCommentModalProps {
   isOpen: boolean;
@@ -23,15 +24,19 @@ export const PinnedCommentModal: React.FC<PinnedCommentModalProps> = ({
   const [copiedIdx, setCopiedIdx] = useState<number | null>(null);
 
   const fetchSuggestions = async () => {
-    if (!window.electronAPI) return;
     setIsLoading(true);
     try {
-      const res = await window.electronAPI.generatePinnedComments({ topic, script });
-      if (res.success && res.suggestions) {
-        setSuggestions(res.suggestions);
+      if (window.electronAPI?.generatePinnedComments) {
+        const res = await window.electronAPI.generatePinnedComments({ topic, script });
+        if (res.success && res.suggestions) {
+          setSuggestions(res.suggestions);
+          return;
+        }
       }
+      setSuggestions(generateBrowserPinnedComments(topic));
     } catch (err) {
       console.error('[Pinned Comment Fetch Error]:', err);
+      setSuggestions(generateBrowserPinnedComments(topic));
     } finally {
       setIsLoading(false);
     }

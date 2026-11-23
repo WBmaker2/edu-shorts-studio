@@ -10,6 +10,8 @@ import {
   Heading,
   CheckCircle2,
   HelpCircle,
+  Volume2,
+  VolumeX,
 } from 'lucide-react';
 import type { SubtitleStyleId, TitleStyleId, SubtitleFontSize } from '../types';
 
@@ -68,6 +70,34 @@ export const ShortsPhonePreview: React.FC<ShortsPhonePreviewProps> = ({
   const [viewMode, setViewMode] = useState<'hook' | 'subtitle'>('subtitle');
   const [isAutoPlaying, setIsAutoPlaying] = useState<boolean>(false);
   const [simulatedTime, setSimulatedTime] = useState<number>(3.2);
+  const [isSpeaking, setIsSpeaking] = useState<boolean>(false);
+
+  const handleToggleSpeech = () => {
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+    if (isSpeaking) {
+      window.speechSynthesis.cancel();
+      setIsSpeaking(false);
+      return;
+    }
+    const textToRead = (sampleScriptText || headerTitleText || '원자와 분자의 차이를 1분 만에 정리해 봅시다.').trim();
+    if (!textToRead) return;
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(textToRead);
+    utter.lang = 'ko-KR';
+    utter.rate = 1.05;
+    utter.onend = () => setIsSpeaking(false);
+    utter.onerror = () => setIsSpeaking(false);
+    setIsSpeaking(true);
+    window.speechSynthesis.speak(utter);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (!isAutoPlaying) return;
@@ -121,27 +151,44 @@ export const ShortsPhonePreview: React.FC<ShortsPhonePreviewProps> = ({
             <BookOpen className="w-3.5 h-3.5 text-[#1E40AF]" />
             <span>9:16 교실 화면 미리보기</span>
           </div>
-          <button
-            type="button"
-            onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-            className={`flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold transition-colors tabular-nums ${
-              isAutoPlaying
-                ? 'bg-[#1E40AF] text-white'
-                : 'bg-[#FAF8F3] text-[#14213D] hover:bg-[#F2EFE6] border border-[#CFC6AE]'
-            }`}
-          >
-            {isAutoPlaying ? (
-              <>
-                <Pause className="w-2.5 h-2.5 fill-current" />
-                <span>순환 중 ({simulatedTime.toFixed(1)}s)</span>
-              </>
-            ) : (
-              <>
-                <Play className="w-2.5 h-2.5 fill-current" />
-                <span>구간 순환 재생</span>
-              </>
+          <div className="flex items-center gap-1">
+            {typeof window !== 'undefined' && 'speechSynthesis' in window && (
+              <button
+                type="button"
+                onClick={handleToggleSpeech}
+                className={`flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold transition-colors ${
+                  isSpeaking
+                    ? 'bg-[#FEF3C7] text-[#78350F] border border-[#FCD34D]'
+                    : 'bg-[#FAF8F3] text-[#14213D] hover:bg-[#F2EFE6] border border-[#CFC6AE]'
+                }`}
+                title="API 키 없이 브라우저 내장 한국어 음성으로 대본을 미리 들어봅니다"
+              >
+                {isSpeaking ? <VolumeX className="w-2.5 h-2.5" /> : <Volume2 className="w-2.5 h-2.5 text-[#1E40AF]" />}
+                <span>{isSpeaking ? '음성 중지' : '음성 듣기'}</span>
+              </button>
             )}
-          </button>
+            <button
+              type="button"
+              onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+              className={`flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold transition-colors tabular-nums ${
+                isAutoPlaying
+                  ? 'bg-[#1E40AF] text-white'
+                  : 'bg-[#FAF8F3] text-[#14213D] hover:bg-[#F2EFE6] border border-[#CFC6AE]'
+              }`}
+            >
+              {isAutoPlaying ? (
+                <>
+                  <Pause className="w-2.5 h-2.5 fill-current" />
+                  <span>순환 중 ({simulatedTime.toFixed(1)}s)</span>
+                </>
+              ) : (
+                <>
+                  <Play className="w-2.5 h-2.5 fill-current" />
+                  <span>구간 순환</span>
+                </>
+              )}
+            </button>
+          </div>
         </div>
 
         {/* Segmented Mode Switch Tabs */}

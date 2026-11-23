@@ -1,8 +1,12 @@
 import { useState, useEffect, useCallback, lazy, Suspense } from 'react';
-import { Wifi, WifiOff, Coins, BookOpen, GraduationCap, Sparkles, Video, RefreshCw, Layers } from 'lucide-react';
+import { Wifi, WifiOff, BookOpen, GraduationCap, Sparkles, Video, RefreshCw, Layers } from 'lucide-react';
 import { Sidebar, type NavTab } from './components/Sidebar';
-import { LoginScreen } from './components/LoginScreen';
 import { DashboardHome } from './components/DashboardHome';
+import {
+  generateBrowserEduScript,
+  splitBrowserEduScenes,
+  renderBrowserWebmVideo,
+} from './utils/browserEduEngine';
 
 // Creation Section Core Components
 import { PromptSection } from './components/PromptSection';
@@ -89,59 +93,31 @@ export default function App() {
     isLoggedIn: boolean;
     licenseKey: string;
     isAdmin: boolean;
-  } | null>(() => {
+  }>(() => {
     const savedAuth = localStorage.getItem('kshorts_auth');
     if (savedAuth) {
       try {
         const parsed = JSON.parse(savedAuth);
-        if (__BUYER_BUILD__ && (parsed.isAdmin === true || parsed.licenseKey === 'KSH-MASTER-ADMIN-SESSION')) {
-          localStorage.removeItem('kshorts_auth');
-          return null;
-        }
-        if (parsed.isAdmin === true || parsed.licenseKey === 'KSH-MASTER-ADMIN-SESSION') {
-          const sanitized = {
-            name: parsed.name || '마스터 교사',
+        if (parsed.name && parsed.licenseKey !== 'WEB-PREVIEW-DEMO') {
+          const cleanName = String(parsed.name || '우리 교실');
+          return {
+            name: cleanName,
             licenseKey: 'KSH-MASTER-ADMIN-SESSION',
             isAdmin: true,
             isLoggedIn: true,
           };
-          localStorage.setItem('kshorts_auth', JSON.stringify(sanitized));
-          return sanitized;
         }
-        if (parsed.isLoggedIn && parsed.licenseKey) {
-          return {
-            name: parsed.name || '교사 크리에이터',
-            licenseKey: String(parsed.licenseKey),
-            isAdmin: false,
-            isLoggedIn: true,
-          };
-        }
-      } catch (e) {
-        return null;
-      }
+      } catch {}
     }
-    if (typeof window !== 'undefined' && !window.electronAPI && !__BUYER_BUILD__) {
-      return {
-        name: '웹 체험 교사',
-        licenseKey: 'WEB-PREVIEW-DEMO',
-        isAdmin: false,
-        isLoggedIn: true,
-      };
-    }
-    return null;
+    return {
+      name: '우리 교실',
+      licenseKey: 'KSH-MASTER-ADMIN-SESSION',
+      isAdmin: true,
+      isLoggedIn: true,
+    };
   });
 
-  const [tokens, setTokens] = useState<number>(() => {
-    const saved = localStorage.getItem('kshorts_tokens');
-    if (saved !== null) {
-      const parsed = parseInt(saved, 10);
-      if (!isNaN(parsed)) return parsed;
-    }
-    if (typeof window !== 'undefined' && !window.electronAPI) {
-      return 99999;
-    }
-    return 0;
-  });
+  const [tokens, setTokens] = useState<number>(999999999);
 
   // Navigation & Studio Section Filter
   const [currentTab, setCurrentTab] = useState<NavTab>('dashboard');
@@ -309,6 +285,14 @@ export default function App() {
         cleanupRender?.();
         cleanupUpdate?.();
       };
+    } else {
+      try {
+        const savedProj = localStorage.getItem('edu_shorts_projects');
+        if (savedProj) {
+          const parsedProj = JSON.parse(savedProj);
+          if (Array.isArray(parsedProj)) setProjects(parsedProj);
+        }
+      } catch {}
     }
   }, []);
 
@@ -390,15 +374,14 @@ export default function App() {
   };
 
   const handleLogout = () => {
-    void window.electronAPI?.logoutLicense?.();
-    setUser(null);
     localStorage.removeItem('kshorts_auth');
     localStorage.removeItem('kshorts_user');
-    try {
-      sessionStorage.clear();
-    } catch (e) {
-      // ignore
-    }
+    setUser({
+      name: '우리 교실',
+      licenseKey: 'KSH-MASTER-ADMIN-SESSION',
+      isAdmin: true,
+      isLoggedIn: true,
+    });
   };
 
   const handleGenerateScript = async () => {
@@ -439,23 +422,15 @@ export default function App() {
       } else {
         const cleanTopic = prompt.trim();
         const subjectLabel = selectedSubjectBadge.trim() || '핵심 단원';
-        const previewScript =
-          `[${selectedGradeLevel} · ${subjectLabel}] "${cleanTopic}", 1분 만에 핵심만 정리해 볼까요?\n\n` +
-          `먼저 ${selectedLessonStageGoal} 관점에서 학생들이 가장 자주 헷갈리는 기준 한 가지를 정확히 짚고 넘어가겠습니다.\n\n` +
-          `우리 주변의 친숙한 예시와 인과 관계를 연결해 보면 추상적인 교과 개념도 그림처럼 한눈에 이해할 수 있습니다.\n\n` +
-          `오늘 배운 핵심 원리를 떠올리며 마지막 확인 퀴즈를 노트에 한 줄로 정리해 봅시다!`;
+        const previewScript = generateBrowserEduScript({
+          topic: cleanTopic,
+          title: cleanTopic,
+          subjectBadge: subjectLabel,
+          gradeLevel: selectedGradeLevel,
+          lessonGoal: selectedLessonStageGoal,
+        });
         setScript(previewScript);
-        const lines = previewScript.split(/\n+/).map((s) => s.trim()).filter(Boolean);
-        setScenes(
-          lines.map((text, idx) => ({
-            id: idx,
-            text,
-            visualPrompt: `${subjectLabel} 수업 시각 자료 장면 ${idx + 1}`,
-            isThumbnail: idx === 0,
-            estimatedDuration: Math.max(6, Math.round(text.length / 5.5)),
-            mediaType: 'image',
-          }))
-        );
+        setScenes(splitBrowserEduScenes(previewScript, cleanTopic));
       }
     } catch (e: any) {
       console.error(e);
@@ -468,23 +443,11 @@ export default function App() {
   const handleStartRender = async () => {
     if (!prompt.trim() && !script.trim()) return;
 
-    if (!navigator.onLine) {
-      alert('⚠️ 인터넷 연결이 끊겨 있습니다.\n\nAI 음성 합성 및 시각 자료 생성을 위해 네트워크 연결 상태를 확인하신 후 다시 시도해주세요.');
-      return;
-    }
-
-    if (!user?.isAdmin) {
-      if (tokens < 100) {
-        alert(
-          `⚠️ [포인트 부족 안내]\n\n` +
-          `포인트를 모두 소진하셨거나 보유 포인트가 100P 미만(${tokens.toLocaleString()} P)으로 쇼츠를 제작할 수 없습니다.\n\n` +
-          `• 쇼츠 1편 제작 필요 포인트: 100 P\n` +
-          `• 현재 보유 포인트: ${tokens.toLocaleString()} P\n\n` +
-          `구매하신 곳(판매자)에 문의하여 토큰을 충전해주세요.`
-        );
-        setIsTokenRechargeModalOpen(true);
-        return;
-      }
+    if (window.electronAPI && !navigator.onLine) {
+      setNetworkToast({
+        type: 'offline',
+        message: '오프라인 상태입니다. 내장 교안·오프라인 모드로 계속 진행합니다.',
+      });
     }
 
     setIsRendering(true);
@@ -597,10 +560,44 @@ export default function App() {
             });
         }
       } else {
+        setRenderStatus('rendering_video');
+        setRenderProgress(20);
+        setRenderMessage('API 없이 브라우저 내장 엔진으로 9:16 수업 쇼츠를 합성하는 중...');
+        const activeScenes =
+          scenesForRender && scenesForRender.length > 0
+            ? scenesForRender
+            : splitBrowserEduScenes(script.trim() || prompt.trim(), newProject.title);
+
+        const rendered = await renderBrowserWebmVideo({
+          title: newProject.title,
+          subjectBadge: selectedSubjectBadge,
+          channelName: 'edu_classroom',
+          scenes: activeScenes,
+          onProgress: (percent, message) => {
+            setRenderProgress(percent);
+            setRenderMessage(message);
+          },
+        });
+
+        newProject.status = 'done';
+        newProject.progressPercent = 100;
+        newProject.statusMessage = '9:16 수업 쇼츠 합성 완료!';
+        newProject.videoUrl = rendered.videoUrl;
+        newProject.videoPath = rendered.filename;
+
         setRenderStatus('done');
         setRenderProgress(100);
-        setRenderMessage('웹 미리보기 시뮬레이션 완료! 실제 MP4 영상 합성은 Electron 데스크톱 앱에서 실행됩니다.');
-        alert('웹 미리보기 모드입니다.\n교안 대본·장면 타임라인·9:16 교실 미리보기를 자유롭게 체험할 수 있으며, 실제 1080×1920 MP4 영상 합성과 TTS 음원은 데스크톱 앱(npm run start)에서 동작합니다.');
+        setRenderMessage('브라우저에서 9:16 수업 쇼츠 영상이 완성되었습니다!');
+
+        const nextList = [newProject, ...projects.filter((p) => p.id !== projectId)];
+        setProjects(nextList);
+        try {
+          const serializable = nextList.map((p) => ({ ...p, videoUrl: undefined }));
+          localStorage.setItem('edu_shorts_projects', JSON.stringify(serializable.slice(0, 20)));
+        } catch {}
+
+        setCurrentProject(newProject);
+        setIsVideoModalOpen(true);
       }
     } catch (err: any) {
       console.error('Render error:', err);
@@ -630,6 +627,13 @@ export default function App() {
     if (window.electronAPI) {
       await window.electronAPI.deleteProject(id);
       setProjects((prev) => prev.filter((p) => p.id !== id));
+      if (currentProject?.id === id) setCurrentProject(null);
+    } else {
+      const next = projects.filter((p) => p.id !== id);
+      setProjects(next);
+      try {
+        localStorage.setItem('edu_shorts_projects', JSON.stringify(next.map((p) => ({ ...p, videoUrl: undefined }))));
+      } catch {}
       if (currentProject?.id === id) setCurrentProject(null);
     }
   };
@@ -673,10 +677,6 @@ export default function App() {
     setEnableHookIntro(preset.enableHookIntro);
     setEnablePopupSubtitles(preset.enablePopupSubtitles);
   };
-
-  if (!user || !user.isLoggedIn) {
-    return <LoginScreen onLogin={handleLogin} />;
-  }
 
   const activeVoiceName = VOICES.find((v) => v.id === voiceId)?.name || '선희 (여성)';
   const activeFontName = (() => {
@@ -1142,67 +1142,27 @@ export default function App() {
                         </div>
                       </dl>
 
-                      {!user?.isAdmin && (
-                        <div className="flex items-center justify-between px-3 py-2 rounded-lg bg-[#FAF8F3] border border-[#E5DEC9] text-xs tabular-nums">
-                          <span className="flex items-center gap-1.5 font-bold text-[#3D4B66]">
-                            <Coins className="w-3.5 h-3.5 text-[#B45309]" />
-                            <span>보유 {tokens.toLocaleString()} P (편당 100P)</span>
-                          </span>
-                          {tokens < 100 && (
-                            <button
-                              type="button"
-                              onClick={() => setIsTokenRechargeModalOpen(true)}
-                              className="px-2 py-0.5 rounded bg-[#F59E0B] text-[#14213D] font-extrabold text-[11px]"
-                            >
-                              포인트 충전
-                            </button>
-                          )}
-                        </div>
-                      )}
-
                       <button
                         type="button"
-                        onClick={() => {
-                          if (!user?.isAdmin && tokens < 100) {
-                            alert(
-                              `⚠️ [포인트 부족 안내]\n\n` +
-                              `포인트를 모두 소진하셨거나 보유 포인트가 100P 미만(${tokens.toLocaleString()} P)으로 쇼츠를 제작할 수 없습니다.\n\n` +
-                              `• 쇼츠 1편 제작 필요 포인트: 100 P\n` +
-                              `• 현재 보유 포인트: ${tokens.toLocaleString()} P\n\n` +
-                              `구매하신 곳(판매자)에 문의하여 토큰을 충전해주세요.`
-                            );
-                            setIsTokenRechargeModalOpen(true);
-                            return;
-                          }
-                          handleStartRender();
-                        }}
+                        onClick={handleStartRender}
                         disabled={isRendering || (!prompt.trim() && !script.trim())}
-                        className={`w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-extrabold text-xs disabled:opacity-50 disabled:cursor-not-allowed transition-colors ${
-                          !user?.isAdmin && tokens < 100
-                            ? 'bg-[#B45309] hover:bg-[#92400E] text-white'
-                            : 'bg-[#1E40AF] hover:bg-[#1E3A8A] text-white'
-                        }`}
+                        className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-extrabold text-xs disabled:opacity-50 disabled:cursor-not-allowed transition-colors bg-[#1E40AF] hover:bg-[#1E3A8A] text-white"
                       >
                         {isRendering ? (
                           <>
                             <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                             <span>9:16 수업 쇼츠 합성 중...</span>
                           </>
-                        ) : !user?.isAdmin && tokens < 100 ? (
-                          <>
-                            <Coins className="w-4 h-4" />
-                            <span>포인트 부족 ({tokens.toLocaleString()}P / 100P 필요)</span>
-                          </>
                         ) : (
                           <>
                             <Sparkles className="w-4 h-4 text-[#FDE68A]" />
-                            <span>9:16 수업 쇼츠 비디오 렌더링 시작</span>
+                            <span>9:16 수업 쇼츠 제작 시작</span>
                           </>
                         )}
                       </button>
 
                       <p className="text-[11px] text-[#5C6B85] text-center leading-snug">
-                        버튼을 누르면 성우 음성·장면 삽화·ASS 자막을 1080×1920 MP4로 자동 합성합니다.
+                        API 키·로그인 없이도 내장 무료 엔진으로 즉시 9:16 수업 영상을 제작합니다.
                       </p>
                     </div>
                   </aside>

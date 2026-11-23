@@ -312,28 +312,6 @@ export const AutoPilotPage: React.FC<AutoPilotPageProps> = ({ settings, onNaviga
   const handleTriggerNow = async () => {
     if (isExecutingNow) return;
 
-    // Check token balance for non-admin creators
-    try {
-      const authStr = localStorage.getItem('kshorts_auth');
-      let isAdmin = false;
-      if (authStr) {
-        const parsed = JSON.parse(authStr);
-        isAdmin = Boolean(parsed.isAdmin);
-      }
-      const tokenStr = localStorage.getItem('kshorts_tokens');
-      const currentTokens = tokenStr ? parseInt(tokenStr, 10) : 0;
-      if (!isAdmin && currentTokens < 100) {
-        alert(
-          `⚠️ [포인트 부족 안내]\n\n` +
-          `포인트를 모두 소진하셨거나 잔여 포인트가 100P 미만(${currentTokens.toLocaleString()} P)으로 오토파일럿 쇼츠를 제작할 수 없습니다.\n\n` +
-          `• 쇼츠 1편 제작 필요 포인트: 100 P\n` +
-          `• 현재 보유 포인트: ${currentTokens.toLocaleString()} P\n\n` +
-          `사이드바의 [+충전] 버튼 또는 관리자에게 문의하여 포인트를 충전해주세요.`
-        );
-        return;
-      }
-    } catch {}
-
     setIsExecutingNow(true);
     setTriggerResult(null);
 

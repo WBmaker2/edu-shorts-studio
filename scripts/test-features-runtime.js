@@ -526,15 +526,15 @@ assert(!loginScreenSource.includes('무제한 토큰이 제공되며'), 'LoginSc
 
 const appSource = fs.readFileSync(path.join(__dirname, '..', 'src', 'App.tsx'), 'utf8');
 if (ADMIN_CODE) assert(!appSource.includes(ADMIN_CODE), '보안 강화: App.tsx 소스에 관리자 코드 평문 흔적 0% 검증');
-assert(appSource.includes('kshorts_auth'), 'App.tsx에 kshorts_auth 라이센스 영구 인증 저장소 연동 확인');
+assert(appSource.includes('kshorts_auth'), 'App.tsx에 kshorts_auth 세션 키 보존 확인');
 assert(appSource.includes('KSH-MASTER-ADMIN-SESSION'), '보안 강화: App.tsx localStorage에 관리자 평문 코드 미저장(KSH-MASTER-ADMIN-SESSION 마스킹 세션) 확인');
-assert(appSource.includes('tokens < 100'), 'App.tsx에 쇼츠 1편 제작 시 100 토큰 필수 검증 로직 확인');
-assert(appSource.includes('onLicenseStatus') && !appSource.includes('deductLicenseTokens'), 'App.tsx는 서버 장부 상태를 받아 표시하고 차감은 메인 프로세스가 처리');
-assert(appSource.includes('isAdmin={user.isAdmin}'), 'App.tsx에 관리자 권한 상태 Sidebar 전달 연동 확인');
+assert(!appSource.includes('tokens < 100') && !appSource.includes('웹 체험 교사'), 'App.tsx에서 포인트 부족 차단 및 웹 체험 교사 임시 문구 제거 확인');
+assert(appSource.includes('onLicenseStatus') && !appSource.includes('deductLicenseTokens'), 'App.tsx는 차감 로직 없이 상태를 수신만 함');
+assert(appSource.includes('generateBrowserEduScript') && appSource.includes('renderBrowserWebmVideo'), 'App.tsx가 로그인·API 없이도 브라우저 내장 교안/영상 합성을 지원함');
 
 const sidebarSource = fs.readFileSync(path.join(__dirname, '..', 'src', 'components', 'Sidebar.tsx'), 'utf8');
-assert(sidebarSource.includes('보유 토큰'), 'Sidebar.tsx에 보유 토큰 위젯 UI 탑재 확인');
-assert(sidebarSource.includes('무제한 (∞)'), 'Sidebar.tsx에 관리자 전용 무제한(∞) 토큰 뱃지 탑재 확인');
+assert(sidebarSource.includes('오픈 교실 스튜디오') && sidebarSource.includes('API 없이 바로 제작'), 'Sidebar.tsx에 무로그인·무API 오픈 교실 스튜디오 상태 카드 탑재 확인');
+assert(!sidebarSource.includes('보유 토큰') && !sidebarSource.includes('+충전'), 'Sidebar.tsx에서 보유 토큰·충전 과금 UI 완전 제거 확인');
 
 const autoPilotSource = fs.readFileSync(path.join(__dirname, '..', 'src', 'components', 'AutoPilotPage.tsx'), 'utf8');
 assert(autoPilotSource.includes('stopAutoPilot'), 'AutoPilotPage.tsx에 예약 끄기 시 stopAutoPilot 연동 확인');

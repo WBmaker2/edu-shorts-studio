@@ -13,6 +13,7 @@ import {
   RefreshCw,
 } from 'lucide-react';
 import type { MultilingualTranslationItem } from '../types';
+import { generateBrowserMultilingual } from '../utils/browserEduEngine';
 
 interface MultilingualModalProps {
   isOpen: boolean;
@@ -54,10 +55,11 @@ export const MultilingualModal: React.FC<MultilingualModalProps> = ({
         if (res.success && res.translations) {
           setTranslations(res.translations);
           if (res.warning) setTranslateNotice(res.warning);
-        } else {
-          setTranslateNotice(res.error || '번역에 실패했습니다. 잠시 후 다시 시도해 주세요.');
+          return;
         }
       }
+      const webTranslations = await generateBrowserMultilingual(koreanTitle, koreanScript);
+      setTranslations(webTranslations);
     } catch (err) {
       console.warn('Multilingual translation error:', err);
       setTranslateNotice('번역에 실패했습니다. 잠시 후 다시 시도해 주세요.');
