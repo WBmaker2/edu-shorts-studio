@@ -1,3 +1,4 @@
+import { Muxer as Mp4Muxer, ArrayBufferTarget } from 'mp4-muxer';
 import type {
   HookingVariant,
   MultilingualTranslationItem,
@@ -87,19 +88,21 @@ export function generateBrowserEduScript(input: BrowserScriptInput): string {
 }
 
 /**
- * 대본 문단을 장면 배열로 분할
+ * 대본 문단을 약 1분(50~60초) 호흡의 장면 배열로 분할
  */
 export function splitBrowserEduScenes(script: string, title: string = ''): ScriptScene[] {
   const lines = String(script || '')
     .split(/\n+/)
     .map((s) => s.trim())
     .filter(Boolean);
-  return lines.slice(0, 8).map((text, idx) => ({
+  const sliced = lines.slice(0, 8);
+  const perSceneMin = sliced.length <= 4 ? 12 : sliced.length === 5 ? 10 : 8;
+  return sliced.map((text, idx) => ({
     id: idx,
     text,
     visualPrompt: `${title || '교과 핵심 개념'} 수업 시각 자료 장면 ${idx + 1}`,
     isThumbnail: idx === 0,
-    estimatedDuration: Math.max(5, Math.round(text.length / 5.5)),
+    estimatedDuration: Math.max(perSceneMin, Math.round(text.length / 4.2)),
     mediaType: 'image',
   }));
 }
@@ -272,57 +275,381 @@ function wrapKoreanCanvasText(ctx: CanvasRenderingContext2D, text: string, maxWi
 }
 
 const STAGE_LABELS = ['도입 발문', '핵심 개념', '원리 · 사례', '확인 · 비교', '요약 정리'];
+const CANVAS_FONT_STACK = '"Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif';
 
-export interface BrowserRenderOptions {
-  title: string;
-  subjectBadge: string;
-  channelName: string;
-  scenes: ScriptScene[];
-  onProgress?: (percent: number, message: string) => void;
+interface PlannedSceneSegment {
+  scene: ScriptScene;
+  idx: number;
+  stageName: string;
+  startSec: number;
+  durationSec: number;
 }
 
-/**
- * API 키 및 데스크톱 앱 없이 브라우저 Canvas + MediaRecorder로
- * 9:16 세로 교육 쇼츠 WebM 영상을 직접 합성하여 미리보기/다운로드 제공
- */
-export async function renderBrowserWebmVideo(
-  options: BrowserRenderOptions
-): Promise<{ videoUrl: string; filename: string }> {
-  const { title, subjectBadge, channelName, scenes, onProgress } = options;
+function buildSceneSchedule(scenes: ScriptScene[]): {
+  segments: PlannedSceneSegment[];
+  totalSec: number;
+} {
   const activeScenes =
     scenes.length > 0
       ? scenes
       : [
           {
             id: 0,
-            text: title || '오늘의 핵심 개념을 1분 만에 정리해 봅시다.',
+            text: '오늘의 핵심 개념을 1분 만에 정리해 봅시다.',
             visualPrompt: '',
             isThumbnail: true,
-            estimatedDuration: 4,
+            estimatedDuration: 15,
           },
         ];
 
-  if (typeof MediaRecorder === 'undefined') {
-    throw new Error('이 브라우저는 영상 녹화(MediaRecorder)를 지원하지 않습니다.');
+  let cursor = 0;
+  const segments: PlannedSceneSegment[] = activeScenes.map((scene, sIdx) => {
+    const dur = Math.max(4, Math.round(scene.estimatedDuration || 12));
+    const stageName =
+      sIdx === 0
+        ? STAGE_LABELS[0]
+        : sIdx === activeScenes.length - 1 && activeScenes.length > 2
+        ? STAGE_LABELS[4]
+        : STAGE_LABELS[Math.min(sIdx, STAGE_LABELS.length - 1)];
+    const seg: PlannedSceneSegment = {
+      scene,
+      idx: sIdx,
+      stageName,
+      startSec: cursor,
+      durationSec: dur,
+    };
+    cursor += dur;
+    return seg;
+  });
+
+  return { segments, totalSec: Math.max(4, cursor) };
+}
+
+function drawEduSlideFrame(
+  ctx: CanvasRenderingContext2D,
+  width: number,
+  height: number,
+  params: {
+    cleanTitle: string;
+    subjectBadge: string;
+    channelName: string;
+    seg: PlannedSceneSegment;
+    totalScenes: number;
+    localT: number;
+    overallProgress: number;
+    elapsedSec: number;
+    totalSec: number;
+  }
+) {
+  const { cleanTitle, subjectBadge, channelName, seg, totalScenes, localT, overallProgress, elapsedSec, totalSec } =
+    params;
+
+  // Ink-Navy Chalkboard & Paper Margin Note Frame
+  ctx.fillStyle = '#0F1B33';
+  ctx.fillRect(0, 0, width, height);
+
+  // Subtle ruled margin grid
+  ctx.strokeStyle = 'rgba(229, 222, 201, 0.07)';
+  ctx.lineWidth = 1;
+  for (let y = 140; y < height - 100; y += 36) {
+    ctx.beginPath();
+    ctx.moveTo(28, y);
+    ctx.lineTo(width - 28, y);
+    ctx.stroke();
   }
 
-  const width = 540;
-  const height = 960;
-  const canvas = document.createElement('canvas');
-  canvas.width = width;
-  canvas.height = height;
-  const ctx = canvas.getContext('2d');
-  if (!ctx) throw new Error('Canvas 2D 컨텍스트를 초기화할 수 없습니다.');
+  // Top subject pill
+  ctx.fillStyle = '#1E335C';
+  ctx.beginPath();
+  ctx.roundRect(width / 2 - 125, 44, 250, 32, 16);
+  ctx.fill();
+  ctx.strokeStyle = '#60A5FA';
+  ctx.lineWidth = 1;
+  ctx.stroke();
 
-  const mimeTypes = [
-    'video/webm;codecs=vp9',
-    'video/webm;codecs=vp8',
-    'video/webm',
-  ];
+  ctx.fillStyle = '#E8EEF7';
+  ctx.font = `bold 14px ${CANVAS_FONT_STACK}`;
+  ctx.textAlign = 'center';
+  ctx.fillText(subjectBadge || '교육 개념 요약', width / 2, 65);
+
+  // Highlighter Tape Title Header
+  ctx.fillStyle = '#FACC15';
+  ctx.beginPath();
+  ctx.roundRect(44, 96, width - 88, 56, 12);
+  ctx.fill();
+
+  ctx.fillStyle = '#14213D';
+  ctx.font = `900 18px ${CANVAS_FONT_STACK}`;
+  ctx.fillText(cleanTitle, width / 2, 130);
+
+  // Central Concept Chalkboard Card with gentle zoom motion
+  const scale = 1 + localT * 0.025;
+  ctx.save();
+  ctx.translate(width / 2, 430);
+  ctx.scale(scale, scale);
+  ctx.fillStyle = '#16284C';
+  ctx.beginPath();
+  ctx.roundRect(-215, -170, 430, 340, 20);
+  ctx.fill();
+  ctx.strokeStyle = '#2F4A80';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Stage Pill inside board
+  ctx.fillStyle = '#FEF3C7';
+  ctx.beginPath();
+  ctx.roundRect(-80, -142, 160, 28, 14);
+  ctx.fill();
+  ctx.fillStyle = '#78350F';
+  ctx.font = `800 13px ${CANVAS_FONT_STACK}`;
+  ctx.fillText(`STEP ${seg.idx + 1}/${totalScenes} · ${seg.stageName}`, 0, -123);
+
+  // Scene main text inside board
+  ctx.fillStyle = '#FAF8F3';
+  ctx.font = `bold 21px ${CANVAS_FONT_STACK}`;
+  const wrapped = wrapKoreanCanvasText(ctx, seg.scene.text, 370);
+  const lineHeight = 33;
+  const startY = -((wrapped.length - 1) * lineHeight) / 2 + 12;
+  wrapped.slice(0, 7).forEach((line, lIdx) => {
+    ctx.fillText(line, 0, startY + lIdx * lineHeight);
+  });
+  ctx.restore();
+
+  // Bottom Highlighted Subtitle Band
+  ctx.fillStyle = 'rgba(15, 23, 42, 0.88)';
+  ctx.beginPath();
+  ctx.roundRect(36, 700, width - 72, 124, 14);
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(250, 204, 21, 0.45)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  ctx.fillStyle = '#FACC15';
+  ctx.font = `900 19px ${CANVAS_FONT_STACK}`;
+  ctx.textAlign = 'center';
+  const subLines = wrapKoreanCanvasText(ctx, seg.scene.text, width - 110).slice(0, 3);
+  const subStartY = 746 - ((subLines.length - 1) * 28) / 2;
+  subLines.forEach((sl, idx) => {
+    ctx.fillText(sl, width / 2, subStartY + idx * 28);
+  });
+
+  // Channel & Timecode Footer
+  const fmt = (sec: number) => {
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60);
+    return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+  };
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#9FB2D4';
+  ctx.font = `bold 13px ${CANVAS_FONT_STACK}`;
+  ctx.fillText(`@${channelName || 'edu_classroom'} · 무료 교안 슬라이드`, 40, 882);
+
+  ctx.textAlign = 'right';
+  ctx.fillStyle = '#E8EEF7';
+  ctx.fillText(`${fmt(elapsedSec)} / ${fmt(totalSec)}`, width - 40, 882);
+
+  ctx.fillStyle = '#1E335C';
+  ctx.fillRect(40, 904, width - 80, 8);
+  ctx.fillStyle = '#F59E0B';
+  ctx.fillRect(40, 904, Math.max(12, (width - 80) * overallProgress), 8);
+}
+
+/**
+ * WebCodecs(VideoEncoder + AudioEncoder) + mp4-muxer로
+ * 계획된 전체 분량(예: 45~60초)의 표준 H.264/AAC MP4 영상을 고속 오프라인 합성한다.
+ */
+async function renderBrowserMp4WithWebCodecs(
+  canvas: HTMLCanvasElement,
+  ctx: CanvasRenderingContext2D,
+  options: BrowserRenderOptions,
+  segments: PlannedSceneSegment[],
+  totalSec: number
+): Promise<{ videoUrl: string; filename: string; durationSeconds: number }> {
+  const width = canvas.width;
+  const height = canvas.height;
+  const fps = 10;
+  const frameDurationUs = Math.round(1_000_000 / fps);
+  const cleanTitle = (options.title || '1분 핵심 개념 수업').slice(0, 34);
+
+  const audioSupport =
+    typeof AudioEncoder !== 'undefined' && typeof AudioData !== 'undefined'
+      ? await AudioEncoder.isConfigSupported({
+          codec: 'mp4a.40.2',
+          sampleRate: 48000,
+          numberOfChannels: 1,
+          bitrate: 64_000,
+        }).catch(() => ({ supported: false }))
+      : { supported: false };
+
+  const useAudio = Boolean(audioSupport.supported);
+
+  const muxer = new Mp4Muxer({
+    target: new ArrayBufferTarget(),
+    video: {
+      codec: 'avc',
+      width,
+      height,
+      frameRate: fps,
+    },
+    ...(useAudio
+      ? {
+          audio: {
+            codec: 'aac',
+            numberOfChannels: 1,
+            sampleRate: 48000,
+          },
+        }
+      : {}),
+    fastStart: 'in-memory',
+  });
+
+  let encodeError: Error | null = null;
+  const videoEncoder = new VideoEncoder({
+    output: (chunk, meta) => muxer.addVideoChunk(chunk, meta),
+    error: (err) => {
+      encodeError = err instanceof Error ? err : new Error(String(err));
+    },
+  });
+
+  videoEncoder.configure({
+    codec: 'avc1.42001f',
+    width,
+    height,
+    bitrate: 1_800_000,
+    framerate: fps,
+  });
+
+  let audioEncoder: AudioEncoder | null = null;
+  if (useAudio) {
+    audioEncoder = new AudioEncoder({
+      output: (chunk, meta) => muxer.addAudioChunk(chunk, meta),
+      error: (err) => {
+        encodeError = err instanceof Error ? err : new Error(String(err));
+      },
+    });
+    audioEncoder.configure({
+      codec: 'mp4a.40.2',
+      sampleRate: 48000,
+      numberOfChannels: 1,
+      bitrate: 64_000,
+    });
+  }
+
+  // Generate 1-sec PCM audio chunks with gentle chime on scene transitions
+  if (audioEncoder) {
+    const sampleRate = 48000;
+    const sceneStartSet = new Set(segments.map((s) => s.startSec));
+    for (let sec = 0; sec < totalSec; sec++) {
+      if (encodeError) throw encodeError;
+      const pcm = new Float32Array(sampleRate);
+      if (sceneStartSet.has(sec)) {
+        const chimeSamples = Math.min(sampleRate, Math.round(0.35 * sampleRate));
+        for (let i = 0; i < chimeSamples; i++) {
+          const tSec = i / sampleRate;
+          const env = Math.exp(-tSec * 9.5) * 0.14;
+          pcm[i] = env * (Math.sin(2 * Math.PI * 523.25 * tSec) + 0.5 * Math.sin(2 * Math.PI * 783.99 * tSec));
+        }
+      }
+      const audioData = new AudioData({
+        format: 'f32',
+        sampleRate,
+        numberOfFrames: sampleRate,
+        numberOfChannels: 1,
+        timestamp: sec * 1_000_000,
+        data: pcm,
+      });
+      audioEncoder.encode(audioData);
+      audioData.close();
+      if (audioEncoder.encodeQueueSize > 12) {
+        await new Promise((r) => setTimeout(r, 0));
+      }
+    }
+  }
+
+  let globalFrameIndex = 0;
+  const totalFrames = totalSec * fps;
+
+  for (const seg of segments) {
+    const sceneFrames = seg.durationSec * fps;
+    options.onProgress?.(
+      Math.min(92, Math.round(((seg.startSec + seg.durationSec * 0.2) / totalSec) * 90)),
+      `장면 ${seg.idx + 1}/${segments.length} (${seg.stageName}, ${seg.durationSec}초) H.264 MP4 합성 중...`
+    );
+
+    for (let f = 0; f < sceneFrames; f++) {
+      if (encodeError) throw encodeError;
+      const localT = f / Math.max(1, sceneFrames - 1);
+      const elapsedSec = seg.startSec + f / fps;
+      drawEduSlideFrame(ctx, width, height, {
+        cleanTitle,
+        subjectBadge: options.subjectBadge,
+        channelName: options.channelName,
+        seg,
+        totalScenes: segments.length,
+        localT,
+        overallProgress: (globalFrameIndex + 1) / totalFrames,
+        elapsedSec,
+        totalSec,
+      });
+
+      const frame = new VideoFrame(canvas, {
+        timestamp: globalFrameIndex * frameDurationUs,
+        duration: frameDurationUs,
+      });
+      const isKeyFrame = f === 0 || globalFrameIndex % (fps * 2) === 0;
+      videoEncoder.encode(frame, { keyFrame: isKeyFrame });
+      frame.close();
+      globalFrameIndex++;
+
+      if (videoEncoder.encodeQueueSize > 6 || globalFrameIndex % 10 === 0) {
+        await new Promise((r) => setTimeout(r, 0));
+      }
+    }
+  }
+
+  options.onProgress?.(95, 'MP4 인덱스(FastStart) 마무리 중...');
+  await videoEncoder.flush();
+  videoEncoder.close();
+  if (audioEncoder) {
+    await audioEncoder.flush();
+    audioEncoder.close();
+  }
+  if (encodeError) throw encodeError;
+
+  muxer.finalize();
+  const blob = new Blob([muxer.target.buffer], { type: 'video/mp4' });
+  const videoUrl = URL.createObjectURL(blob);
+  const safeName = (cleanTitle || 'edu_shorts').replace(/[^0-9A-Za-z\uAC00-\uD7A3_-]/g, '_');
+
+  return {
+    videoUrl,
+    filename: `${safeName}_9x16.mp4`,
+    durationSeconds: totalSec,
+  };
+}
+
+/**
+ * WebCodecs 미지원 브라우저용 안전 WebM 폴백 (flush 보장)
+ */
+async function renderBrowserWebmFallback(
+  canvas: HTMLCanvasElement,
+  ctx: CanvasRenderingContext2D,
+  options: BrowserRenderOptions,
+  segments: PlannedSceneSegment[],
+  totalSec: number
+): Promise<{ videoUrl: string; filename: string; durationSeconds: number }> {
+  if (typeof MediaRecorder === 'undefined') {
+    throw new Error('이 브라우저는 영상 인코딩을 지원하지 않습니다.');
+  }
+
+  const width = canvas.width;
+  const height = canvas.height;
+  const cleanTitle = (options.title || '1분 핵심 개념 수업').slice(0, 34);
+  const mimeTypes = ['video/webm;codecs=vp9', 'video/webm;codecs=vp8', 'video/webm'];
   const selectedMime = mimeTypes.find((m) => MediaRecorder.isTypeSupported(m)) || 'video/webm';
 
-  const stream = canvas.captureStream(24);
-  const recorder = new MediaRecorder(stream, { mimeType: selectedMime, videoBitsPerSecond: 2_200_000 });
+  const stream = canvas.captureStream(15);
+  const recorder = new MediaRecorder(stream, { mimeType: selectedMime, videoBitsPerSecond: 1_800_000 });
   const chunks: BlobPart[] = [];
   recorder.ondataavailable = (ev) => {
     if (ev.data && ev.data.size > 0) chunks.push(ev.data);
@@ -334,134 +661,44 @@ export async function renderBrowserWebmVideo(
     };
   });
 
-  recorder.start(150);
+  recorder.start(500);
 
-  const msPerScene = Math.min(2000, Math.max(1200, Math.round(9000 / activeScenes.length)));
-  const totalFramesPerScene = Math.round((msPerScene / 1000) * 24);
-  const cleanTitle = (title || '1분 핵심 개념 수업').slice(0, 34);
+  const fps = 15;
+  const intervalMs = Math.round(1000 / fps);
+  let elapsedFrames = 0;
+  const totalFrames = totalSec * fps;
 
-  for (let sIdx = 0; sIdx < activeScenes.length; sIdx++) {
-    const scene = activeScenes[sIdx];
-    const stageName =
-      sIdx === 0
-        ? STAGE_LABELS[0]
-        : sIdx === activeScenes.length - 1 && activeScenes.length > 2
-        ? STAGE_LABELS[4]
-        : STAGE_LABELS[Math.min(sIdx, STAGE_LABELS.length - 1)];
-
-    onProgress?.(
-      Math.min(92, Math.round(((sIdx + 1) / activeScenes.length) * 85)),
-      `장면 ${sIdx + 1}/${activeScenes.length} (${stageName}) 9:16 슬라이드 합성 중...`
+  for (const seg of segments) {
+    const sceneFrames = seg.durationSec * fps;
+    options.onProgress?.(
+      Math.min(92, Math.round(((seg.startSec + seg.durationSec * 0.2) / totalSec) * 90)),
+      `장면 ${seg.idx + 1}/${segments.length} (${seg.stageName}) 녹화 합성 중...`
     );
 
-    for (let f = 0; f < totalFramesPerScene; f++) {
-      const t = f / Math.max(1, totalFramesPerScene - 1);
-
-      // Ink-Navy Chalkboard & Paper Margin Note Frame
-      ctx.fillStyle = '#0F1B33';
-      ctx.fillRect(0, 0, width, height);
-
-      // Subtle ruled margin grid
-      ctx.strokeStyle = 'rgba(229, 222, 201, 0.07)';
-      ctx.lineWidth = 1;
-      for (let y = 140; y < height - 100; y += 36) {
-        ctx.beginPath();
-        ctx.moveTo(28, y);
-        ctx.lineTo(width - 28, y);
-        ctx.stroke();
-      }
-
-      // Top subject pill
-      ctx.fillStyle = '#1E335C';
-      ctx.beginPath();
-      ctx.roundRect(width / 2 - 120, 44, 240, 32, 16);
-      ctx.fill();
-      ctx.strokeStyle = '#60A5FA';
-      ctx.lineWidth = 1;
-      ctx.stroke();
-
-      ctx.fillStyle = '#E8EEF7';
-      ctx.font = 'bold 14px "Pretendard", sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText(subjectBadge || '교육 개념 요약', width / 2, 65);
-
-      // Highlighter Tape Title Header
-      ctx.fillStyle = '#FACC15';
-      ctx.beginPath();
-      ctx.roundRect(44, 96, width - 88, 56, 12);
-      ctx.fill();
-
-      ctx.fillStyle = '#14213D';
-      ctx.font = '900 18px "Pretendard", sans-serif';
-      ctx.fillText(cleanTitle, width / 2, 130);
-
-      // Central Concept Chalkboard Card with gentle Ken-Burns zoom effect
-      const scale = 1 + t * 0.02;
-      ctx.save();
-      ctx.translate(width / 2, 430);
-      ctx.scale(scale, scale);
-      ctx.fillStyle = '#16284C';
-      ctx.beginPath();
-      ctx.roundRect(-215, -170, 430, 340, 20);
-      ctx.fill();
-      ctx.strokeStyle = '#2F4A80';
-      ctx.lineWidth = 2;
-      ctx.stroke();
-
-      // Stage Pill inside board
-      ctx.fillStyle = '#FEF3C7';
-      ctx.beginPath();
-      ctx.roundRect(-70, -142, 140, 28, 14);
-      ctx.fill();
-      ctx.fillStyle = '#78350F';
-      ctx.font = '800 13px "Pretendard", sans-serif';
-      ctx.fillText(`STEP ${sIdx + 1} · ${stageName}`, 0, -123);
-
-      // Scene main text inside board
-      ctx.fillStyle = '#FAF8F3';
-      ctx.font = 'bold 21px "Pretendard", sans-serif';
-      const wrapped = wrapKoreanCanvasText(ctx, scene.text, 370);
-      const lineHeight = 33;
-      const startY = -((wrapped.length - 1) * lineHeight) / 2 + 12;
-      wrapped.slice(0, 7).forEach((line, lIdx) => {
-        ctx.fillText(line, 0, startY + lIdx * lineHeight);
+    for (let f = 0; f < sceneFrames; f++) {
+      const localT = f / Math.max(1, sceneFrames - 1);
+      drawEduSlideFrame(ctx, width, height, {
+        cleanTitle,
+        subjectBadge: options.subjectBadge,
+        channelName: options.channelName,
+        seg,
+        totalScenes: segments.length,
+        localT,
+        overallProgress: (elapsedFrames + 1) / totalFrames,
+        elapsedSec: seg.startSec + f / fps,
+        totalSec,
       });
-      ctx.restore();
-
-      // Bottom Highlighted Subtitle Band
-      ctx.fillStyle = 'rgba(15, 23, 42, 0.88)';
-      ctx.beginPath();
-      ctx.roundRect(36, 700, width - 72, 124, 14);
-      ctx.fill();
-      ctx.strokeStyle = 'rgba(250, 204, 21, 0.45)';
-      ctx.lineWidth = 1.5;
-      ctx.stroke();
-
-      ctx.fillStyle = '#FACC15';
-      ctx.font = '900 19px "Pretendard", sans-serif';
-      const subLines = wrapKoreanCanvasText(ctx, scene.text, width - 110).slice(0, 3);
-      const subStartY = 746 - ((subLines.length - 1) * 28) / 2;
-      subLines.forEach((sl, idx) => {
-        ctx.fillText(sl, width / 2, subStartY + idx * 28);
-      });
-
-      // Channel & Progress Bar Footer
-      ctx.textAlign = 'left';
-      ctx.fillStyle = '#9FB2D4';
-      ctx.font = 'bold 13px "Pretendard", sans-serif';
-      ctx.fillText(`@${channelName || 'edu_classroom'} · 무료 교안 슬라이드 렌더링`, 40, 882);
-
-      const overallProgress = (sIdx + t) / activeScenes.length;
-      ctx.fillStyle = '#1E335C';
-      ctx.fillRect(40, 904, width - 80, 8);
-      ctx.fillStyle = '#F59E0B';
-      ctx.fillRect(40, 904, Math.max(12, (width - 80) * overallProgress), 8);
-
-      await new Promise((r) => setTimeout(r, 38));
+      elapsedFrames++;
+      await new Promise((r) => setTimeout(r, intervalMs));
     }
   }
 
-  onProgress?.(96, '영상 파일 인코딩 마무리 중...');
+  options.onProgress?.(96, '영상 파일 인코딩 마무리 중...');
+  if (recorder.state === 'recording') {
+    try {
+      recorder.requestData();
+    } catch {}
+  }
   recorder.stop();
   const blob = await donePromise;
   const videoUrl = URL.createObjectURL(blob);
@@ -470,5 +707,51 @@ export async function renderBrowserWebmVideo(
   return {
     videoUrl,
     filename: `${safeName}_9x16.webm`,
+    durationSeconds: totalSec,
   };
+}
+
+export interface BrowserRenderOptions {
+  title: string;
+  subjectBadge: string;
+  channelName: string;
+  scenes: ScriptScene[];
+  onProgress?: (percent: number, message: string) => void;
+}
+
+/**
+ * API 키 및 데스크톱 앱 없이 브라우저에서 타임라인 전체 길이(예: 50~60초)와 동일한
+ * 9:16 세로 교육 쇼츠 MP4(WebCodecs 우선, 미지원 시 WebM 폴백)를 합성해 반환한다.
+ */
+export async function renderBrowserWebmVideo(
+  options: BrowserRenderOptions
+): Promise<{ videoUrl: string; filename: string; durationSeconds: number }> {
+  const { segments, totalSec } = buildSceneSchedule(options.scenes);
+
+  const width = 540;
+  const height = 960;
+  const canvas = document.createElement('canvas');
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) throw new Error('Canvas 2D 컨텍스트를 초기화할 수 없습니다.');
+
+  if (typeof VideoEncoder !== 'undefined' && typeof VideoFrame !== 'undefined') {
+    try {
+      const avcCheck = await VideoEncoder.isConfigSupported({
+        codec: 'avc1.42001f',
+        width,
+        height,
+        bitrate: 1_800_000,
+        framerate: 10,
+      });
+      if (avcCheck.supported) {
+        return await renderBrowserMp4WithWebCodecs(canvas, ctx, options, segments, totalSec);
+      }
+    } catch (err) {
+      console.warn('[Browser MP4 WebCodecs fallback to WebM]:', err);
+    }
+  }
+
+  return await renderBrowserWebmFallback(canvas, ctx, options, segments, totalSec);
 }

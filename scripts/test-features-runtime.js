@@ -536,6 +536,13 @@ const sidebarSource = fs.readFileSync(path.join(__dirname, '..', 'src', 'compone
 assert(sidebarSource.includes('오픈 교실 스튜디오') && sidebarSource.includes('API 없이 바로 제작'), 'Sidebar.tsx에 무로그인·무API 오픈 교실 스튜디오 상태 카드 탑재 확인');
 assert(!sidebarSource.includes('보유 토큰') && !sidebarSource.includes('+충전'), 'Sidebar.tsx에서 보유 토큰·충전 과금 UI 완전 제거 확인');
 
+const browserEngineSource = fs.readFileSync(path.join(__dirname, '..', 'src', 'utils', 'browserEduEngine.ts'), 'utf8');
+assert(!browserEngineSource.includes('9000 / activeScenes.length'), 'browserEduEngine.ts에 9초 강제 절단 버그 제거 확인');
+assert(browserEngineSource.includes('buildSceneSchedule') && browserEngineSource.includes('fastStart: \'in-memory\'') && browserEngineSource.includes('avc1.42001f'), 'browserEduEngine.ts가 장면 전체 길이 기반 WebCodecs H.264 FastStart MP4 합성 탑재 확인');
+assert(browserEngineSource.includes('mp4a.40.2') && browserEngineSource.includes('requestData()'), 'browserEduEngine.ts에 AAC 오디오 트랙 및 WebM 폴백 플러시 포함 확인');
+const videoPlayerSource = fs.readFileSync(path.join(__dirname, '..', 'src', 'components', 'VideoPlayerModal.tsx'), 'utf8');
+assert(videoPlayerSource.includes("endsWith('.mp4')") && videoPlayerSource.includes('영상 다운로드'), 'VideoPlayerModal.tsx가 MP4 확장자를 보존해 다운로드 링크 생성 확인');
+
 const autoPilotSource = fs.readFileSync(path.join(__dirname, '..', 'src', 'components', 'AutoPilotPage.tsx'), 'utf8');
 assert(autoPilotSource.includes('stopAutoPilot'), 'AutoPilotPage.tsx에 예약 끄기 시 stopAutoPilot 연동 확인');
 

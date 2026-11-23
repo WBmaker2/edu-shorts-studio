@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FileText, Clock, CheckCircle2, Film, Globe, MessageSquare, BookOpen } from 'lucide-react';
 import type { ScriptScene } from '../types';
+import { splitBrowserEduScenes } from '../utils/browserEduEngine';
 import { SceneTimelineEditor } from './SceneTimelineEditor';
 import { MultilingualModal } from './MultilingualModal';
 import { PinnedCommentModal } from './PinnedCommentModal';
@@ -47,20 +48,9 @@ export const ScriptEditor: React.FC<ScriptEditorProps> = ({
         console.warn('Split scenes failed:', err);
       }
     }
-    // Local fallback scene splitter by sentences/paragraphs
-    const lines = script
-      .split(/\n+/)
-      .map((s) => s.trim())
-      .filter(Boolean);
-    if (lines.length > 0) {
-      const localScenes: ScriptScene[] = lines.slice(0, 8).map((text, idx) => ({
-        id: idx,
-        text,
-        visualPrompt: `${title} - ${text}`,
-        isThumbnail: idx === 0,
-        estimatedDuration: Math.max(4, Math.round(text.length / 5.5)),
-        mediaType: 'image',
-      }));
+    // Local fallback scene splitter aligned with ~50-60s classroom pacing
+    const localScenes = splitBrowserEduScenes(script, title);
+    if (localScenes.length > 0) {
       onChangeScenes(localScenes);
     }
   };

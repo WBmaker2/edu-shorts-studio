@@ -58,7 +58,7 @@ const INITIAL_EDU_SCENES: ScriptScene[] = [
     text: '물 한 방울을 끝까지 쪼개면 레고 블록 한 조각 같은 기본 입자가 나옵니다.',
     visualPrompt: 'Educational 3D diagram comparing water droplet and lego building blocks',
     isThumbnail: true,
-    estimatedDuration: 8,
+    estimatedDuration: 13,
     mediaType: 'image',
   },
   {
@@ -66,7 +66,7 @@ const INITIAL_EDU_SCENES: ScriptScene[] = [
     text: '더 이상 쪼개지지 않는 물질의 기본 입자를 바로 원자라고 부릅니다.',
     visualPrompt: 'Clean science textbook illustration of an atom nucleus and electrons',
     isThumbnail: false,
-    estimatedDuration: 11,
+    estimatedDuration: 15,
     mediaType: 'image',
   },
   {
@@ -74,7 +74,7 @@ const INITIAL_EDU_SCENES: ScriptScene[] = [
     text: '반면 원자들이 결합해 물질 고유의 성질을 나타내는 가장 작은 단위가 분자입니다.',
     visualPrompt: 'H2O water molecule bonding diagram for middle school science',
     isThumbnail: false,
-    estimatedDuration: 13,
+    estimatedDuration: 15,
     mediaType: 'image',
   },
   {
@@ -82,7 +82,7 @@ const INITIAL_EDU_SCENES: ScriptScene[] = [
     text: '그럼 물의 성질을 지닌 최소 단위는 원자일까요, 분자일까요? 정답은 물 분자(H2O)입니다!',
     visualPrompt: 'Classroom summary quiz card showing atom vs molecule comparison',
     isThumbnail: false,
-    estimatedDuration: 12,
+    estimatedDuration: 14,
     mediaType: 'image',
   },
 ];
@@ -581,13 +581,14 @@ export default function App() {
 
         newProject.status = 'done';
         newProject.progressPercent = 100;
-        newProject.statusMessage = '9:16 수업 쇼츠 합성 완료!';
+        newProject.durationSeconds = rendered.durationSeconds;
+        newProject.statusMessage = `9:16 수업 쇼츠 합성 완료 (${rendered.durationSeconds}초)!`;
         newProject.videoUrl = rendered.videoUrl;
         newProject.videoPath = rendered.filename;
 
         setRenderStatus('done');
         setRenderProgress(100);
-        setRenderMessage('브라우저에서 9:16 수업 쇼츠 영상이 완성되었습니다!');
+        setRenderMessage(`계획된 ${rendered.durationSeconds}초 분량의 9:16 수업 쇼츠가 완성되었습니다!`);
 
         const nextList = [newProject, ...projects.filter((p) => p.id !== projectId)];
         setProjects(nextList);

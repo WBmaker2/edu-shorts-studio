@@ -84,7 +84,9 @@ export const VideoPlayerModal: React.FC<VideoPlayerModalProps> = ({
             </div>
             <div>
               <h3 className="font-bold text-base text-gray-100 line-clamp-1">{project.title}</h3>
-              <span className="text-xs text-gray-400">1080x1920 (9:16) 풀HD 다이내믹 쇼츠 렌더링 완료</span>
+              <span className="text-xs text-gray-400">
+                총 {project.durationSeconds || 55}초 · 9:16 세로 수업 쇼츠 렌더링 완료
+              </span>
             </div>
           </div>
           <button
@@ -246,11 +248,15 @@ export const VideoPlayerModal: React.FC<VideoPlayerModalProps> = ({
             {project.videoUrl && (
               <a
                 href={project.videoUrl}
-                download={project.videoPath?.endsWith('.webm') ? project.videoPath : `${(project.title || 'edu_shorts').replace(/[^0-9A-Za-z\uAC00-\uD7A3_-]/g, '_')}.webm`}
+                download={
+                  project.videoPath && (project.videoPath.endsWith('.mp4') || project.videoPath.endsWith('.webm'))
+                    ? project.videoPath
+                    : `${(project.title || 'edu_shorts').replace(/[^0-9A-Za-z\uAC00-\uD7A3_-]/g, '_')}.mp4`
+                }
                 className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-blue-600 hover:bg-blue-500 text-white transition-all active:scale-95"
               >
                 <Download className="w-3.5 h-3.5" />
-                <span>영상 다운로드</span>
+                <span>영상 다운로드 ({project.videoPath?.endsWith('.webm') ? 'WebM' : 'MP4'})</span>
               </a>
             )}
 
