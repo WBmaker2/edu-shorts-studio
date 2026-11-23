@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1440px;height:900px;overflow:hidden;font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:#F4F3EE;color:#1C2127;display:grid;grid-template-columns:236px 1fr}
+aside{background:#1C2127;color:#D6D3CB;display:flex;flex-direction:column;justify-content:space-between;padding:20px 14px;border-right:1px solid #2D333B}
+.brand{display:flex;align-items:center;gap:10px;padding:4px 8px 18px;border-bottom:1px solid #2D333B}
+.mark{width:34px;height:34px;border-radius:8px;background:#0F766E;color:#fff;display:grid;place-items:center;font-weight:900;font-size:15px}
+.brand h1{font-size:15px;font-weight:800;color:#FAF9F5;letter-spacing:-.02em}
+.brand span{font-size:10px;color:#8E959E;display:block;letter-spacing:.08em}
+nav{margin-top:16px;display:flex;flex-direction:column;gap:4px}
+.nav-item{padding:10px 12px;border-radius:8px;font-size:13px;font-weight:600;display:flex;justify-content:space-between;align-items:center;color:#B9BDC2}
+.nav-item.active{background:#0F766E;color:#FAF9F5;font-weight:700}
+.pill{font-size:10px;padding:2px 7px;border-radius:4px;background:#2A3038;color:#C8CBCF;font-variant-numeric:tabular-nums}
+.active .pill{background:#115E59;color:#CCFBF1}
+.rail-foot{border-top:1px solid #2D333B;padding-top:14px;font-size:11px;color:#8E959E;display:flex;flex-direction:column;gap:8px}
+.status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#10B981;margin-right:6px}
+main{display:grid;grid-template-rows:64px 1fr;overflow:hidden}
+header{background:#FAF9F5;border-bottom:1px solid #DEDBD2;padding:0 28px;display:flex;align-items:center;justify-content:space-between}
+.ctx{display:flex;align-items:center;gap:12px}
+.ctx h2{font-size:18px;font-weight:800;letter-spacing:-.02em}
+.tag{font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;background:#E6F4F1;color:#0F766E;border:1px solid #B7E1D9}
+.tag.ochre{background:#FEF3C7;color:#B45309;border-color:#FDE68A}
+.actions{display:flex;gap:10px}
+.btn{padding:9px 15px;border-radius:8px;font-size:12px;font-weight:700;border:1px solid #D1CEC4;background:#fff;color:#1C2127}
+.btn.primary{background:#0F766E;border-color:#0F766E;color:#fff}
+.workspace{display:grid;grid-template-columns:1fr 370px;gap:0;overflow:hidden}
+.editor{padding:24px 28px;display:flex;flex-direction:column;gap:16px;overflow:hidden}
+.preset-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.preset{background:#FAF9F5;border:1px solid #DEDBD2;border-radius:10px;padding:12px 14px}
+.preset.on{border-color:#0F766E;background:#F0FAF8}
+.preset b{font-size:13px;display:block;margin-bottom:3px}
+.preset span{font-size:11px;color:#5E656E}
+.panel{background:#FAF9F5;border:1px solid #DEDBD2;border-radius:10px;padding:16px 18px}
+.panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.panel-head h3{font-size:14px;font-weight:800}
+.topic-box{background:#fff;border:1px solid #D1CEC4;border-radius:8px;padding:12px 14px;font-size:14px;font-weight:600;display:flex;justify-content:space-between;align-items:center}
+.scenes{display:flex;flex-direction:column;gap:8px}
+.scene{display:grid;grid-template-columns:72px 86px 1fr 110px;align-items:center;gap:12px;background:#fff;border:1px solid #E3E0D8;border-radius:8px;padding:10px 12px}
+.scene.focus{border-color:#0F766E;background:#F7FCFB}
+.tc{font-variant-numeric:tabular-nums;font-size:12px;font-weight:700;color:#4B5563}
+.step-badge{font-size:11px;font-weight:800;padding:3px 8px;border-radius:5px;text-align:center;background:#F4F3EE;color:#374151}
+.step-badge.hook{background:#FEF3C7;color:#B45309}
+.step-badge.core{background:#E6F4F1;color:#0F766E}
+.scene p{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dur-bar{height:8px;background:#ECEAE3;border-radius:99px;overflow:hidden}
+.dur-fill{height:100%;background:#0F766E}
+.stage{background:#EAE8E1;border-left:1px solid #DEDBD2;padding:24px;display:flex;flex-direction:column;align-items:center;justify-content:space-between}
+.stage-head{width:100%;display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:#4B5563}
+.phone{width:282px;height:500px;border-radius:26px;background:#14181D;border:6px solid #2C333B;padding:18px 16px;display:flex;flex-direction:column;justify-content:space-between;color:#fff;position:relative}
+.top-ribbon{background:#F59E0B;color:#14181D;font-size:13px;font-weight:900;padding:6px 10px;border-radius:6px;text-align:center}
+.mid-diagram{flex:1;margin:16px 0;border:1px dashed #475569;border-radius:12px;display:grid;place-items:center;background:#1E293B;font-size:12px;color:#CBD5E1;text-align:center;padding:12px}
+.sub-box{background:rgba(15,23,42,.88);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:10px 12px;text-align:center;font-size:15px;font-weight:800;line-height:1.4}
+.sub-box em{color:#FDE047;font-style:normal}
+.stage-controls{width:100%;background:#FAF9F5;border:1px solid #DEDBD2;border-radius:10px;padding:12px;display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:700}
+</style>
+</head>
+<body>
+<aside>
+  <div>
+    <div class="brand">
+      <div class="mark">E</div>
+      <div><h1>Edu-Shorts Studio</h1><span>CLASSROOM EDITION</span></div>
+    </div>
+    <nav>
+      <div class="nav-item"><span>수업 대시보드</span></div>
+      <div class="nav-item active"><span>수업 쇼츠 제작</span><span class="pill">60s</span></div>
+      <div class="nav-item"><span>강의 영상 하이라이트</span></div>
+      <div class="nav-item"><span>교과 프리셋 · 성우</span></div>
+      <div class="nav-item"><span>수업 자료 보관함</span><span class="pill">14</span></div>
+      <div class="nav-item"><span>단원 일괄 제작</span></div>
+      <div class="nav-item"><span>공유 · 예약 배포</span></div>
+      <div class="nav-item"><span>AI · 엔진 설정</span></div>
+    </nav>
+  </div>
+  <div class="rail-foot">
+    <div><span class="status-dot"></span>로컬 Edge-TTS · FFmpeg 준비됨</div>
+    <div>무료 내장 엔진 활성 · API 키 선택</div>
+  </div>
+</aside>
+<main>
+  <header>
+    <div class="ctx">
+      <h2>수업 쇼츠 스튜디오</h2>
+      <span class="tag">중2 과학 · 물질의 구성</span>
+      <span class="tag ochre">핵심 개념 1분 요약</span>
+    </div>
+    <div class="actions">
+      <button class="btn">수업안 불러오기</button>
+      <button class="btn primary">9:16 수업 영상 렌더링</button>
+    </div>
+  </header>
+  <div class="workspace">
+    <section class="editor">
+      <div class="preset-strip">
+        <div class="preset on"><b>개념 1분 요약</b><span>도입→원리→정리</span></div>
+        <div class="preset"><b>도입 퀴즈 쇼츠</b><span>질문→힌트→정답</span></div>
+        <div class="preset"><b>교과서 핵심 암기</b><span>키워드 강조 자막</span></div>
+        <div class="preset"><b>수업 전 예습 클립</b><span>차분한 선희 성우</span></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h3>학습 주제 및 목표</h3><span style="font-size:12px;color:#0F766E;font-weight:700">예상 52초 · 5장면</span></div>
+        <div class="topic-box"><span>원자와 분자는 무엇이 다를까? 레고 블록 비유로 50초 만에 이해하기</span><button class="btn primary">수업 대본 생성</button></div>
+      </div>
+      <div class="panel" style="flex:1">
+        <div class="panel-head"><h3>수업 흐름 타임라인</h3><span style="font-size:12px;color:#5E656E;font-variant-numeric:tabular-nums">총 00:52 · 1.05x 속도</span></div>
+        <div class="scenes">
+          <div class="scene focus"><span class="tc">00:00–00:08</span><span class="step-badge hook">수업 도입</span><p>물 한 방울을 끝까지 쪼개면 레고 한 조각, 바로 원자가 나옵니다.</p><div class="dur-bar"><div class="dur-fill" style="width:45%"></div></div></div>
+          <div class="scene"><span class="tc">00:08–00:21</span><span class="step-badge core">핵심 개념</span><p>원자는 더 이상 쪼개지지 않는 물질의 기본 입자입니다.</p><div class="dur-bar"><div class="dur-fill" style="width:78%"></div></div></div>
+          <div class="scene"><span class="tc">00:21–00:36</span><span class="step-badge core">비교 설명</span><p>분자는 원자들이 결합해 물질의 성질을 나타내는 가장 작은 입자죠.</p><div class="dur-bar"><div class="dur-fill" style="width:90%"></div></div></div>
+          <div class="scene"><span class="tc">00:36–00:45</span><span class="step-badge">확인 퀴즈</span><p>그럼 물의 성질을 가진 가장 작은 알갱이는 원자일까요, 분자일까요?</p><div class="dur-bar"><div class="dur-fill" style="width:55%"></div></div></div>
+          <div class="scene"><span class="tc">00:45–00:52</span><span class="step-badge">핵심 정리</span><p>성질을 지니는 최소 단위는 분자! 다음 시간엔 분자식으로 이어갑니다.</p><div class="dur-bar"><div class="dur-fill" style="width:40%"></div></div></div>
+        </div>
+      </div>
+    </section>
+    <aside class="stage" style="background:#EAE8E1;color:#1C2127">
+      <div class="stage-head"><span>9:16 교실 미리보기</span><span style="font-variant-numeric:tabular-nums">1080 × 1920</span></div>
+      <div class="phone">
+        <div class="top-ribbon">중2 과학 · 원자와 분자 1분 정리</div>
+        <div class="mid-diagram">장면 1 시각 자료<br/>물 분자 모형과 레고 블록 대비 일러스트</div>
+        <div class="sub-box">물 한 방울을 끝까지 쪼개면<br/><em>원자</em>라는 기본 조각이 나옵니다</div>
+      </div>
+      <div class="stage-controls"><span>음성: 선희 (또렷한 교사 톤)</span><span style="color:#0F766E">자막 안전영역 OK</span></div>
+    </aside>
+  </div>
+</main>
+</body>
+</html>

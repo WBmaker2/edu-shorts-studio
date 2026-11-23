@@ -2,7 +2,7 @@ import React from 'react';
 import {
   LayoutDashboard,
   Bot,
-  Video,
+  BookOpen,
   Sparkles,
   FolderOpen,
   Share2,
@@ -14,6 +14,7 @@ import {
   Calendar,
   Crown,
   Coins,
+  GraduationCap,
 } from 'lucide-react';
 
 export type NavTab = 'dashboard' | 'create' | 'video-to-shorts' | 'autopilot' | 'ai-settings' | 'projects' | 'templates' | 'publish' | 'help';
@@ -42,7 +43,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
   projectCount,
   onLogout,
   isAdmin,
-  licenseKey,
   tokens,
   onOpenUpdate,
   onOpenCalendarModal,
@@ -52,86 +52,87 @@ export const Sidebar: React.FC<SidebarProps> = ({
   currentVersion,
 }) => {
   const menuItems: { id: NavTab; label: string; icon: React.ComponentType<{ className?: string }>; badge?: string | number }[] = [
-    { id: 'dashboard', label: '대시보드', icon: LayoutDashboard },
-    { id: 'create', label: '쇼츠 자동 제작', icon: Video },
-    { id: 'video-to-shorts', label: '영상 분석 쇼츠', icon: Film, badge: 'NEW' },
-    { id: 'autopilot', label: '예약 발행 (Auto-Pilot)', icon: Zap, badge: '무인 자동' },
-    { id: 'ai-settings', label: 'AI 및 엔진 설정', icon: Bot },
-    { id: 'projects', label: '작성글/영상 관리', icon: FolderOpen, badge: projectCount > 0 ? projectCount : undefined },
-    { id: 'templates', label: '템플릿/보이스', icon: Sparkles },
-    { id: 'publish', label: '발행 및 SNS/플랫폼 연동', icon: Share2, badge: '4대 SNS' },
-    { id: 'help', label: '도움말 및 가이드', icon: HelpCircle },
+    { id: 'dashboard', label: '교사 대시보드', icon: LayoutDashboard },
+    { id: 'create', label: '단원 수업 쇼츠 제작', icon: BookOpen, badge: '60초' },
+    { id: 'video-to-shorts', label: '강의·영상 분석 쇼츠', icon: Film, badge: 'NEW' },
+    { id: 'templates', label: '교과 프리셋 · 성우', icon: Sparkles },
+    { id: 'projects', label: '수업 클립 보관함', icon: FolderOpen, badge: projectCount > 0 ? projectCount : undefined },
+    { id: 'autopilot', label: '예약 배포 (Auto-Pilot)', icon: Zap, badge: '자동' },
+    { id: 'publish', label: '학습 채널 · SNS 연동', icon: Share2 },
+    { id: 'ai-settings', label: 'AI · 로컬 엔진 설정', icon: Bot },
+    { id: 'help', label: '교사용 제작 가이드', icon: HelpCircle },
   ];
 
-  const displayVersion = currentVersion || (typeof __APP_VERSION__ !== 'undefined' ? __APP_VERSION__ : '1.4.0');
+  const displayVersion = currentVersion || (typeof __APP_VERSION__ !== 'undefined' ? __APP_VERSION__ : '1.4.15');
 
   return (
-    <aside className="w-64 bg-[#0f172a] border-r border-slate-800 flex flex-col justify-between shrink-0 select-none h-screen text-slate-300">
-      {/* Top Header Logo */}
+    <aside className="hidden md:flex w-64 bg-[#14213D] border-r border-[#24365C] flex-col justify-between shrink-0 select-none h-screen text-[#E8EEF7]">
       <div>
-        <div className="h-16 px-5 flex items-center gap-3 border-b border-slate-800/80 bg-[#0b1120]">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-blue-500/20 text-white font-black text-base">
-            <Film className="w-5 h-5" />
+        {/* Brand Identity Header */}
+        <div className="h-16 px-4 flex items-center gap-2.5 border-b border-[#24365C] bg-[#0F1930]">
+          <div className="w-8 h-8 rounded-lg bg-[#F59E0B] flex items-center justify-center text-[#14213D] font-black text-base shrink-0">
+            <GraduationCap className="w-5 h-5 stroke-[2.2]" />
           </div>
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-1.5">
-              <span className="font-bold text-sm text-white tracking-tight">K-Shorts Studio</span>
-              <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-400/30 font-mono font-bold">
+            <div className="flex items-center justify-between gap-1">
+              <span className="font-extrabold text-[13px] text-white tracking-tight whitespace-nowrap">Edu-Shorts Studio</span>
+              <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#1E335C] text-[#C6D6F2] border border-[#2F4A80] font-bold tabular-nums shrink-0">
                 v{displayVersion}
               </span>
             </div>
-            <span className="text-[10px] text-slate-400 font-medium tracking-wider uppercase block">CONTENT STUDIO</span>
+            <span className="text-[10px] text-[#9FB2D4] font-semibold tracking-tight block truncate">
+              단원 개념 노트 &amp; 9:16 수업 스튜디오
+            </span>
           </div>
         </div>
 
-        {/* User Profile Mini Bar & Token Balance */}
-        <div className="p-3 mx-3 my-3 rounded-xl bg-slate-800/60 border border-slate-700/60 space-y-2.5">
+        {/* Educator Profile & Token Ledger */}
+        <div className="p-3 mx-3 my-3 rounded-lg bg-[#1A2B4E] border border-[#293E6D] space-y-2.5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5 min-w-0">
-              <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${
-                isAdmin
-                  ? 'bg-amber-500/20 border border-amber-500/40 text-amber-300'
-                  : 'bg-blue-500/20 border border-blue-400/30 text-blue-400'
-              }`}>
+              <div
+                className={`w-8 h-8 rounded-md flex items-center justify-center font-bold text-xs shrink-0 border ${
+                  isAdmin
+                    ? 'bg-[#3B2F14] border-[#D97706] text-[#FDE68A]'
+                    : 'bg-[#1E3A8A] border-[#3B63D6] text-[#DBEAFE]'
+                }`}
+              >
                 {isAdmin ? <Crown className="w-4 h-4" /> : <User className="w-4 h-4" />}
               </div>
               <div className="min-w-0">
-                <p className="text-xs font-bold text-white truncate flex items-center gap-1">
-                  <span>{userName}</span>
+                <p className="text-xs font-bold text-white truncate flex items-center gap-1.5">
+                  <span className="truncate">{userName}</span>
                   {isAdmin && (
-                    <span className="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/30 text-amber-300 font-black">
+                    <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#D97706] text-[#14213D] font-black">
                       MASTER
                     </span>
                   )}
                 </p>
-                <div className="text-[10px] text-emerald-400 font-medium flex items-center gap-1 truncate">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-                  <span className="truncate">
-                    {isAdmin ? '관리자 권한' : '일반 크리에이터'}
-                  </span>
+                <div className="text-[10px] text-[#86EFAC] font-semibold flex items-center gap-1.5 truncate">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#4ADE80] shrink-0" />
+                  <span className="truncate">{isAdmin ? '마스터 교사 권한' : '인증 교사 워크스페이스'}</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Token Balance Badge */}
-          <div className="pt-2 border-t border-slate-700/60 flex items-center justify-between text-[11px]">
-            <span className="text-slate-400 flex items-center gap-1 font-medium">
-              <Coins className="w-3.5 h-3.5 text-amber-400" />
+          <div className="pt-2 border-t border-[#293E6D] flex items-center justify-between text-[11px]">
+            <span className="text-[#B6C7E6] flex items-center gap-1 font-semibold">
+              <Coins className="w-3.5 h-3.5 text-[#FBBF24]" />
               <span>보유 토큰</span>
             </span>
             {isAdmin ? (
-              <span className="font-black text-amber-300 bg-amber-500/20 px-2 py-0.5 rounded text-[10px] border border-amber-500/30 flex items-center gap-1 shadow-sm">
+              <span className="font-extrabold text-[#FDE68A] bg-[#3B2F14] px-2 py-0.5 rounded text-[10px] border border-[#B45309] flex items-center gap-1">
                 <Crown className="w-2.5 h-2.5" />
                 <span>무제한 (∞)</span>
               </span>
             ) : (
               <div className="flex items-center gap-1.5">
                 <span
-                  className={`font-bold px-2 py-0.5 rounded text-[10px] border transition-all ${
+                  className={`font-bold px-2 py-0.5 rounded text-[10px] border tabular-nums ${
                     (tokens ?? 0) < 100
-                      ? 'text-rose-300 bg-rose-500/20 border-rose-500/40 animate-pulse font-extrabold'
-                      : 'text-blue-300 bg-blue-500/20 border-blue-500/30'
+                      ? 'text-[#FECACA] bg-[#7F1D1D] border-[#DC2626] font-extrabold'
+                      : 'text-[#DBEAFE] bg-[#1E3A8A] border-[#3B63D6]'
                   }`}
                   title={(tokens ?? 0) < 100 ? '포인트 부족: 쇼츠 제작 시 최소 100P 필요' : `${(tokens ?? 0).toLocaleString()} P 보유`}
                 >
@@ -140,11 +141,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 </span>
                 {onOpenRechargeModal && (
                   <button
+                    type="button"
                     onClick={onOpenRechargeModal}
-                    className="px-1.5 py-0.5 rounded bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-[9px] font-bold transition-all flex items-center gap-0.5"
+                    className="px-1.5 py-0.5 rounded bg-[#F59E0B] hover:bg-[#D97706] text-[#14213D] text-[10px] font-extrabold transition-colors"
                     title="토큰 추가 충전"
                   >
-                    <span>+충전</span>
+                    +충전
                   </button>
                 )}
               </div>
@@ -152,35 +154,43 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </div>
         </div>
 
-        {/* Navigation Menu Links */}
-        <nav className="px-3 space-y-1.5 mt-1">
+        {/* Curriculum Studio Navigation */}
+        <nav className="px-3 space-y-1 mt-1" aria-label="스튜디오 주 메뉴">
           {menuItems.map((item) => {
             const Icon = item.icon;
             const isActive = currentTab === item.id;
             return (
               <button
                 key={item.id}
+                type="button"
                 onClick={() => onSelectTab(item.id)}
-                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all group ${
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-semibold transition-colors group ${
                   isActive
-                    ? 'bg-blue-600 text-white shadow-md shadow-blue-900/40 font-bold'
-                    : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800/60'
+                    ? 'bg-[#1E40AF] text-white border border-[#3B63D6] font-bold'
+                    : 'text-[#B6C7E6] hover:text-white hover:bg-[#1C2E52] border border-transparent'
                 }`}
               >
-                <div className="flex items-center gap-3">
-                  <Icon
-                    className={`w-4 h-4 transition-colors ${
-                      isActive ? 'text-white' : 'text-slate-400 group-hover:text-slate-200'
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <span
+                    className={`w-1 h-3.5 rounded-full transition-colors ${
+                      isActive ? 'bg-[#FBBF24]' : 'bg-transparent group-hover:bg-[#3B5998]'
                     }`}
                   />
-                  <span>{item.label}</span>
+                  <Icon
+                    className={`w-4 h-4 shrink-0 transition-colors ${
+                      isActive ? 'text-[#FDE68A]' : 'text-[#9FB2D4] group-hover:text-white'
+                    }`}
+                  />
+                  <span className="truncate">{item.label}</span>
                 </div>
                 {item.badge !== undefined && (
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                    isActive
-                      ? 'bg-white/20 text-white'
-                      : 'bg-slate-800 text-slate-300 border border-slate-700'
-                  }`}>
+                  <span
+                    className={`text-[10px] font-bold px-1.5 py-0.5 rounded tabular-nums shrink-0 ${
+                      isActive
+                        ? 'bg-[#14213D] text-[#FDE68A]'
+                        : 'bg-[#1C2E52] text-[#C6D6F2] border border-[#2C4475]'
+                    }`}
+                  >
                     {item.badge}
                   </span>
                 )}
@@ -190,39 +200,39 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </nav>
 
         {onOpenCalendarModal && (
-          <div className="px-3 mt-3">
+          <div className="px-3 mt-2.5">
             <button
+              type="button"
               onClick={onOpenCalendarModal}
-              className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500/15 to-yellow-500/15 hover:from-amber-500/25 hover:to-yellow-500/25 text-amber-300 border border-amber-500/30 font-bold text-xs shadow-xs transition-all active:scale-[0.98]"
+              className="w-full flex items-center justify-between px-3 py-2 rounded-lg bg-[#1A2B4E] hover:bg-[#223763] text-[#FDE68A] border border-[#B45309] font-bold text-xs transition-colors"
             >
               <div className="flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-amber-400" />
-                <span>쇼츠 발행 캘린더</span>
+                <Calendar className="w-4 h-4 text-[#FBBF24]" />
+                <span>수업 배포 캘린더</span>
               </div>
-              <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-amber-400 text-slate-950 font-black">
-                NEW
+              <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#F59E0B] text-[#14213D] font-black">
+                일정표
               </span>
             </button>
           </div>
         )}
       </div>
 
-      {/* Bottom Status & Actions */}
-      <div className="p-3 border-t border-slate-800/80 space-y-2.5 bg-[#0b1120]">
-        <div className="bg-slate-800/40 rounded-xl p-3 border border-slate-700/50 text-[11px] text-slate-400 space-y-1">
-          <div className="flex items-center justify-between font-medium text-slate-300">
-            <span>엔진 상태</span>
-            <span className="text-emerald-400 font-bold flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              정상 가동
+      {/* Bottom Engine Status & Session Controls */}
+      <div className="p-3 border-t border-[#24365C] space-y-2 bg-[#0F1930]">
+        <div className="bg-[#162442] rounded-lg p-2.5 border border-[#253A66] text-[11px] text-[#B6C7E6] space-y-1">
+          <div className="flex items-center justify-between font-semibold text-white">
+            <span>로컬 수업 엔진</span>
+            <span className="text-[#86EFAC] font-bold flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#4ADE80]" />
+              준비 완료
             </span>
           </div>
-          <div className="text-[10px] text-slate-500">
-            FFmpeg 9:16 + Neural TTS
+          <div className="text-[10px] text-[#9FB2D4] tabular-nums">
+            FFmpeg 9:16 · 무료 Neural TTS
           </div>
         </div>
 
-        {/* Update & Sync Button */}
         {onOpenUpdate && (() => {
           const isRealUpdate = Boolean(
             hasUpdate &&
@@ -232,20 +242,23 @@ export const Sidebar: React.FC<SidebarProps> = ({
           );
           return (
             <button
+              type="button"
               onClick={onOpenUpdate}
-              className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold transition-all shadow-sm group ${
+              className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-bold transition-colors ${
                 isRealUpdate
-                  ? 'text-white bg-blue-600 hover:bg-blue-500 border border-blue-400/50 shadow-md shadow-blue-500/20 animate-pulse'
-                  : 'text-slate-400 hover:text-white bg-slate-800/40 hover:bg-slate-800 border border-slate-700/50 hover:border-slate-600'
+                  ? 'text-[#14213D] bg-[#F59E0B] hover:bg-[#D97706] border border-[#FCD34D]'
+                  : 'text-[#B6C7E6] hover:text-white bg-[#162442] hover:bg-[#1E3158] border border-[#253A66]'
               }`}
             >
               <div className="flex items-center gap-2">
-                <Zap className={`w-3.5 h-3.5 ${isRealUpdate ? 'text-yellow-300' : 'text-slate-400 group-hover:text-blue-400'}`} />
-                <span>{isRealUpdate ? '새 버전 업데이트' : '최신 버전 사용 중'}</span>
+                <Zap className={`w-3.5 h-3.5 ${isRealUpdate ? 'text-[#14213D]' : 'text-[#FBBF24]'}`} />
+                <span>{isRealUpdate ? '새 버전 업데이트' : '버전 상태 확인'}</span>
               </div>
-              <span className={`text-[10px] px-1.5 py-0.5 rounded font-mono font-bold ${
-                isRealUpdate ? 'bg-yellow-400 text-slate-900' : 'bg-slate-700/60 text-slate-300'
-              }`}>
+              <span
+                className={`text-[10px] px-1.5 py-0.5 rounded font-bold tabular-nums ${
+                  isRealUpdate ? 'bg-[#14213D] text-[#FDE68A]' : 'bg-[#21345E] text-[#D5E1F7]'
+                }`}
+              >
                 {isRealUpdate ? `v${latestVersion || 'NEW'}` : `v${displayVersion}`}
               </span>
             </button>
@@ -253,11 +266,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
         })()}
 
         <button
+          type="button"
           onClick={onLogout}
-          className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-medium text-slate-400 hover:text-rose-400 hover:bg-rose-950/20 border border-transparent hover:border-rose-900/30 transition-all"
+          className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold text-[#B6C7E6] hover:text-[#FCA5A5] hover:bg-[#3B1824] border border-transparent hover:border-[#7F1D1D] transition-colors"
         >
           <LogOut className="w-3.5 h-3.5" />
-          <span>사용자 전환 / 나가기</span>
+          <span>교사 전환 / 나가기</span>
         </button>
       </div>
     </aside>

@@ -18,7 +18,7 @@ export const BatchGeneratorModal: React.FC<BatchGeneratorModalProps> = ({
   onBatchDone,
 }) => {
   const [inputText, setInputText] = useState(
-    `하루 10분 아침 기상 루틴으로 인생 바꾸는 법\n부자들이 절대 사지 않는 3가지 물건\n뇌 과학자가 추천하는 집중력 300% 높이는 비법\n인간관계에서 손절해야 할 위험한 사람의 특징\n수면 전문가가 말하는 5분 만에 깊은 잠에 빠지는 꿀팁`
+    `[1차시] 원자와 분자의 차이: 레고 블록 비유로 1분 구분하기\n[2차시] 식물의 광합성과 호흡: 밤에는 왜 산소를 소비할까?\n[3차시] 고조선 8조법 3가지 조항으로 읽는 고대 사회 모습\n[4차시] 기회비용 vs 매몰비용: 영화표 사례로 합리적 선택 이해\n[5차시] 에빙하우스 망각곡선을 이기는 10분·1일·1주 복습 전략`
   );
   const [defaultVoiceId, setDefaultVoiceId] = useState('ko-KR-SunHiNeural');
   const [defaultTemplateId, setDefaultTemplateId] = useState('basic');
@@ -193,62 +193,62 @@ export const BatchGeneratorModal: React.FC<BatchGeneratorModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="bg-white rounded-3xl shadow-2xl border border-slate-200 max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#14213D]/60 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="bg-[#FFFDF8] rounded-2xl shadow-2xl border border-[#CFC6AE] max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
         {/* Header */}
-        <div className="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-gradient-to-r from-blue-50/50 via-white to-indigo-50/50">
+        <div className="px-6 py-4 border-b border-[#E5DEC9] flex items-center justify-between bg-[#FAF8F3]">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-blue-600/10 border border-blue-600/20 flex items-center justify-center text-blue-600 shadow-inner">
+            <div className="w-10 h-10 rounded-xl bg-[#EFF6FF] border border-[#BFDBFE] flex items-center justify-center text-[#1E40AF]">
               <Layers className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="text-base font-black text-slate-900">
-                  엑셀 / CSV 쇼츠 일괄 대량 양산 (Batch Bulk)
+                <h3 className="text-base font-black text-[#14213D]">
+                  단원 차시별 수업 쇼츠 일괄 제작
                 </h3>
-                <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 border border-blue-200">
-                  무인 자동화
+                <span className="text-[10px] font-extrabold px-2 py-0.5 rounded bg-[#FEF3C7] text-[#78350F] border border-[#FCD34D]">
+                  커리큘럼 일괄 렌더링
                 </span>
               </div>
-              <p className="text-xs text-slate-500 font-medium">
-                여러 주제를 적어두면 밤새 수십 개의 쇼츠 영상을 전자동으로 완성합니다.
+              <p className="text-xs text-[#5C6B85] font-medium">
+                이번 주 차시별 단원 주제를 줄마다 입력하면 동일한 교안 설정으로 한 번에 렌더링합니다.
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
             disabled={isRunning}
-            className="p-2 text-slate-400 hover:text-slate-600 rounded-xl hover:bg-slate-100 transition-colors disabled:opacity-30"
+            className="p-2 text-[#5C6B85] hover:text-[#14213D] rounded-lg hover:bg-[#F2EFE6] transition-colors disabled:opacity-30"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Body */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-5">
+        <div className="flex-1 overflow-y-auto p-6 space-y-5 bg-[#FFFDF8]">
           {/* Status Overlay if running */}
           {isRunning || isFinished ? (
-            <div className="space-y-4 bg-slate-50 border border-slate-200/90 rounded-2xl p-5">
+            <div className="space-y-4 bg-[#FAF8F3] border border-[#E5DEC9] rounded-xl p-5">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   {isRunning ? (
-                    <div className="w-4 h-4 border-2 border-blue-500/30 border-t-blue-600 rounded-full animate-spin" />
+                    <div className="w-4 h-4 border-2 border-[#BFDBFE] border-t-[#1E40AF] rounded-full animate-spin" />
                   ) : (
-                    <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+                    <CheckCircle2 className="w-5 h-5 text-[#15803D]" />
                   )}
-                  <span className="text-sm font-extrabold text-slate-800">
-                    {isRunning ? '쇼츠 대량 양산 중...' : '대량 양산 완료!'}
+                  <span className="text-sm font-extrabold text-[#14213D]">
+                    {isRunning ? '차시별 수업 쇼츠 일괄 제작 중...' : '수업 쇼츠 일괄 제작 완료'}
                   </span>
                 </div>
-                <span className="text-xs font-mono font-bold text-slate-600">
+                <span className="text-xs font-mono font-bold text-[#3D4B66] tabular-nums">
                   {completedCount} / {totalCount} 완료 ({currentProgress}%)
                 </span>
               </div>
 
               {/* Progress Bar */}
-              <div className="w-full bg-slate-200 rounded-full h-3 overflow-hidden p-0.5">
+              <div className="w-full bg-[#E5DEC9] rounded-full h-2.5 overflow-hidden">
                 <div
-                  className="bg-gradient-to-r from-blue-600 to-indigo-600 h-full rounded-full transition-all duration-300"
+                  className="bg-[#1E40AF] h-full rounded-full transition-all duration-300"
                   style={{ width: `${currentProgress}%` }}
                 />
               </div>
@@ -329,37 +329,37 @@ export const BatchGeneratorModal: React.FC<BatchGeneratorModalProps> = ({
               {/* Topics Textarea Input */}
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <label className="text-xs font-extrabold text-slate-700 flex items-center gap-1.5">
-                    <FileText className="w-3.5 h-3.5 text-blue-600" />
-                    <span>생성할 쇼츠 주제 목록 (한 줄에 1개씩 입력)</span>
+                  <label className="text-xs font-extrabold text-[#14213D] flex items-center gap-1.5">
+                    <FileText className="w-3.5 h-3.5 text-[#1E40AF]" />
+                    <span>생성할 단원 차시별 수업 주제 목록 (한 줄에 1개씩 입력)</span>
                   </label>
-                  <span className="text-xs font-mono font-bold text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100">
-                    총 {topics.length}개 주제 감지됨
+                  <span className="text-xs font-mono font-bold text-[#1E40AF] bg-[#EFF6FF] px-2.5 py-0.5 rounded border border-[#BFDBFE] tabular-nums">
+                    총 {topics.length}개 차시 감지됨
                   </span>
                 </div>
                 <textarea
                   rows={6}
                   value={inputText}
                   onChange={(e) => setInputText(e.target.value)}
-                  placeholder="예:&#10;하루 10분 아침 기상 루틴으로 인생 바꾸는 법&#10;부자들이 절대 사지 않는 3가지 물건"
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none text-xs leading-relaxed font-sans transition-all resize-none shadow-inner"
+                  placeholder="예:&#10;[1차시] 원자와 분자의 차이&#10;[2차시] 식물의 광합성과 호흡 원리"
+                  className="w-full px-4 py-3 rounded-lg border border-[#CFC6AE] bg-[#FAF8F3] focus:bg-white focus:border-[#1E40AF] outline-none text-xs leading-relaxed font-sans text-[#14213D] transition-colors resize-none"
                 />
               </div>
 
               {/* Shared Batch Presets Config */}
               <div className="space-y-2 pt-1">
-                <h4 className="text-xs font-extrabold text-slate-700">일괄 적용할 기본 프리셋 설정</h4>
+                <h4 className="text-xs font-extrabold text-[#14213D]">일괄 적용할 교안 공통 설정</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {/* Voice */}
                   <div className="space-y-1">
-                    <label className="text-[11px] font-bold text-slate-500 flex items-center gap-1">
-                      <Mic className="w-3 h-3 text-indigo-500" />
-                      <span>성우 보이스</span>
+                    <label className="text-[11px] font-bold text-[#5C6B85] flex items-center gap-1">
+                      <Mic className="w-3 h-3 text-[#1E40AF]" />
+                      <span>교사 성우 보이스</span>
                     </label>
                     <select
                       value={defaultVoiceId}
                       onChange={(e) => setDefaultVoiceId(e.target.value)}
-                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-800 bg-white focus:outline-none focus:border-blue-500"
+                      className="w-full px-3 py-2 rounded-lg border border-[#CFC6AE] text-xs font-bold text-[#14213D] bg-[#FAF8F3] focus:outline-none focus:border-[#1E40AF]"
                     >
                       {VOICES.map((v) => (
                         <option key={v.id} value={v.id}>
@@ -371,14 +371,14 @@ export const BatchGeneratorModal: React.FC<BatchGeneratorModalProps> = ({
 
                   {/* Template */}
                   <div className="space-y-1">
-                    <label className="text-[11px] font-bold text-slate-500 flex items-center gap-1">
-                      <Palette className="w-3 h-3 text-pink-500" />
-                      <span>비주얼 화풍</span>
+                    <label className="text-[11px] font-bold text-[#5C6B85] flex items-center gap-1">
+                      <Palette className="w-3 h-3 text-[#B45309]" />
+                      <span>교안 비주얼 템플릿</span>
                     </label>
                     <select
                       value={defaultTemplateId}
                       onChange={(e) => setDefaultTemplateId(e.target.value)}
-                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-800 bg-white focus:outline-none focus:border-blue-500"
+                      className="w-full px-3 py-2 rounded-lg border border-[#CFC6AE] text-xs font-bold text-[#14213D] bg-[#FAF8F3] focus:outline-none focus:border-[#1E40AF]"
                     >
                       {TEMPLATES.map((t) => (
                         <option key={t.id} value={t.id}>
@@ -390,14 +390,14 @@ export const BatchGeneratorModal: React.FC<BatchGeneratorModalProps> = ({
 
                   {/* BGM */}
                   <div className="space-y-1">
-                    <label className="text-[11px] font-bold text-slate-500 flex items-center gap-1">
-                      <Music className="w-3 h-3 text-violet-500" />
-                      <span>BGM 무드</span>
+                    <label className="text-[11px] font-bold text-[#5C6B85] flex items-center gap-1">
+                      <Music className="w-3 h-3 text-[#15803D]" />
+                      <span>수업 배경음악</span>
                     </label>
                     <select
                       value={defaultBgmMood}
                       onChange={(e) => setDefaultBgmMood(e.target.value)}
-                      className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-800 bg-white focus:outline-none focus:border-blue-500"
+                      className="w-full px-3 py-2 rounded-lg border border-[#CFC6AE] text-xs font-bold text-[#14213D] bg-[#FAF8F3] focus:outline-none focus:border-[#1E40AF]"
                     >
                       {BGM_TRACKS.map((b) => (
                         <option key={b.id} value={b.id}>
@@ -410,52 +410,49 @@ export const BatchGeneratorModal: React.FC<BatchGeneratorModalProps> = ({
               </div>
 
               {/* SFX Toggle in Batch */}
-              <label className="flex items-center justify-between p-3 rounded-xl border border-slate-200/80 bg-slate-50 cursor-pointer hover:bg-slate-100/70 transition-colors">
+              <label className="flex items-center justify-between p-3 rounded-lg border border-[#E5DEC9] bg-[#FAF8F3] cursor-pointer hover:bg-[#F2EFE6] transition-colors">
                 <div className="flex items-center gap-2">
-                  <span className="text-base">🔊</span>
                   <div>
-                    <span className="text-xs font-extrabold text-slate-800 block">바이럴 효과음(SFX) 전 항목 자동 믹싱</span>
-                    <span className="text-[10px] text-slate-500">Whoosh, Boom, Pop, Ding 효과음을 모든 영상에 자동 삽입</span>
+                    <span className="text-xs font-extrabold text-[#14213D] block">수업 강조 효과음(SFX) 전 항목 자동 믹싱</span>
+                    <span className="text-[10px] text-[#5C6B85]">단계 전환(Whoosh)·핵심 단어(Pop)·정답 차임(Ding) 자동 삽입</span>
                   </div>
                 </div>
                 <input
                   type="checkbox"
                   checked={enableSfx}
                   onChange={(e) => setEnableSfx(e.target.checked)}
-                  className="w-4 h-4 text-blue-600 rounded accent-blue-600 cursor-pointer"
+                  className="w-4 h-4 accent-[#1E40AF] cursor-pointer"
                 />
               </label>
 
               {/* Infinite loop script */}
-              <label className="flex items-center justify-between p-3 rounded-xl border border-slate-200/80 bg-slate-50 cursor-pointer hover:bg-slate-100/70 transition-colors">
+              <label className="flex items-center justify-between p-3 rounded-lg border border-[#E5DEC9] bg-[#FAF8F3] cursor-pointer hover:bg-[#F2EFE6] transition-colors">
                 <div className="flex items-center gap-2">
-                  <span className="text-base">🔁</span>
                   <div>
-                    <span className="text-xs font-extrabold text-slate-800 block">무한 루프 대본 모드</span>
-                    <span className="text-[10px] text-slate-500">모든 영상의 마지막 문장이 첫 문장으로 자연스럽게 이어집니다</span>
+                    <span className="text-xs font-extrabold text-[#14213D] block">복습 순환(무한 루프) 대본 모드</span>
+                    <span className="text-[10px] text-[#5C6B85]">마지막 요약 문장이 도입 질문으로 자연스럽게 이어집니다</span>
                   </div>
                 </div>
                 <input
                   type="checkbox"
                   checked={loopMode}
                   onChange={(e) => setLoopMode(e.target.checked)}
-                  className="w-4 h-4 text-blue-600 rounded accent-blue-600 cursor-pointer"
+                  className="w-4 h-4 accent-[#1E40AF] cursor-pointer"
                 />
               </label>
 
               {/* Parallel workers */}
-              <div className="flex items-center justify-between p-3 rounded-xl border border-slate-200/80 bg-slate-50">
+              <div className="flex items-center justify-between p-3 rounded-lg border border-[#E5DEC9] bg-[#FAF8F3]">
                 <div className="flex items-center gap-2">
-                  <span className="text-base">⚡</span>
                   <div>
-                    <span className="text-xs font-extrabold text-slate-800 block">동시 렌더링 수</span>
-                    <span className="text-[10px] text-slate-500">자동: PC의 CPU·메모리·부하에 맞춰 1~3개를 조절합니다</span>
+                    <span className="text-xs font-extrabold text-[#14213D] block">동시 렌더링 수</span>
+                    <span className="text-[10px] text-[#5C6B85]">자동: PC의 CPU·메모리 상태에 맞춰 1~3개 병렬 처리</span>
                   </div>
                 </div>
                 <select
                   value={String(maxParallel)}
                   onChange={(e) => setMaxParallel(e.target.value === 'auto' ? 'auto' : (Number(e.target.value) as 1 | 2 | 3))}
-                  className="text-xs font-bold border border-slate-200 rounded-lg px-2 py-1 bg-white text-slate-700"
+                  className="text-xs font-bold border border-[#CFC6AE] rounded-lg px-2 py-1 bg-white text-[#14213D]"
                 >
                   <option value="auto">자동 (권장)</option>
                   <option value="1">1개 (순차)</option>
@@ -468,24 +465,24 @@ export const BatchGeneratorModal: React.FC<BatchGeneratorModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 border-t border-slate-100 bg-slate-50/50 flex items-center justify-between">
-          <div className="text-[11px] text-slate-400 font-medium">
-            {isRunning ? '컴퓨터를 켜두시면 PC 상태에 맞춰 안전하게 렌더링됩니다.' : '완료된 영상은 비디오 보관함에 즉시 적재됩니다.'}
+        <div className="px-6 py-4 border-t border-[#E5DEC9] bg-[#FAF8F3] flex items-center justify-between">
+          <div className="text-[11px] text-[#5C6B85] font-medium">
+            {isRunning ? 'PC 상태에 맞춰 안전하게 렌더링하고 있습니다.' : '완성된 수업 영상은 수업 자료 보관함에 즉시 저장됩니다.'}
           </div>
 
           <div className="flex items-center gap-2.5">
             {isRunning ? (
               <button
                 onClick={handleCancel}
-                className="px-4 py-2.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-bold transition-all active:scale-95 flex items-center gap-1.5"
+                className="px-4 py-2 rounded-lg bg-[#FEF2F2] hover:bg-[#FEE2E2] text-[#B91C1C] border border-[#FECACA] text-xs font-bold transition-colors flex items-center gap-1.5"
               >
                 <Square className="w-3.5 h-3.5 fill-current" />
-                <span>대량 작업 취소</span>
+                <span>일괄 작업 취소</span>
               </button>
             ) : isFinished ? (
               <button
                 onClick={onClose}
-                className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-extrabold shadow-md shadow-blue-500/20 transition-all active:scale-95"
+                className="px-5 py-2 rounded-lg bg-[#1E40AF] hover:bg-[#1E3A8A] text-white text-xs font-extrabold transition-colors"
               >
                 확인 및 닫기
               </button>
@@ -493,17 +490,17 @@ export const BatchGeneratorModal: React.FC<BatchGeneratorModalProps> = ({
               <>
                 <button
                   onClick={onClose}
-                  className="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-600 text-xs font-bold hover:bg-slate-100 transition-colors"
+                  className="px-4 py-2 rounded-lg border border-[#CFC6AE] text-[#3D4B66] text-xs font-bold hover:bg-[#F2EFE6] transition-colors"
                 >
                   취소
                 </button>
                 <button
                   onClick={handleStartBatch}
                   disabled={topics.length === 0}
-                  className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-extrabold shadow-md shadow-blue-500/20 transition-all active:scale-95 disabled:opacity-40 flex items-center gap-2"
+                  className="px-5 py-2 rounded-lg bg-[#14213D] hover:bg-[#1C2E52] text-white text-xs font-extrabold transition-colors disabled:opacity-40 flex items-center gap-2"
                 >
-                  <Sparkles className="w-4 h-4" />
-                  <span>{topics.length}개 쇼츠 일괄 자동 제작 시작</span>
+                  <Sparkles className="w-4 h-4 text-[#FDE68A]" />
+                  <span>{topics.length}개 차시 일괄 제작 시작</span>
                 </button>
               </>
             )}

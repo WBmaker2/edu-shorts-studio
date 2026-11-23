@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Music, Volume2, Sparkles, Check, Play, Square, Flame, ShieldCheck } from 'lucide-react';
+import { Music, Volume2, Sparkles, Check, Play, Square, HelpCircle, ShieldCheck, Bell } from 'lucide-react';
 import { BGM_TRACKS } from '../constants/bgm';
 
 interface BgmSelectorProps {
@@ -70,72 +70,51 @@ export const BgmSelector: React.FC<BgmSelectorProps> = ({
   };
 
   return (
-    <div className="bg-white border border-slate-200/90 rounded-2xl p-6 space-y-5 shadow-sm">
+    <section className="bg-[#FFFDF8] border border-[#E5DEC9] rounded-xl p-5 space-y-4">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#E5DEC9] pb-3">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-600">
+          <div className="p-2 rounded-lg bg-[#EFF6FF] text-[#1E40AF] border border-[#BFDBFE]">
             <Music className="w-4 h-4" />
           </div>
           <div>
             <div className="flex flex-wrap items-center gap-2">
-              <h3 className="font-extrabold text-sm text-slate-900">
-                배경음악(BGM) & 스마트 오디오 덕킹
+              <h3 className="font-extrabold text-sm text-[#14213D]">
+                수업 배경음(BGM) &amp; 성우 음성 자동 덕킹
               </h3>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-violet-100 text-violet-700 border border-violet-200">
-                오디오 덕킹 탑재
-              </span>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 border border-emerald-200 flex items-center gap-1">
-                <ShieldCheck className="w-3 h-3 text-emerald-600" />
-                직접 합성한 로열티 프리 음원
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#DCFCE7] text-[#14532D] border border-[#86EFAC] flex items-center gap-1">
+                <ShieldCheck className="w-3 h-3 text-[#15803D]" />
+                자체 합성 로열티 프리 음원
               </span>
             </div>
-            <p className="text-xs text-slate-500 font-medium">
-              성우 목소리가 나올 때는 BGM이 자동으로 줄어들고(Ducking), 공백에서는 자연스럽게 올라옵니다.
+            <p className="text-xs text-[#5C6B85] font-medium">
+              교사 내레이션이 나올 때는 배경음 볼륨을 자동으로 낮춰(Ducking) 설명 전달력을 지킵니다.
             </p>
           </div>
         </div>
 
-        {/* BGM Toggle Switch */}
-        <div className="flex items-center gap-2.5 self-end sm:self-auto">
-          <span className="text-xs font-bold text-slate-700">BGM 사용</span>
-          <button
-            type="button"
-            onClick={() => onToggleBgm(!enableBgm)}
-            className={`w-11 h-6 flex items-center rounded-full p-1 transition-colors duration-200 ${
-              enableBgm ? 'bg-violet-600' : 'bg-slate-300'
-            }`}
-          >
-            <div
-              className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-200 ${
-                enableBgm ? 'translate-x-5' : 'translate-x-0'
-              }`}
-            />
-          </button>
-        </div>
+        <label className="flex items-center gap-2 self-end sm:self-auto cursor-pointer">
+          <span className="text-xs font-extrabold text-[#14213D]">배경음 사용</span>
+          <input
+            type="checkbox"
+            checked={enableBgm}
+            onChange={() => onToggleBgm(!enableBgm)}
+            className="w-4 h-4 cursor-pointer"
+          />
+        </label>
       </div>
 
       {enableBgm && (
-        <div className="space-y-4 pt-1 animate-in fade-in duration-200">
-          {/* Copyright Safe Guarantee Banner */}
-          <div className="p-3 rounded-xl bg-emerald-50/70 border border-emerald-200/80 flex items-start gap-2.5">
-            <ShieldCheck className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" />
-            <div className="text-[11px] text-emerald-950 leading-relaxed">
-              <span className="font-bold text-emerald-800">로열티 프리 배경음악:</span>
-              {' '}제공되는 배경음악은 프로그램이 직접 합성한 로열티 프리 음원입니다. 저작권 판정은 각 플랫폼 기준을 따릅니다.
-              스마트폰 모바일 앱에서 직접 최신 트렌드 음악을 삽입하고 싶으신 경우 <b>'배경음악 없음'</b>을 선택하시면 됩니다.
-            </div>
-          </div>
-
+        <div className="space-y-3.5">
           {/* Volume Control Bar */}
-          <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
-              <Volume2 className="w-4 h-4 text-violet-600" />
-              <span>BGM 볼륨: {Math.round(bgmVolume * 100)}%</span>
-              <span className="text-[10px] text-slate-400 font-medium">(성우 목소리 대비 밸런스)</span>
+          <div className="p-3 rounded-lg bg-[#FAF8F3] border border-[#E5DEC9] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex items-center gap-2 text-xs font-bold text-[#14213D] tabular-nums">
+              <Volume2 className="w-4 h-4 text-[#1E40AF]" />
+              <span>배경음 볼륨: {Math.round(bgmVolume * 100)}%</span>
+              <span className="text-[11px] text-[#5C6B85] font-medium">(수업 영상은 15~22% 권장)</span>
             </div>
-            <div className="flex items-center gap-3 w-full sm:w-56">
-              <span className="text-[10px] text-slate-400 font-bold">10%</span>
+            <div className="flex items-center gap-3 w-full sm:w-56 tabular-nums">
+              <span className="text-[10px] text-[#5C6B85] font-bold">10%</span>
               <input
                 type="range"
                 min="0.10"
@@ -143,49 +122,48 @@ export const BgmSelector: React.FC<BgmSelectorProps> = ({
                 step="0.02"
                 value={bgmVolume}
                 onChange={(e) => onChangeVolume(parseFloat(e.target.value))}
-                className="w-full accent-violet-600 cursor-pointer"
+                className="w-full cursor-pointer"
               />
-              <span className="text-[10px] text-slate-400 font-bold">45%</span>
+              <span className="text-[10px] text-[#5C6B85] font-bold">45%</span>
             </div>
           </div>
 
           {/* BGM Mood Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
             {BGM_TRACKS.map((track) => {
               const isSelected = selectedMood === track.id || (track.id === 'auto' && !selectedMood);
               const isPlaying = playingTrackId === track.id;
 
-              // Auto-detected BGM mood for the current topic
               const detectedMood = track.id === 'auto' && currentTopic ? (() => {
                 const text = currentTopic.toLowerCase();
-                if (text.match(/공포|스릴러|미스터리|소름|괴담|심해|미제|충격|귀신|사건|벌금|탈옥|블랙홀|골짜기|외로운|비밀|어두운|복선|황당|범죄/)) {
-                  return { label: '🌑 미스터리 & 긴장감 (Suspense)', color: 'bg-indigo-100 text-indigo-800 border-indigo-200' };
+                if (text.match(/공포|스릴러|미스터리|소름|괴담|심해|미제|충격|사건|벌금|탈옥|블랙홀|골짜기|비밀/)) {
+                  return { label: '탐구 & 긴장감 (Suspense)', color: 'bg-[#FEF3C7] text-[#78350F] border-[#FCD34D]' };
                 }
-                if (text.match(/역사|동기부여|성공|위인|전쟁|왕실|명언|부자|백만장자|억만장자|애플|스타벅스|마케팅|다이아몬드|로또|워런|일론|금수저/)) {
-                  return { label: '⚔️ 웅장한 시네마틱 (Epic)', color: 'bg-amber-100 text-amber-800 border-amber-200' };
+                if (text.match(/역사|동기부여|성공|위인|전쟁|왕실|명언|고조선|신라|로마|장영실|훈민정음/)) {
+                  return { label: '역사 다큐 시네마틱 (Epic)', color: 'bg-[#FEF3C7] text-[#78350F] border-[#FCD34D]' };
                 }
-                if (text.match(/뇌과학|뇌|심리|흑역사|이불킥|거짓말|나르시시스트|소시오패스|가스라이팅|미러링|자존감|지식|테크|ai|과학|기술|스마트폰|컴퓨터/)) {
-                  return { label: '⚡ 모던 테크 & 지식 (Tech)', color: 'bg-sky-100 text-sky-800 border-sky-200' };
+                if (text.match(/뇌과학|뇌|심리|원자|분자|광합성|과학|기술|물리|화학|기회비용|수학|정보|ai/)) {
+                  return { label: '과학 · 개념 탐구 (Tech)', color: 'bg-[#EFF6FF] text-[#1E40AF] border-[#BFDBFE]' };
                 }
-                if (text.match(/건강|힐링|수면|명상|마음|요가|스트레스|휴식|호흡법|위로|감성|눈물|사망/)) {
-                  return { label: '☕ 감성 힐링 & 로파이 (Lofi)', color: 'bg-emerald-100 text-emerald-800 border-emerald-200' };
+                if (text.match(/건강|힐링|수면|명상|마음|복습|문학|독서|호흡법/)) {
+                  return { label: '차분한 복습 로파이 (Lofi)', color: 'bg-[#DCFCE7] text-[#14532D] border-[#86EFAC]' };
                 }
-                return { label: '☀️ 밝고 경쾌한 팝 (Upbeat)', color: 'bg-rose-100 text-rose-800 border-rose-200' };
+                return { label: '밝은 수업 도입 (Upbeat)', color: 'bg-[#EFF6FF] text-[#1E40AF] border-[#BFDBFE]' };
               })() : null;
 
               return (
                 <div
                   key={track.id}
                   onClick={() => onSelectMood(track.id)}
-                  className={`relative p-3.5 rounded-xl border text-left transition-all cursor-pointer group flex flex-col justify-between ${
+                  className={`relative p-3.5 rounded-lg border text-left transition-colors cursor-pointer group flex flex-col justify-between ${
                     isSelected
-                      ? 'border-violet-600 bg-violet-50/50 shadow-sm ring-1 ring-violet-600'
-                      : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50/60'
+                      ? 'border-[#1E40AF] bg-[#EFF6FF]'
+                      : 'border-[#E5DEC9] bg-[#FAF8F3] hover:bg-[#FFFDF8] hover:border-[#CFC6AE]'
                   }`}
                 >
                   <div>
                     <div className="flex items-start justify-between gap-2">
-                      <div className="font-extrabold text-xs text-slate-900 leading-snug">
+                      <div className="font-extrabold text-xs text-[#14213D] leading-snug">
                         {track.name}
                       </div>
                       <div className="flex items-center gap-1 shrink-0">
@@ -193,10 +171,10 @@ export const BgmSelector: React.FC<BgmSelectorProps> = ({
                           <button
                             type="button"
                             onClick={(e) => handlePreview(e, track.id, track.filename)}
-                            className={`w-6 h-6 rounded-lg flex items-center justify-center transition-colors ${
+                            className={`w-6 h-6 rounded flex items-center justify-center transition-colors ${
                               isPlaying
-                                ? 'bg-violet-600 text-white'
-                                : 'bg-slate-100 text-slate-500 hover:bg-violet-100 hover:text-violet-700'
+                                ? 'bg-[#1E40AF] text-white'
+                                : 'bg-[#FFFDF8] text-[#3D4B66] border border-[#CFC6AE] hover:border-[#1E40AF] hover:text-[#1E40AF]'
                             }`}
                             title={isPlaying ? '정지' : '미리듣기'}
                           >
@@ -204,32 +182,28 @@ export const BgmSelector: React.FC<BgmSelectorProps> = ({
                           </button>
                         )}
                         <div
-                          className={`w-4 h-4 rounded-full border flex items-center justify-center transition-colors ${
+                          className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${
                             isSelected
-                              ? 'border-violet-600 bg-violet-600 text-white'
-                              : 'border-slate-300 group-hover:border-slate-400'
+                              ? 'border-[#1E40AF] bg-[#1E40AF] text-white'
+                              : 'border-[#CFC6AE] bg-white text-transparent'
                           }`}
                         >
-                          {isSelected && <Check className="w-2.5 h-2.5 stroke-[3]" />}
+                          <Check className="w-2.5 h-2.5 stroke-[3]" />
                         </div>
                       </div>
                     </div>
+
                     {detectedMood && (
-                      <div className={`mt-1.5 px-2 py-0.5 rounded-md border text-[10px] font-extrabold inline-flex items-center gap-1 ${detectedMood.color}`}>
+                      <div className={`mt-1.5 px-2 py-0.5 rounded border text-[10px] font-extrabold inline-flex items-center gap-1 ${detectedMood.color}`}>
                         <span>자동 선곡 예정:</span>
                         <span>{detectedMood.label}</span>
                       </div>
                     )}
-                    <p className="text-[11px] text-slate-500 mt-1 leading-relaxed font-medium">
+
+                    <p className="text-[11px] text-[#3D4B66] mt-1 leading-snug font-medium">
                       {track.description}
                     </p>
                   </div>
-                  {track.copyrightStatus && (
-                    <div className="mt-2.5 pt-2 border-t border-slate-100 flex items-center gap-1 text-[10px] text-emerald-600 font-semibold">
-                      <ShieldCheck className="w-3 h-3 text-emerald-500 shrink-0" />
-                      <span className="truncate">{track.copyrightStatus}</span>
-                    </div>
-                  )}
                 </div>
               );
             })}
@@ -237,69 +211,64 @@ export const BgmSelector: React.FC<BgmSelectorProps> = ({
         </div>
       )}
 
-      {/* Video Retention Boost Options (Hook Intro + Pop-up Subtitles + SFX) */}
-      <div className="pt-3 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-2 gap-3">
+      {/* Pedagogical Retention Options (Intro Question Banner + Keyword Pop-up) */}
+      <div className="pt-3 border-t border-[#E5DEC9] grid grid-cols-1 sm:grid-cols-2 gap-3">
         {onToggleHookIntro && (
-          <label className="flex items-center justify-between p-3 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-slate-50 cursor-pointer transition-colors">
+          <label className="flex items-center justify-between p-3 rounded-lg border border-[#E5DEC9] bg-[#FAF8F3] hover:bg-[#FFFDF8] cursor-pointer transition-colors">
             <div className="flex items-center gap-2">
-              <Flame className="w-4 h-4 text-amber-500 shrink-0" />
+              <HelpCircle className="w-4 h-4 text-[#B45309] shrink-0" />
               <div>
-                <span className="text-xs font-extrabold text-slate-800 block">첫 3초 후킹 인트로 배너</span>
-                <span className="text-[10px] text-slate-500">스크롤 이탈을 막는 강렬한 0~2초 오버레이</span>
+                <span className="text-xs font-extrabold text-[#14213D] block">첫 3초 수업 도입 질문 배너</span>
+                <span className="text-[11px] text-[#5C6B85]">수업 시작 0~2.5초 동안 핵심 발문 카드를 표시합니다</span>
               </div>
             </div>
             <input
               type="checkbox"
               checked={enableHookIntro}
               onChange={(e) => onToggleHookIntro(e.target.checked)}
-              className="w-4 h-4 text-violet-600 rounded accent-violet-600 cursor-pointer"
+              className="w-4 h-4 cursor-pointer"
             />
           </label>
         )}
 
         {onTogglePopupSubtitles && (
-          <label className="flex items-center justify-between p-3 rounded-xl border border-slate-200/80 bg-slate-50/50 hover:bg-slate-50 cursor-pointer transition-colors">
+          <label className="flex items-center justify-between p-3 rounded-lg border border-[#E5DEC9] bg-[#FAF8F3] hover:bg-[#FFFDF8] cursor-pointer transition-colors">
             <div className="flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-blue-500 shrink-0" />
+              <Sparkles className="w-4 h-4 text-[#1E40AF] shrink-0" />
               <div>
-                <span className="text-xs font-extrabold text-slate-800 block">팝업 바운스 & 네온 자막</span>
-                <span className="text-[10px] text-slate-500">MrBeast 스타일 단어 확대 & 키워드 강조</span>
+                <span className="text-xs font-extrabold text-[#14213D] block">핵심 용어 팝업 강조 자막</span>
+                <span className="text-[11px] text-[#5C6B85]">중요 개념어 등장 시 탄력 있는 자막 애니메이션을 적용합니다</span>
               </div>
             </div>
             <input
               type="checkbox"
               checked={enablePopupSubtitles}
               onChange={(e) => onTogglePopupSubtitles(e.target.checked)}
-              className="w-4 h-4 text-violet-600 rounded accent-violet-600 cursor-pointer"
+              className="w-4 h-4 cursor-pointer"
             />
           </label>
         )}
       </div>
 
-      {/* Broadcast SFX (Sound Effects) Auto Design Engine */}
-      <div className="pt-4 border-t border-slate-100 space-y-3">
+      {/* Classroom Audio Cue SFX */}
+      <div className="pt-3 border-t border-[#E5DEC9] space-y-3">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div className="flex items-center gap-2">
-            <span className="text-base">🔊</span>
+            <Bell className="w-4 h-4 text-[#B45309]" />
             <div>
-              <div className="flex items-center gap-2">
-                <h4 className="text-xs font-extrabold text-slate-800">
-                  바이럴 효과음(SFX) 자동 사운드 디자인
-                </h4>
-                <span className="text-[9px] font-extrabold px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 border border-amber-200">
-                  알고리즘 시청지속율 +20%
-                </span>
-              </div>
-              <p className="text-[11px] text-slate-400">
-                씬 전환(Whoosh), 인트로 후킹(Boom), 키워드 팝업(Pop), 핵심 꿀팁(Ding) 효과음 자동 믹싱
+              <h4 className="text-xs font-extrabold text-[#14213D]">
+                수업 단계 전환 · 핵심 포인트 효과음(SFX)
+              </h4>
+              <p className="text-[11px] text-[#5C6B85]">
+                장면 전환(Whoosh), 도입 발문(Boom), 키워드 등장(Pop), 핵심 요점(Ding) 효과음을 자동 배치합니다
               </p>
             </div>
           </div>
 
           <div className="flex items-center gap-3 self-end sm:self-auto">
             {enableSfx && onChangeSfxVolume && (
-              <div className="flex items-center gap-1.5 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200">
-                <Volume2 className="w-3.5 h-3.5 text-slate-400" />
+              <div className="flex items-center gap-1.5 bg-[#FAF8F3] px-2.5 py-1 rounded border border-[#E5DEC9] tabular-nums">
+                <Volume2 className="w-3.5 h-3.5 text-[#5C6B85]" />
                 <input
                   type="range"
                   min="0.05"
@@ -307,60 +276,49 @@ export const BgmSelector: React.FC<BgmSelectorProps> = ({
                   step="0.05"
                   value={sfxVolume}
                   onChange={(e) => onChangeSfxVolume(parseFloat(e.target.value))}
-                  className="w-16 h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                  className="w-16 cursor-pointer"
                 />
-                <span className="text-[10px] font-mono font-bold text-slate-600">
+                <span className="text-[10px] font-bold text-[#14213D]">
                   {Math.round(sfxVolume * 100)}%
                 </span>
               </div>
             )}
 
             {onToggleSfx && (
-              <button
-                type="button"
-                onClick={() => onToggleSfx(!enableSfx)}
-                className={`w-9 h-5 flex items-center rounded-full p-0.5 transition-colors duration-200 ${
-                  enableSfx ? 'bg-amber-500' : 'bg-slate-300'
-                }`}
-              >
-                <div
-                  className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-200 ${
-                    enableSfx ? 'translate-x-4' : 'translate-x-0'
-                  }`}
-                />
-              </button>
+              <input
+                type="checkbox"
+                checked={enableSfx}
+                onChange={() => onToggleSfx(!enableSfx)}
+                className="w-4 h-4 cursor-pointer"
+              />
             )}
           </div>
         </div>
 
-        {/* 5 Built-in SFX Chips with Preview */}
         {enableSfx && (
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 pt-1">
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
             {[
-              { id: 'sfx_whoosh', name: '화면전환', icon: '💨', file: 'sfx_whoosh.mp3' },
-              { id: 'sfx_boom', name: '후킹타격', icon: '💥', file: 'sfx_boom.mp3' },
-              { id: 'sfx_pop', name: '자막팝업', icon: '🫧', file: 'sfx_pop.mp3' },
-              { id: 'sfx_ding', name: '핵심꿀팁', icon: '🔔', file: 'sfx_ding.mp3' },
-              { id: 'sfx_glitch', name: '경고반전', icon: '⚡', file: 'sfx_glitch.mp3' },
+              { id: 'sfx_whoosh', name: '단계 전환음', file: 'sfx_whoosh.mp3' },
+              { id: 'sfx_boom', name: '도입 주목음', file: 'sfx_boom.mp3' },
+              { id: 'sfx_pop', name: '자막 팝업음', file: 'sfx_pop.mp3' },
+              { id: 'sfx_ding', name: '핵심 알림음', file: 'sfx_ding.mp3' },
+              { id: 'sfx_glitch', name: '주의 환기음', file: 'sfx_glitch.mp3' },
             ].map((sfx) => (
               <button
                 key={sfx.id}
                 type="button"
                 onClick={(e) => handlePreview(e, sfx.id, sfx.file)}
-                className={`flex items-center justify-between px-2.5 py-1.5 rounded-xl border text-[11px] font-bold transition-all ${
+                className={`flex items-center justify-between px-2.5 py-1.5 rounded-md border text-[11px] font-bold transition-colors ${
                   playingTrackId === sfx.id
-                    ? 'bg-amber-500 text-white border-amber-600 shadow-sm'
-                    : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200/80'
+                    ? 'bg-[#14213D] text-[#FDE68A] border-[#14213D]'
+                    : 'bg-[#FAF8F3] hover:bg-[#F2EFE6] text-[#14213D] border-[#E5DEC9]'
                 }`}
               >
-                <span className="flex items-center gap-1.5 truncate">
-                  <span>{sfx.icon}</span>
-                  <span>{sfx.name}</span>
-                </span>
+                <span className="truncate">{sfx.name}</span>
                 {playingTrackId === sfx.id ? (
-                  <Square className="w-2.5 h-2.5 fill-current" />
+                  <Square className="w-2.5 h-2.5 fill-current shrink-0" />
                 ) : (
-                  <Play className="w-2.5 h-2.5 text-slate-400" />
+                  <Play className="w-2.5 h-2.5 text-[#5C6B85] shrink-0" />
                 )}
               </button>
             ))}
@@ -368,16 +326,16 @@ export const BgmSelector: React.FC<BgmSelectorProps> = ({
         )}
 
         {enableSfx && onToggleHighlightSfx && (
-          <div className="pt-2 border-t border-slate-100/80">
-            <label className="flex items-center justify-between p-2.5 rounded-xl border border-amber-200/60 bg-amber-50/40 hover:bg-amber-50/70 cursor-pointer transition-colors">
+          <div>
+            <label className="flex items-center justify-between p-2.5 rounded-lg border border-[#FCD34D] bg-[#FEF3C7]/45 hover:bg-[#FEF3C7]/70 cursor-pointer transition-colors">
               <div className="flex items-center gap-2">
-                <span className="text-sm">🔔</span>
+                <Bell className="w-3.5 h-3.5 text-[#B45309] shrink-0" />
                 <div>
-                  <span className="text-xs font-extrabold text-amber-950 block">
+                  <span className="text-xs font-extrabold text-[#14213D] block">
                     자막 핵심 단어 & 숫자 효과음 자동 싱크
                   </span>
-                  <span className="text-[10px] text-amber-800/80">
-                    돈/숫자/꿀팁 단어 발화 시 딩(Ding), 충격/반전 단어 발화 시 팝(Pop) 효과음 자동 동기화
+                  <span className="text-[11px] text-[#78350F]">
+                    핵심 수치·개념어 발화 시 알림음(Ding/Pop)을 자막 하이라이트와 동기화합니다
                   </span>
                 </div>
               </div>
@@ -385,12 +343,12 @@ export const BgmSelector: React.FC<BgmSelectorProps> = ({
                 type="checkbox"
                 checked={syncHighlightSfx}
                 onChange={(e) => onToggleHighlightSfx(e.target.checked)}
-                className="w-4 h-4 text-amber-600 rounded accent-amber-600 cursor-pointer"
+                className="w-4 h-4 cursor-pointer"
               />
             </label>
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 };

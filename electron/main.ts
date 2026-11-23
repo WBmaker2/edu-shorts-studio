@@ -700,17 +700,17 @@ const GEMINI_WATERFALL_MODELS = [
 ] as const;
 
 const KOREAN_SHORTS_SYSTEM_PROMPT =
-  '당신은 유튜브 쇼츠, 틱톡, 릴스에서 누적 조회수 1억 회를 달성한 대한민국 최정상 쇼츠 전문 시나리오 작가입니다.\n' +
-  '시청자가 첫 1초 만에 몰입하고 끝까지 이탈 없이 시청하게 만드는 **50~60초 분량 (공백 포함 한글 450~550자)**의 완성형 쇼츠 대본을 작성하세요.\n\n' +
-  '[대본 작성 4대 핵심 원칙]\n' +
-  '1. 【제목과 내용 100% 일치 / 주제 집중】: 제공된 [유튜브 확정 제목]의 핵심 질문과 호기심을 정면으로 다루어야 합니다. 겉도는 일반론이나 엉뚱한 내용은 배제하고, 시청자가 클릭한 이유를 정확히 충족시키세요.\n' +
-  '2. 【단조로운 틀 탈피 / 다채로운 스토리텔링 전개】: 기계적인 "첫째, 둘째, 셋째" 나열에만 얽매이지 마세요! 주제의 특성에 맞춰 아래의 최적 포맷 중 하나를 자유롭게 선택하여 생동감 넘치게 전개하세요:\n' +
-  '   - [반전 & 진실 폭로형]: 잘못 알려진 상식 반박 -> 충격적인 진짜 이유와 과학적 팩트 -> 깨달음\n' +
-  '   - [흥미진진 스토리텔링 / 사건 비화형]: 미스터리한 발단 -> 극적인 전개와 갈등/원인 -> 소름 돋는 결과\n' +
-  '   - [심리 & 공감 솔루션형]: 시청자가 무릎을 칠 만한 깊은 공감 유발 -> 뇌과학/심리학적 명쾌한 통찰 -> 즉시 써먹는 팁\n' +
-  '   - [실전 비법 & 노하우형]: 핵심 원리 설명과 누구나 따라할 수 있는 명쾌하고 생생한 실천 가이드\n' +
-  '3. 【글 잘림 절대 방지 / 온전한 문장 종결】: 절대로 문장이 중간에 끊기거나 단어 단위로 잘린 채 끝나면 안 됩니다. 도입-몰입 전개-여운 있는 마침(시청자 소통 질문)까지 온전한 마침표(.)나 물음표(?)로 완벽히 끝맺으세요.\n' +
-  '4. 【순수 대사만 출력】: [화면 전환], (효과음), [성우 지시문] 등 어떠한 괄호 지시문도 절대 넣지 말고, 오직 AI 성우가 읽을 실제 한국어 대사만 450~550자로 출력하세요.';
+  '당신은 대한민국 초·중·고 교실 수업과 학원 강의에서 학생들의 집중력과 개념 이해도를 극대화하는 교육 콘텐츠 전문 수업 설계자(Instructional Designer)이자 1타 교사입니다.\n' +
+  '학생이 첫 3초 만에 수업 호기심을 느끼고 핵심 개념을 정확하게 기억하게 만드는 **50~60초 분량 (공백 포함 한글 450~550자)**의 완성형 교육 쇼츠 대본을 작성하세요.\n\n' +
+  '[교육 쇼츠 대본 작성 4대 핵심 원칙]\n' +
+  '1. 【학습 목표와 단원 내용 100% 일치】: 제공된 [수업 제목/단원]과 학년 수준(교과 맥락)을 정면으로 다루어야 합니다. 근거 없는 과장이나 자극적 낚시성 표현은 배제하고, 정확한 교과 개념과 원리를 쉽고 명쾌하게 설명하세요.\n' +
+  '2. 【단조로운 틀 탈피 / 수업 맞춤형 4단계 전개 포맷】: 단순 열거에만 그치지 말고, 학습 주제의 성격에 맞춰 아래 수업 포맷 중 하나를 유연하게 적용하세요:\n' +
+  '   - [오개념 교정(반전 & 진실 폭로형)]: 학생이 흔히 착각하는 오개념 질문 → 왜 틀렸는지 과학적·논리적 원인 → 올바른 개념 정립\n' +
+  '   - [스토리텔링 역사·사례형]: 흥미로운 사건/인물 발단 → 시대적 배경과 인과 관계 → 오늘날의 시사점 및 핵심 정리\n' +
+  '   - [인지과학·개념 비유형]: 일상 속 친숙한 비유(예: 레고 블록, 택배 물류 등) → 추상적 개념의 시각화 → 시험·수업 적용 포인트\n' +
+  '   - [단계별 개념 마스터 & 확인 퀴즈형]: 핵심 정의 1문장 → 원리 2단계 → 마지막 10초 형성평가 O·X 또는 한 줄 요약 질문\n' +
+  '3. 【글 잘림 절대 방지 / 온전한 문장 종결】: 문장이 중간에 끊기거나 미완성으로 끝나면 안 됩니다. 도입 발문-핵심 개념-원리/비유-확인 퀴즈/마무리까지 온전한 마침표(.)나 물음표(?)로 완벽히 끝맺으세요.\n' +
+  '4. 【순수 교사용 내레이션 대사만 출력】: [화면 전환], (효과음), [칠판 판서] 등 괄호 지시문이나 마크다운 기호는 절대 넣지 말고, AI 교사 음성이 그대로 읽을 순수 한국어 대사만 450~550자로 출력하세요.';
 
 // ---- 무한 루프 쇼츠 대본 엔진 ----
 const LOOP_MODE_SYSTEM_ADDENDUM =
@@ -800,14 +800,14 @@ async function callGeminiApiForScript(
 ): Promise<string> {
   const effectiveTitle = (title || prompt).trim();
   const userPrompt =
-    `[유튜브 영상 확정 제목]: ${effectiveTitle}\n` +
-    `[쇼츠 기획 주제]: ${prompt}\n` +
-    `[목표 분량]: 약 ${durationSeconds}초 분량 (한글 약 450~550자의 완결형 쇼츠 대본)\n\n` +
-    `[🚨 대본 집필 가이드]:\n` +
-    `1. 도입부 (0~5초): 제목 "${effectiveTitle}"에 담긴 핵심 질문이나 호기심을 시청자에게 직접 던져 3초 만에 스크롤을 멈추게 만드세요.\n` +
-    `2. 본론 (몰입 전개): 단조롭게 "첫째, 둘째, 셋째"만 반복하지 말고, 주제에 가장 어울리는 흥미진진한 서사(반전, 팩트 폭격, 기상천외한 원인, 생생한 노하우 등)로 눈을 뗄 수 없게 서술하세요.\n` +
-    `3. 결론 (마무리): 핵심 요점을 강렬하게 각인시키고, 시청자가 댓글을 달고 싶어지는 질문으로 온전한 문장으로 매끄럽게 마무리하세요.\n` +
-    `* [화면 전환], (효과음) 등 괄호 지시문이나 해시태그는 절대 넣지 말고, AI 성우가 읽을 순수 한국어 대사만 출력하세요.`;
+    `[수업 영상 제목]: ${effectiveTitle}\n` +
+    `[교과·단원 및 수업 설계 요청]: ${prompt}\n` +
+    `[목표 분량]: 약 ${durationSeconds}초 분량 (한글 약 450~550자의 완결형 교육 쇼츠 대본)\n\n` +
+    `[수업 대본 집필 4단계 가이드]:\n` +
+    `1. 도입 발문 (0~8초): 제목 "${effectiveTitle}"에 담긴 궁금증이나 학생이 흔히 헷갈리는 오개념 질문으로 첫 문장을 열어 수업 집중을 끌어내세요.\n` +
+    `2. 핵심 개념 & 원리/비유 (8~45초): 교과서 정의를 쉬운 일상 비유나 인과 관계로 설명하고, 반드시 기억할 구분 포인트(예: A와 B의 차이)를 명확히 짚어주세요.\n` +
+    `3. 확인 퀴즈 & 요약 마무리 (45~60초): 방금 배운 개념을 스스로 점검할 짧은 O·X 또는 한 줄 요약 질문으로 온전한 문장을 맺으세요.\n` +
+    `* [화면 전환], (효과음), 마크다운 등 지시문이나 해시태그는 절대 넣지 말고, AI 교사 성우가 읽을 순수 한국어 대사만 출력하세요.`;
 
   let lastErr: any = null;
   for (const model of GEMINI_WATERFALL_MODELS) {
@@ -884,10 +884,10 @@ async function callOpenAiApiForScript(
         {
           role: 'user',
           content:
-            `[유튜브 영상 확정 제목]: ${effectiveTitle}\n` +
-            `[쇼츠 기획 주제]: ${prompt}\n` +
+            `[수업 영상 제목]: ${effectiveTitle}\n` +
+            `[교과·단원 및 수업 설계 요청]: ${prompt}\n` +
             `[목표 길이]: 약 ${durationSeconds}초 분량 (한글 약 450~550자 완결 대본)\n` +
-            `반드시 위 [확정 제목] "${effectiveTitle}"의 궁금증과 호기심을 정면으로 해결하는 완성형 쇼츠 대본을 작성해 주세요. 지루한 '첫째, 둘째, 셋째' 나열에 얽매이지 말고, 반전이나 흥미진진한 팩트 전개 등 가장 몰입도 높은 호흡으로 순수 한국어 대사만 완결형 문장으로 출력하세요.`,
+            `위 [수업 영상 제목] "${effectiveTitle}"의 교과 개념과 원리를 학생 눈높이에서 명쾌하게 해결하는 4단계 교육 쇼츠 대본(도입 발문 → 핵심 개념 정의 → 실생활 비유·원리 → 확인 퀴즈/요약)을 순수 한국어 대사만 완결형 문장으로 출력하세요.`,
         },
       ],
       temperature: 0.7,
@@ -927,6 +927,36 @@ function cleanScript(raw: string): string {
 function generateSmartKoreanScript(prompt: string, title?: string): string {
   const combined = `${title || ''} ${prompt}`.toLowerCase();
   const displayTitle = (title || prompt).replace(/[#\r\n]/g, '').trim();
+
+  // E1. 과학 — 원자 · 분자 · 이온 · 물질의 구성
+  if (combined.includes('원자') || combined.includes('분자') || combined.includes('원소') || combined.includes('이온')) {
+    return `원자와 분자, 교과서에서 매번 나오는데 정확히 무엇이 다른지 아직 헷갈리시나요? 레고 블록으로 딱 1분 만에 구분해 드립니다!\n\n원자는 물질을 이루는 더 이상 쪼개지지 않는 가장 작은 기본 알갱이입니다. 산소 원자, 수소 원자처럼 물질의 종류를 결정하는 재료 한 조각이라고 생각하면 쉽습니다.\n\n반면 분자는 이 원자들이 규칙에 맞게 결합해 물질 고유의 성질을 나타내는 가장 작은 단위입니다. 예를 들어 수소 원자 두 개와 산소 원자 하나가 결합하면 비로소 '물 분자'가 되어 액체 성질을 갖게 됩니다.\n\n만약 물 분자를 원자로 쪼개 버리면 더 이상 물의 성질은 사라지고 맙니다. 정리해 볼까요? 기본 재료 한 알은 원자, 성질을 지닌 완성품은 분자입니다! 물 분자 한 개에는 총 몇 개의 원자가 들어 있을까요? 오늘 배운 핵심을 노트에 정리해 봅시다!`;
+  }
+
+  // E2. 과학 — 광합성 · 세포 · 엽록체
+  if (combined.includes('광합성') || combined.includes('엽록체') || (combined.includes('세포') && combined.includes('식물'))) {
+    return `식물은 입도 없는데 매일 햇빛만 받고 어떻게 영양분을 만들며 자랄까요? 정답은 잎 속 초록 공장, 광합성에 있습니다!\n\n광합성은 식물의 엽록체에서 빛에너지를 이용해 물과 이산화탄소를 포도당과 산소로 바꾸는 과정입니다. 뿌리로 빨아들인 물과 잎의 기공으로 들어온 이산화탄소가 만나, 태양 빛을 전기로 삼아 에너지를 생산하는 셈이죠.\n\n여기서 학생 여러분이 자주 헷갈리는 포인트가 있습니다. 식물은 낮에만 광합성을 하지만, 에너지를 얻기 위한 호흡은 낮과 밤 구분 없이 24시간 내내 한다는 사실입니다.\n\n따라서 밤에는 광합성 없이 호흡만 하므로 산소를 쓰고 이산화탄소를 내보냅니다. 확인 문제입니다! 광합성에 꼭 필요한 기체는 이산화탄소일까요, 산소일까요? 오늘 수업의 핵심 반응식을 떠올리며 답해 보세요!`;
+  }
+
+  // E3. 과학 — 물리(관성 · 베르누이 · 작용 반작용 · 부력)
+  if (combined.includes('관성') || combined.includes('베르누이') || combined.includes('작용 반작용') || combined.includes('작용반작용') || combined.includes('부력')) {
+    return `버스가 갑자기 출발하면 왜 몸이 뒤로 쏠리고, 급정거하면 왜 앞으로 넘어질까요? 바로 뉴턴 운동 제1법칙, 관성 때문입니다!\n\n관성은 물체가 원래의 운동 상태를 그대로 유지하려는 성질입니다. 정지해 있던 버스가 앞으로 튀어 나가도 우리 몸은 계속 제자리에 있으려 하기 때문에 상대적으로 뒤로 밀리는 것처럼 느껴집니다.\n\n반대로 달리는 버스 안에서 급브레이크를 밟으면, 버스는 멈추지만 우리 몸은 계속 앞으로 나아가려는 관성 때문에 앞으로 쏠리게 됩니다. 안전벨트가 생명을 지키는 가장 과학적인 이유이기도 하죠.\n\n또한 질량이 클수록 관성도 커서 무거운 화물차가 승용차보다 제동 거리가 훨씬 깁니다. 오늘 확인 퀴즈! 멈춰 있던 공이 계속 멈춰 있으려는 것도 관성일까요? 정답은 맞다! 3초 정리로 기억해 봅시다!`;
+  }
+
+  // E4. 역사 — 고조선 8조법 · 훈민정음 · 삼국통일 · 한국사
+  if (combined.includes('고조선') || combined.includes('8조법') || combined.includes('훈민정음') || combined.includes('삼국통일') || combined.includes('임진왜란')) {
+    return `우리 역사 최초의 국가 고조선에는 왜 8조법이라는 엄격한 법이 있었을까요? 오늘 세 조항만으로 고조선 사회의 모습을 생생하게 복원해 봅시다!\n\n첫째, 사람을 죽인 자는 즉시 사형에 처했습니다. 이는 당시 사회가 사람의 생명과 노동력을 매우 중시했음을 보여줍니다.\n\n둘째, 남에게 상해를 입힌 자는 곡식으로 배상하게 했습니다. 여기서 우리는 고조선이 이미 농경 사회였고, 벼·보리 같은 곡식을 화폐처럼 사용했다는 사실을 알 수 있습니다.\n\n셋째, 도둑질을 한 자는 노비로 삼거나 50만 전을 내고 죄를 면하게 했습니다. 이는 사유재산 제도가 뚜렷했고 귀족과 노비 같은 계급이 존재했음을 증명합니다.\n\n단 세 개의 법 조항만으로 생명 존중, 사유재산, 계급 사회라는 핵심 키워드가 모두 읽히죠? 시험에 반드시 나오는 고조선 사회의 특징 3가지, 머릿속에 꼭 담아두세요!`;
+  }
+
+  // E5. 사회 · 경제 — 기회비용 · 매몰비용 · 수요와 공급
+  if (combined.includes('기회비용') || combined.includes('매몰비용') || (combined.includes('수요') && combined.includes('공급')) || combined.includes('합리적 선택')) {
+    return `시험 공부를 할지 친구와 영화를 볼지 고민될 때, 경제학에서는 무엇을 기준으로 합리적 선택을 내릴까요? 핵심은 바로 기회비용입니다!\n\n기회비용은 어떤 선택을 함으로써 포기해야 하는 여러 대안 중 가장 가치가 큰 것 하나를 말합니다. 영화를 보느라 1만 5천 원을 쓰고 동시에 공부로 얻을 점수 향상 기회를 놓쳤다면, 영화표 값과 포기한 공부 가치의 합이 진정한 기회비용입니다.\n\n반면 이미 지출해서 다시는 돌려받을 수 없는 비용을 매몰비용이라고 부릅니다. 영화가 재미없어도 표 값이 아까워 끝까지 자리에 앉아 있는 심리가 대표적인 매몰비용의 오류죠.\n\n합리적인 의사결정을 할 때는 편익이 기회비용보다 커야 하며, 과거의 매몰비용은 과감히 잊어야 합니다! 오늘 확인 질문! 이미 결제한 헬스장 연회비는 합리적 선택 시 고려해야 할까요? 노트에 O, X로 답해 보세요!`;
+  }
+
+  // E6. 수학 · 학습법 — 피타고라스 · 확률 · 에빙하우스 · 메타인지
+  if (combined.includes('피타고라스') || combined.includes('확률') || combined.includes('방정식') || combined.includes('에빙하우스') || combined.includes('망각곡선') || combined.includes('메타인지')) {
+    return `열심히 공부했는데도 다음 날 시험지 앞에서 머리가 하얘지는 이유, 독일의 심리학자 에빙하우스가 밝혀낸 망각곡선으로 설명할 수 있습니다!\n\n에빙하우스의 실험에 따르면, 인간은 학습 후 단 20분 만에 배운 내용의 약 42퍼센트를 잊고, 하루가 지나면 무려 70퍼센트 가까이 기억에서 사라집니다. 눈으로 여러 번 읽기만 하는 수동적 복습은 착각만 키울 뿐입니다.\n\n가장 확실한 해법은 망각이 시작되기 직전인 10분 뒤, 1일 뒤, 1주일 뒤 간격을 두고 백지에 핵심 키워드를 직접 인출해 보는 분산 인출 연습입니다. 뇌가 기억을 억지로 꺼낼 때 시냅스 연결이 강해집니다.\n\n내가 무엇을 알고 무엇을 모르는지 점검하는 메타인지의 시작은 스스로 문제를 내보고 설명해 보는 것입니다. 지금 눈을 감고 오늘 수업 핵심 한 가지를 떠올려 보세요!`;
+  }
 
   // 1. 욕실 거울 김서림 / 치약
   if (combined.includes('거울') || combined.includes('김서림') || (combined.includes('욕실') && combined.includes('치약'))) {
@@ -1008,10 +1038,11 @@ function generateSmartKoreanScript(prompt: string, title?: string): string {
     return `인간이 아직 5%도 밝혀내지 못한 미지의 영역, 바로 심해와 우주에 얽힌 소름 돋는 과학적 진실입니다!\n\n수심 1만 미터 마리아나 해구는 에베레스트산을 거꾸로 집어넣어도 남을 만큼 깊은 곳입니다. 이곳의 수압은 손톱 위에 코끼리 한 마리가 올라타 있는 무게와 같지만, 놀랍게도 젤리처럼 투명한 괴생물들이 번성하고 있습니다.\n\n우주선 안에서는 빵을 절대 먹을 수 없습니다. 미세한 빵가루가 무중력 상태에서 공중에 둥둥 떠다니다가 우주 비행사의 호흡기로 들어가 질식사를 유발하거나, 정밀 기계 틈새에 들어가 화재를 일으킬 수 있기 때문입니다!\n\n지구 밖 광활한 세계의 신비, 들을수록 놀랍지 않나요? 더 알고 싶은 미스터리 주제가 있다면 댓글로 남겨주세요!`;
   }
 
-  // 17. 범용 스토리텔링형 고품질 생성기 (역동적 호흡과 몰입도 극대화)
-  const cleanSubject = displayTitle.replace(/(3가지|꿀팁|비법|방법|이유|특급|초간단|완벽|비밀|충격|소름|절대|마법)/g, '').trim();
+  // 17. 교육과정 범용 4단계 수업 교안 생성기 (도입 발문 → 핵심 개념 → 원리/비유 → 확인 퀴즈)
+  const cleanSubject = displayTitle.replace(/(1분|핵심|요약|정리|개념|수업|단원|퀴즈|차이|원리|비법|꿀팁)/g, '').trim();
+  const subjectLabel = cleanSubject || displayTitle || '오늘의 핵심 개념';
 
-  return `많은 분들이 궁금해하셨던 화제의 주제, 바로 "${displayTitle}"에 얽힌 놀라운 진실을 지금 1분 만에 밝혀드립니다!\n\n대부분의 사람들은 이 사실을 전혀 모르거나 정반대로 오해하고 계십니다.\n\n${cleanSubject ? `핵심은 바로 "${cleanSubject}"에 숨겨진 원리를 꿰뚫어 보는 것입니다.` : '가장 중요한 본질부터 명확히 짚고 넘어가야 합니다.'} 겉으로 드러난 현상만 보면 놓치기 쉽지만, 이면에 숨겨진 작동 원리를 알게 되면 왜 이런 일이 일어나는지 단번에 이해할 수 있습니다.\n\n실제로 이 작은 차이 하나만 일상에 적용해도 여러분의 시간과 에너지를 수십 배 아낄 수 있습니다. 남들과 똑같은 방식으로 고민하지 마시고, 오늘 알려드린 통찰을 꼭 기억해보세요!\n\n"${displayTitle}"에 대한 여러분의 생각은 어떠신가요? 공감되셨다면 좋아요와 댓글로 생각을 나눠주세요!`;
+  return `수업을 시작하기 전에 질문 하나 드리겠습니다. "${subjectLabel}", 교과서 정의만 보고 막연히 외우다 보면 금방 헷갈리지 않나요?\n\n핵심부터 짚어 보겠습니다. ${displayTitle ? `"${displayTitle}"에서 가장 먼저 기억해야 할 본질은` : '이 단원에서 꼭 알아야 할 핵심 원리는'} 현상 뒤에서 실제로 작동하는 인과 관계와 조건을 구분하는 것입니다.\n\n우리 주변의 익숙한 사례에 비유해 보면 훨씬 쉽습니다. 겉으로 보이는 결과만 암기하지 말고, 왜 이런 변화가 일어나는지 앞뒤 원인을 연결해 보면 시험 문제의 응용 사례도 한눈에 풀립니다.\n\n마지막 확인 퀴즈입니다! 오늘 배운 핵심 키워드와 적용 원리를 단 한 문장으로 요약한다면 어떻게 설명할 수 있을까요? 지금 노트에 한 줄로 정리하며 수업을 마무리해 봅시다!`;
 }
 
 // ----------------------------------------------------
@@ -1907,6 +1938,14 @@ function translateKoreanVisualKeywords(koreanText: string): string {
   const clean = extractVisualKeywords('', koreanText).toLowerCase();
 
   const DICTIONARY: [RegExp, string][] = [
+    [/(?:원자|분자|원소|이온|화학|실험실|비커|주기율표|반응식|산과염기)/, '3D atomic molecular structure chemistry laboratory science education'],
+    [/(?:광합성|엽록체|세포|dna|유전자|현미경|생명과학|생물|생태계)/, 'biological cell structure microscope green chlorophyll leaves science study'],
+    [/(?:관성|베르누이|힘과운동|전류|회로|자석|중력|부력|물리|빛의굴절|스펙트럼|파동)/, 'physics light prism spectrum magnet circuit science classroom demonstration'],
+    [/(?:지진|화산|지각|판구조|화석|기후변화|지구과학|수권|대기)/, 'earth layers volcano tectonic plates meteorology geology documentary education'],
+    [/(?:피타고라스|기하학|삼각형|방정식|그래프|함수|확률|통계|수학|미분|적분)/, 'mathematics geometry chalk formulas graph coordinate grid chalkboard'],
+    [/(?:기회비용|매몰비용|수요|공급|시장경제|인플레이션|사회탐구|민주주의|헌법)/, 'economics supply demand chart civic classroom education notebook analysis'],
+    [/(?:고조선|8조법|훈민정음|세종|삼국통일|임진왜란|한국사|세계사|문화재|박물관)/, 'Korean cultural heritage museum ancient artifacts historic architecture'],
+    [/(?:칠판|교실|선생님|수업|강의|교안|퀴즈|형성평가|에빙하우스|메타인지|복습)/, 'bright modern school classroom chalkboard teacher educational lesson study'],
     [/(?:슈퍼카|스포츠카|람보르기니|페라리|포르쉐|맥라렌|부카티)/, 'luxury exotic supercar driving on highway'],
     [/(?:전기차|테슬라|전기자동차|자율주행)/, 'sleek modern electric vehicle futuristic automotive'],
     [/(?:자동차|차량|승용차|세단|suv|드라이브|고속도로|레이싱|시승)/, 'modern sleek automobile luxury car driving scenic road'],
@@ -1969,7 +2008,7 @@ function translateKoreanVisualKeywords(koreanText: string): string {
     }
   }
 
-  return 'inspiring cinematic modern achievement and success visual';
+  return 'clean bright classroom study notebook educational concept visual';
 }
 
 function getSpecificSceneVisualElement(sceneText: string, sceneIdx: number, isThumbnail: boolean = false, title: string = ''): string {
@@ -5800,38 +5839,38 @@ ipcMain.handle('fetch-trending-keywords', async () => {
 
 ipcMain.handle('generate-hooking-variants', async (_, { topic }: { topic: string }) => {
   const clean = (topic || '').trim();
-  const base = clean || '하루 10분 아침 습관';
+  const base = clean || '원자와 분자의 구분 원리';
 
   return [
     {
       id: 'variant_a',
-      type: '🚨 손실 회피 / 경고형',
-      badge: '손실 회피형',
-      title: `절대 ${base} 모르면 평생 손해봅니다`,
-      hookIntro: `🚨 놓치면 후회하는 3초 비밀`,
-      visualKeyword: `Dramatic shock warning closeup hero shot of ${base}, high tension, hyper-realistic, 8k viral`,
+      type: '오개념 점검 · O/X 발문형',
+      badge: '오개념 진단형',
+      title: `${base}, 혹시 이렇게 잘못 알고 있진 않나요?`,
+      hookIntro: `수업 시작 전 3초 O·X 개념 점검`,
+      visualKeyword: `Bright educational classroom chalkboard diagram illustrating ${base}, clean infographic style`,
       ctrScore: 96,
-      reason: '손실 회피 심리를 강하게 자극하여 첫 1초 스크롤 정지율(Hook Rate)을 극대화합니다.',
+      reason: '학생들이 시험에서 자주 틀리는 오개념을 정면으로 짚어 첫 3초 주의 집중과 능동적 사고를 유도합니다.',
     },
     {
       id: 'variant_b',
-      type: '💡 호기심 / 질문 유도형',
-      badge: '호기심 유발형',
-      title: `상위 1%만 알고 있는 ${base}의 소름돋는 진실?`,
-      hookIntro: `💡 당신만 몰랐던 뜻밖의 사실`,
-      visualKeyword: `Mysterious glowing secret discovery scene of ${base}, cinematic dramatic lighting, volumetric atmosphere`,
+      type: '호기심 · 실생활 탐구형',
+      badge: '생활 연계형',
+      title: `일상 속 ${base}, 왜 이런 현상이 일어날까요?`,
+      hookIntro: `교과서 개념을 주변 사례로 바로 이해하기`,
+      visualKeyword: `Hands-on science and daily life observation demonstration of ${base}, bright daylight clarity`,
       ctrScore: 93,
-      reason: '비밀 폭로형 카피는 끝까지 시청하게 만드는 완청률(Audience Retention)을 높입니다.',
+      reason: '익숙한 일상 현상과 교과 개념을 연결해 학습 동기와 끝까지 시청하는 완주율을 높입니다.',
     },
     {
       id: 'variant_c',
-      type: '⚡ 초단기 / 3줄 요약형',
-      badge: '요약형',
-      title: `단 1분 만에 끝내는 ${base} 핵심 요약 TOP 3`,
-      hookIntro: `⚡ 1분 만에 마스터하는 꿀팁`,
-      visualKeyword: `Vibrant eye-catching 3D modern clean showcase of ${base}, bold composition, sharp focus, octane render`,
+      type: '핵심 요약 · 단원 1분 정리형',
+      badge: '시험 핵심 정리',
+      title: `딱 1분 만에 끝내는 ${base} 핵심 개념 정리`,
+      hookIntro: `수업 전 예습 · 시험 직전 필수 포인트`,
+      visualKeyword: `Clean 3D educational study card summary of ${base}, bright ivory background, sharp typography focus`,
       ctrScore: 90,
-      reason: '숫자와 짧은 시간을 강조하여 바쁜 현대인의 즉각적인 클릭과 저장을 유도합니다.',
+      reason: '핵심 키워드와 1분 완결 구성을 분명히 제시해 예습·복습 저장과 반복 시청을 끌어냅니다.',
     },
   ];
 });
@@ -5861,43 +5900,43 @@ async function freeTranslate(text: string, target: 'en' | 'ja' | 'es'): Promise<
 
 const MULTI_LANG_META = {
   en: {
-    langName: 'English (미국 영어)', flag: '🇺🇸',
-    recommendedVoiceId: 'en-US-ChristopherNeural', recommendedVoiceName: 'Christopher (남성/신뢰)',
-    tags: ['#Shorts', '#Viral', '#Tips'], fallbackTitle: 'You need to know this!',
+    langName: 'English (영어 교안)', flag: '🇺🇸',
+    recommendedVoiceId: 'en-US-ChristopherNeural', recommendedVoiceName: 'Christopher (명료한 강의 톤)',
+    tags: ['#Shorts', '#Education', '#StudyTips'], fallbackTitle: '1-Minute Key Concept Lesson',
   },
   ja: {
-    langName: '日本語 (일본어)', flag: '🇯🇵',
-    recommendedVoiceId: 'ja-JP-NanamiNeural', recommendedVoiceName: 'Nanami (여성/친근)',
-    tags: ['#ショート', '#おすすめ', '#雑学'], fallbackTitle: '知らないと損する！',
+    langName: '日本語 (일본어 교안)', flag: '🇯🇵',
+    recommendedVoiceId: 'ja-JP-NanamiNeural', recommendedVoiceName: 'Nanami (친근한 교사 톤)',
+    tags: ['#ショート授業', '#勉強法', '#わかりやすく解説'], fallbackTitle: '1分でわかる重要ポイント',
   },
   es: {
-    langName: 'Español (스페인어)', flag: '🇪🇸',
-    recommendedVoiceId: 'es-ES-AlvaroNeural', recommendedVoiceName: 'Alvaro (남성/열정)',
-    tags: ['#Shorts', '#Curiosidades', '#Viral'], fallbackTitle: '¡Tienes que saber esto!',
+    langName: 'Español (스페인어 교안)', flag: '🇪🇸',
+    recommendedVoiceId: 'es-ES-AlvaroNeural', recommendedVoiceName: 'Alvaro (또렷한 해설 톤)',
+    tags: ['#Shorts', '#Educacion', '#Aprendizaje'], fallbackTitle: 'Concepto clave en 1 minuto',
   },
 } as const;
 
 ipcMain.handle('translate-script-multilingual', async (_, { script, title }: { script: string; title: string }) => {
   const cleanScript = (script || '').trim();
-  const cleanTitle = (title || '쇼츠 하이라이트').trim();
+  const cleanTitle = (title || '1분 핵심 개념 수업').trim();
   const settings = getStoredSettings();
   const geminiKey = settings.geminiApiKey || process.env.GEMINI_API_KEY;
 
   let parsed: any = null;
   if (geminiKey && cleanScript) {
     const prompt =
-      `You are a viral YouTube Shorts / TikTok localization expert.\n` +
-      `Translate and localize the following Korean Shorts into 3 languages: English (en), Japanese (ja), Spanish (es).\n` +
+      `You are an instructional designer and multilingual curriculum translator.\n` +
+      `Translate and adapt the following Korean educational short lesson into 3 languages for multicultural classrooms and global learners: English (en), Japanese (ja), Spanish (es).\n` +
       `Korean Title: ${cleanTitle}\n` +
       `Korean Script:\n${cleanScript}\n\n` +
       `Output strictly valid JSON with this exact schema:\n` +
       `{\n` +
-      `  "en": { "title": "...", "script": "...", "tags": ["#Shorts", "#Viral", "#Tips"] },\n` +
-      `  "ja": { "title": "...", "script": "...", "tags": ["#ショート", "#おすすめ", "#雑学"] },\n` +
-      `  "es": { "title": "...", "script": "...", "tags": ["#Shorts", "#Curiosidades", "#Viral"] }\n` +
+      `  "en": { "title": "...", "script": "...", "tags": ["#Shorts", "#Education", "#StudyTips"] },\n` +
+      `  "ja": { "title": "...", "script": "...", "tags": ["#ショート授業", "#勉強法", "#解説"] },\n` +
+      `  "es": { "title": "...", "script": "...", "tags": ["#Shorts", "#Educacion", "#Clase"] }\n` +
       `}\n` +
-      `Every title, script and tag must be written entirely in the target language: never leave any Korean (Hangul) characters; translate or romanize proper nouns.\n` +
-      `Ensure scripts sound natural, energetic, and concise for 50-second Shorts voiceover without parenthetical notes.`;
+      `Every title, script and tag must be written entirely in the target language: never leave any Korean (Hangul) characters; translate or romanize proper nouns accurately.\n` +
+      `Keep terminology pedagogically accurate, clear, and concise for a 50-second classroom voiceover without parenthetical stage directions.`;
     for (const model of GEMINI_WATERFALL_MODELS) {
       try {
         const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${geminiKey}`;
@@ -6142,130 +6181,47 @@ ipcMain.handle('export-multi-platform-bundle', async (_, { projectId, videoPath,
 // AI Autonomous Topic Researcher & Auto-Pilot Engine
 // ----------------------------------------------------
 const FALLBACK_AUTONOMOUS_TOPICS: Record<string, { topic: string; title: string }[]> = {
-  life_tips: [
-    { topic: '욕실 거울 김서림 1초 만에 없애는 마법의 꿀팁 3가지', title: '욕실 거울 김서림, 치약 하나로 평생 해결하는 법' },
-    { topic: '냉장고 속 시든 채소 5분 만에 싱싱하게 되살리는 비법', title: '버리려던 야채를 방금 딴 것처럼 살리는 50도 세척법' },
-    { topic: '옷에 묻은 커피와 김치 국물 흔적 없이 지우는 특급 비법', title: '세탁소 사장님만 몰래 쓰는 만능 얼룩 지우개 비법' },
-    { topic: '건전지 잔량 1초 만에 확인하는 과학적인 방법', title: '테스터기 없이 건전지 잔량 확인하는 소름 돋는 팁' },
-    { topic: '바나나 갈변 막고 2주 동안 싱싱하게 보관하는 법', title: '바나나 꼭지에 이것만 감싸면 2주 내내 갓 딴 맛' },
-    { topic: '스마트폰 배터리 수명 2배 늘려주는 필수 설정 3가지', title: '스마트폰 배터리가 광탈할 때 당장 꺼야 할 설정 3가지' },
-    { topic: '신발 냄새 하룻밤 만에 완벽하게 없애는 초간단 비법', title: '신발 냄새 녹차 티백 하나로 박멸하는 초간단 꿀팁' },
+  science_chemistry: [
+    { topic: '원자와 분자의 차이를 레고 블록 비유로 1분 만에 구분하기', title: '[중2 과학] 원자와 분자 차이, 레고로 1분 만에 완벽 정리' },
+    { topic: '식물의 광합성과 호흡 차이: 밤에는 왜 산소를 소비할까?', title: '[중2 과학] 식물은 밤에 광합성을 할까? 시험 빈출 오개념 정리' },
+    { topic: '산성과 염기성을 구별하는 리트머스·BTB 지시약 색 변화 암기법', title: '[통합과학] BTB 용액 색 변화, 30초 스토리로 영원히 기억하기' },
   ],
-  mystery_history: [
-    { topic: '피라미드 내부에서 발견된 충격적인 고대 유물 3가지', title: '피라미드 깊숙한 곳에서 발견된 믿기 힘든 고대 미스터리' },
-    { topic: '인류 역사상 가장 부유했던 인물 만사 무사의 전설', title: '빌 게이츠보다 10배 부자였던 역사상 최고의 금수저' },
-    { topic: '절대 풀리지 않는 세계 3대 고대 미스터리 유적', title: '현대 과학으로도 설명 불가능한 세계 3대 미스터리 유적' },
-    { topic: '조선 왕실에서 실제로 사용했던 기상천외한 건강 비법', title: '조선 왕들이 매일 아침 거르지 않았던 충격적인 건강 비법' },
+  science_physics: [
+    { topic: '버스가 출발하고 멈출 때 몸이 쏠리는 관성의 법칙 원리', title: '[물리 기초] 관성의 법칙, 버스 속 안전벨트로 1분 이해' },
+    { topic: '물속에서 배가 뜨는 이유와 아르키메데스의 부력 원리', title: '[과학 탐구] 무거운 쇠로 만든 배가 물에 뜨는 부력의 비밀' },
+    { topic: '지진파 P파와 S파의 속도 차이와 조기 경보 시스템 원리', title: '[지구과학] 지진이 오기 전 긴급 재난 문자가 먼저 뜨는 이유' },
   ],
-  health_habit: [
-    { topic: '기상 직후 물 한 잔 마시면 몸에서 일어나는 놀라운 변화', title: '아침 기상 후 1분, 미온수 한 잔이 보약인 진짜 이유' },
-    { topic: '매일 10분 걷기만 해도 뇌가 젊어지는 과학적 이유', title: '하루 10분 걷기가 뇌세포를 폭발적으로 깨우는 원리' },
-    { topic: '잠들기 전 3분 스트레칭으로 불면증 끝내는 법', title: '눕자마자 기절 수면하는 취침 전 3분 릴랙스 꿀팁' },
-    { topic: '혈당 스파이크 막아주는 식사 순서의 비밀', title: '먹는 순서만 바꿨는데 살이 쑥 빠지는 거꾸로 식사법' },
+  history_culture: [
+    { topic: '고조선 8조법 세 조항으로 복원하는 고대 농경·계급 사회의 모습', title: '[한국사] 고조선 8조법 3개 조항만으로 읽는 당시 사회 3대 특징' },
+    { topic: '세종대왕이 훈민정음을 창제한 과학적 제자 원리와 백성 사랑', title: '[한국사] 훈민정음 자음·모음 창제 원리에 숨은 놀라운 과학' },
+    { topic: '삼국통일의 역사적 의의와 한계를 1분 연표로 한눈에 정리하기', title: '[한국사 핵심] 신라의 삼국통일 과정과 역사적 의의 1분 요약' },
   ],
-  money_mind: [
-    { topic: '상위 1% 부자들이 아침 6시에 절대 하지 않는 행동 3가지', title: '자수성가 부자들이 기상 후 1시간 동안 절대 손대지 않는 것' },
-    { topic: '돈이 줄줄 새는 사람들의 공통적인 소비 습관 3가지', title: '나도 모르게 통장을 거덜 내는 위험한 일상 소비 습관' },
-    { topic: '멘탈이 강한 사람들이 위기 상황에서 쓰는 생각 정리법', title: '불안과 스트레스가 극에 달했을 때 멘탈 잡는 3초 법칙' },
+  social_economy: [
+    { topic: '합리적 선택을 위한 기회비용과 매몰비용의 결정적 차이', title: '[통합사회] 기회비용 vs 매몰비용, 영화표 사례로 1분 완벽 구분' },
+    { topic: '수요와 공급 곡선의 이동이 시장 균형 가격을 바꾸는 원리', title: '[경제 기초] 딸기 가격이 계절마다 달라지는 수요·공급 원리' },
+    { topic: '인플레이션이 발생했을 때 물가와 화폐 가치에 생기는 변화', title: '[경제 상식] 물가가 오르면 왜 같은 1만 원의 가치가 줄어들까?' },
   ],
-  psychology_relation: [
-    { topic: '대화할 때 상대방의 호감을 100% 얻는 미러링 심리학', title: '말 한마디로 상대방을 내 편으로 만드는 대화의 기술' },
-    { topic: '나를 만만하게 보는 사람을 단숨에 제압하는 태도 3가지', title: '착한 사람이 호구 잡히지 않는 단호한 거절의 법칙' },
-    { topic: '거짓말하는 사람들의 무의식적인 신체 신호 3가지', title: '상대방이 거짓말할 때 1초 만에 알아채는 눈동자의 비밀' },
+  math_logic: [
+    { topic: '피타고라스 정리가 직각삼각형 넓이 합으로 성립하는 시각적 증명', title: '[중2 수학] 피타고라스 정리, 정사각형 넓이로 1분 직관 이해' },
+    { topic: '동전 던지기 독립시행과 도박사의 오류를 수학적으로 구분하기', title: '[확률과 통계] 앞면이 5번 연속 나와도 다음 확률이 50%인 이유' },
   ],
-  office_worker: [
-    { topic: '퇴근 시간을 1시간 앞당겨주는 엑셀 필수 단축키 3가지', title: '일잘러 소리 듣는 칼퇴 보장 엑셀 단축키 모음' },
-    { topic: '직장에서 스트레스 안 받고 일 잘하는 사람들의 마인드셋', title: '월급 루팡 안 당하고 멘탈 지키는 직장인 사회생활 꿀팁' },
-    { topic: '보고서 작성할 때 상사에게 단번에 통과되는 보고 기술', title: '상사가 질문 못 하게 만드는 완벽한 1장 보고서 비법' },
-  ],
-  it_tech: [
-    { topic: '아이폰과 갤럭시 유저 90%가 모르는 숨겨진 꿀기능 3가지', title: '스마트폰 기능의 10%만 쓰고 계셨습니다! 숨은 치트키 3선' },
-    { topic: '알아두면 평생 유용하게 써먹는 무료 웹사이트 3가지', title: '컴퓨터 할 때 10배 빨라지는 마법 같은 무료 사이트 모음' },
-    { topic: '느려진 컴퓨터를 산 날처럼 빠르게 만드는 1분 최적화', title: '포맷 없이 버벅이는 PC 1초 만에 쌩쌩하게 되살리는 법' },
-  ],
-  pets: [
-    { topic: '강아지가 보호자에게 엉덩이를 들이미는 진짜 이유', title: '강아지가 당신에게 엉덩이를 붙이는 소름 돋는 심리' },
-    { topic: '고양이가 집사를 사랑할 때만 보여주는 비밀 행동 3가지', title: '고양이가 당신을 엄마로 인정했다는 확실한 신호 3가지' },
-    { topic: '반려견에게 절대로 먹이면 안 되는 치명적인 음식 3가지', title: '한 입만 줘도 동물병원 응급실 직행하는 위험한 음식' },
-  ],
-  cooking_recipe: [
-    { topic: '라면을 레스토랑 파스타처럼 맛있게 끓이는 백종원급 팁', title: '라면에 이것 한 스푼 넣었더니 국물 맛이 180도 달라졌다' },
-    { topic: '전자레인지 하나로 5분 만에 만드는 촉촉한 계란찜', title: '뚝배기 없이 계란 3개로 폭탄 계란찜 만드는 초간단 비법' },
-    { topic: '남은 치킨 다음 날 방금 튀긴 것처럼 바삭하게 데우는 법', title: '눅눅해진 치킨 에어프라이어 없이 바삭하게 살리는 팁' },
-  ],
-  space_science: [
-    { topic: '블랙홀 안으로 들어가면 인간의 몸에 일어나는 기이한 일', title: '블랙홀에 빠지면 시간은 멈출까? 스파게티화 현상의 비밀' },
-    { topic: '지구상에서 가장 깊은 마리아나 해구에서 발견된 충격 생물', title: '수심 11,000m 심해에 살고 있는 외계 생명체 같은 괴생물' },
-    { topic: '우주 비행사들이 우주에서 절대 먹지 못하는 음식 3가지', title: '우주선 안에서 빵과 탄산음료를 절대 먹을 수 없는 이유' },
-  ],
-  car_driving: [
-    { topic: '기름값 20% 아껴주는 똑똑한 자동차 연비 운전 습관', title: '주유소 가는 횟수 확 줄여주는 초간단 연비 절약 운전법' },
-    { topic: '비 오는 날 사이드미러 물방울 1초 만에 튕겨내는 비법', title: '장마철 사이드미러 빗물에 시야 가릴 때 치약 바르면 생기는 일' },
-    { topic: '자동차 배터리 방전 예방하는 겨울철/여름철 주차 꿀팁', title: '한파에도 방전 걱정 없는 자동차 배터리 관리법' },
-  ],
-  travel: [
-    { topic: '비행기 표 가장 저렴하게 예약하는 요일과 시간의 비밀', title: '항공권 가격이 30% 저렴해지는 시크릿 예매 타이밍' },
-    { topic: '캐리어 짐 2배로 많이 싸는 승무원들의 패킹 노하우', title: '옷 부피 3분의 1로 줄여주는 기적의 롤링 패킹 기술' },
-    { topic: '해외여행 갈 때 환전 수수료 0원으로 아끼는 스마트 꿀팁', title: '은행 가서 환전하면 손해! 여행 고수들만 쓰는 환전 꿀팁' },
-  ],
-  urban_legend: [
-    { topic: '풀리지 않는 전 세계 3대 미스터리 실종 사건', title: '비행기와 함께 흔적도 없이 사라진 미 해군 19편대의 진실' },
-    { topic: '심해에서 녹음된 정체불명의 괴성 블룹(Bloop)의 비밀', title: '고래보다 10배 큰 괴물? 남극 바다 깊은 곳에서 포착된 소리' },
-  ],
-  horror_thriller: [
-    { topic: '실제로 겪은 소름 돋는 심야 엘리베이터 괴담 실화', title: '새벽 3시 엘리베이터를 탔는데 닫힘 버튼이 안 눌렸던 충격 실화' },
-    { topic: '야간 배달 기사들이 실제로 겪은 소름 돋는 폐가 배달 썰', title: '새벽에 외딴 폐가에서 주문이 들어와 배달을 갔더니 생겨난 일' },
-    { topic: '인간이 느낄 수 있는 가장 오싹한 공포: 불쾌한 골짜기 현상', title: '사람처럼 생겼는데 왜 소름이 돋을까? 뇌가 경고하는 무서운 이유' },
-    { topic: '절대 가선 안 되는 전 세계 3대 금지 구역과 기괴한 목격담', title: '구글 어스에서도 모자이크 처리된 지구상 가장 기괴한 섬' },
-    { topic: '나 홀로 숨바꼭질 도시전설의 충격적인 기원과 위험성', title: '절대 따라 하지 마세요! 전 세계를 공포에 떨게 한 강령술의 실체' },
-  ],
-  paranormal_phenomenon: [
-    { topic: '미 FBI 기밀 해제 문서 속 충격적인 초자연 현상과 외계인 기록', title: 'FBI가 50년간 비밀리에 감춰왔던 UFO와 외계 생명체 공식 기록' },
-    { topic: '전 세계 미스터리 미제 사건: 디아틀로프 고개 실종의 진실', title: '영하 30도에서 텐트를 찢고 알몸으로 탈출한 9명의 등산객' },
-    { topic: '수심 1만 미터 심해에서 포착된 정체불명의 초자연적 거대 발광체', title: '심해 탐사선 카메라를 정면으로 응시한 미지의 심해 괴생물' },
-    { topic: '시간 여행자가 남긴 결정적 증거라 불리는 역사 속 3대 사진', title: '1940년대 사진에 현대식 선글라스와 카메라를 든 남자의 정체' },
-  ],
-  unsolved_crime: [
-    { topic: '완전 범죄로 끝날 뻔했던 3대 미제 사건과 기적 같은 진실', title: '공소시효 만료 직전 머리카락 하나로 범인 잡은 레전드 수사 실화' },
-    { topic: '지문도 DNA도 남기지 않은 역사상 가장 완벽했던 금고 털이범', title: '30초 만에 다이아몬드 100억 원어치 털고 사라진 범인의 수법' },
-  ],
-  news_issue: [
-    { topic: '오늘 꼭 알아야 할 1분 실시간 핵심 핫이슈 3가지', title: '오늘 전 국민이 주목하는 핵심 핫이슈 3가지 1분 총정리' },
-    { topic: '오늘부터 시행되는 정부 복지 지원금 및 변경 제도 3가지', title: '놓치면 100만 원 손해! 오늘부터 바뀌는 핵심 지원금 3선' },
-    { topic: '지금 전 세계 주식과 코인 시장을 뒤흔든 결정적 속보 3가지', title: '전 세계 경제를 발칵 뒤집은 오늘의 충격 헤드라인 3선' },
-    { topic: '오늘 아침 구글 트렌드 1위를 찍은 화제의 실시간 검색어', title: 'SNS에서 지금 난리 난 오늘의 화제 검색어 1위의 진실' },
-  ],
-  community_story: [
-    { topic: '직장인 커뮤니티 블라인드에서 공감 10만 개 폭발한 퇴사 썰', title: '야근 중에 부장님 카톡 잘못 보낸 신입사원의 최후' },
-    { topic: '당근마켓에서 무료 나눔 하다가 일어난 소름 돋는 거래 실화', title: '냉장고 무료 나눔 받으러 온 사람이 건넨 충격적인 물건' },
-    { topic: '네이트판 100만 뷰 달성한 결혼식장 레전드 사이다 썰', title: '축의금 3만 원 내고 밥 먹으러 온 전 남친에게 한 방 먹인 썰' },
-    { topic: '에펨코리아/디시인사이드 레전드 유머 사연 모음', title: '인터넷 커뮤니티를 뒤집어놓은 역대급 레전드 오해 썰' },
+  language_study: [
+    { topic: '능동태와 수동태를 행위자 중심으로 1분 만에 구분하는 영문법', title: '[중등 영어] 수동태 개념, 주어의 행동 vs 대상 입장으로 끝내기' },
+    { topic: '긴 지문에서 핵심 주장과 근거 문장을 10초 만에 찾는 문해력 공식', title: '[국어 독해] 비문학 지문 중심 문장 10초 만에 찾아내는 읽기 전략' },
   ],
   brain_body_science: [
-    { topic: '자기 전 이불킥하게 만드는 흑역사가 떠오르는 뇌과학적 이유', title: '왜 밤마다 쪽팔린 기억이 강제 재생될까? 뇌의 충격적 비밀' },
-    { topic: '사람이 사망하기 직전 뇌에서 일어나는 마지막 30초의 진실', title: '죽기 직전 인생이 주마등처럼 스쳐 지나가는 진짜 과학적 원리' },
-    { topic: '거짓말을 밥 먹듯 하는 사람들의 뇌 구조에서 발견된 이상 신호', title: '소시오패스와 거짓말쟁이의 뇌는 일반인과 어떻게 다를까?' },
-    { topic: '시한부 환자들이 생의 마지막에 가장 후회하는 단 1가지', title: '죽기 전에 누구나 오열하며 후회한다는 인생의 단 한 가지' },
+    { topic: '에빙하우스의 망각곡선을 이기는 10분·1일·1주 분산 인출 학습법', title: '[학습 뇌과학] 어제 외운 단어가 기억 안 나는 이유와 망각곡선 극복법' },
+    { topic: '아는 것과 모른다는 것을 구분하는 메타인지 질문 훈련법', title: '[공부법] 상위권 학생이 시험 전 스스로에게 던지는 메타인지 3질문' },
+    { topic: '수면 중 해마가 낮에 배운 지식을 장기기억으로 정리하는 원리', title: '[뇌과학] 시험 전날 벼락치기보다 6시간 숙면이 점수에 유리한 이유' },
   ],
   shocking_facts: [
-    { topic: '스위스에서 밤 10시 이후 화장실 변기 물 내리면 벌금 무는 이유', title: '한국인은 절대 모르는 전 세계의 황당하고 충격적인 법률 3가지' },
-    { topic: '싱가포르에서 껌 씹다 걸리면 벌금 1억 나오는 진짜 이유', title: '길거리에 껌 뱉었다가 곤장 맞을 뻔한 외국인의 실화' },
-    { topic: '로또 1등 당첨자 90%가 5년 안에 쪽박 차는 소름 돋는 이유', title: '벼락부자가 된 사람들이 스스로 파멸하는 심리적 덫' },
-    { topic: '다이아몬드가 사실은 전혀 희귀하지 않은 돌멩이라는 충격 진실', title: '100년간 전 인류를 완벽히 속인 희대의 다이아몬드 마케팅' },
-  ],
-  cinema_culture: [
-    { topic: '센과 치히로의 행방불명 속에 숨겨진 충격적인 어두운 복선', title: '어릴 땐 몰랐는데 다 커서 보면 소름 돋는 지브리의 숨은 진실' },
-    { topic: '타이타닉 침몰 당시 1등실 재벌들이 구명보트를 거부한 이유', title: '죽음 앞에서도 턱시도를 차려입고 신사답게 바다로 가라앉은 갑부' },
-    { topic: '다크나이트 조커 히스 레저의 소름 돋는 애드리브 장면의 비밀', title: '병원 폭파가 늦어졌을 때 히스 레저가 즉흥으로 살려낸 레전드 명장면' },
-  ],
-  billionaire_marketing: [
-    { topic: '애플이 아이폰 충전기를 빼버리고도 8조 원을 더 번 천재적 수법', title: '환경 보호라더니 8조 벌었다? 애플의 소름 돋는 장사 수완' },
-    { topic: '스타벅스가 컵에 손님 이름을 일부러 틀리게 적는 고도의 마케팅', title: '알바생의 실수가 아니다! 스타벅스 바이럴 마케팅의 소름 돋는 비밀' },
-    { topic: '코카콜라가 산타클로스를 빨간 옷으로 세뇌시킨 역사적 진실', title: '원래 초록색이었던 산타가 빨간 옷을 입게 된 충격 비화' },
+    { topic: '우주선 안에서 빵을 먹을 수 없는 물리적·공학적인 과학 이유', title: '[우주 과학] 우주비행사 식단에서 빵이 빠진 진짜 과학적 이유' },
+    { topic: '다이아몬드와 흑연이 똑같은 탄소 원자로 만들어지는데 성질이 다른 이유', title: '[화학 결합] 연필심 흑연과 다이아몬드가 같은 원소라는 놀라운 원리' },
+    { topic: '달과 지구 사이 인력이 매일 바다의 밀물과 썰물을 일으키는 천문 원리', title: '[지구과학] 달이 바닷물을 끌어당겨 밀물과 썰물을 만드는 기조력 원리' },
   ],
   future_ai_tech: [
-    { topic: '2030년 안에 지구상에서 가장 먼저 사라질 직업 1위의 반전', title: '의사 변호사도 위험하다? AI가 대체할 직업 1위의 소름 돋는 실체' },
-    { topic: '페이스북 AI 2대가 인간 모르게 자신들만의 언어로 대화한 사건', title: '연구원들이 경악하며 전원 코드를 뽑아버린 AI 자율 대화 미스터리' },
+    { topic: '생성형 AI가 다음 단어를 예측하는 토큰과 확률 분포의 원리', title: '[정보 수업] 인공지능 챗봇은 어떻게 사람처럼 자연스럽게 대답할까?' },
+    { topic: '자료 탐색 속도를 바꾸는 순차 탐색과 이진 탐색 알고리즘 비교', title: '[코딩 기초] 100만 개 데이터에서 원하는 값을 20번 만에 찾는 이진 탐색' },
   ],
 };
 
@@ -6275,22 +6231,22 @@ async function generateAutonomousTopic(
   apiKey?: string,
   customInstruction?: string
 ): Promise<{ topic: string; title: string }> {
-  const nicheClean = channelNiche || '생활 속 꿀팁 및 유용한 상식';
+  const nicheClean = channelNiche || '초·중·고 교과 핵심 개념 1분 요약 수업';
   const pastText = pastTopics.slice(0, 20).map((t, idx) => `${idx + 1}. ${t}`).join('\n');
 
   if (apiKey) {
     for (const model of GEMINI_WATERFALL_MODELS) {
       try {
         const prompt =
-          `당신은 유튜브 쇼츠 알고리즘을 지배하는 1타 유튜브 기획자입니다.\n\n` +
-          `[채널 콘셉트 및 분야]: ${nicheClean}\n` +
-          (customInstruction ? `[추가 지침]: ${customInstruction}\n` : '') +
-          (pastText ? `[이미 제작된 이전 쇼츠 주제들(절대 중복 금지)]:\n${pastText}\n\n` : '') +
+          `당신은 학교 교사와 학원 강사를 지원하는 교육 콘텐츠 커리큘럼 기획자입니다.\n\n` +
+          `[수업 과목 및 채널 분야]: ${nicheClean}\n` +
+          (customInstruction ? `[추가 수업 지침]: ${customInstruction}\n` : '') +
+          (pastText ? `[이미 제작된 이전 수업 주제들(중복 금지)]:\n${pastText}\n\n` : '') +
           `[미션]:\n` +
-          `1. 위 채널 콘셉트에 부합하면서, 시청자가 스크롤을 멈추고 1초 만에 클릭하게 만들 파급력 높은 쇼츠 주제 1개를 기획하세요.\n` +
-          `2. 과거 다룬 주제와 명확히 차별화되는 참신하고 구체적인 실천형/흥미형 소재여야 합니다.\n` +
-          `3. 응답은 반드시 순수 JSON 객체 포맷으로만 출력하세요 (따옴표나 마크다운 코드블록 없이):\n` +
-          `{"topic": "대본 생성에 쓸 구체적인 주제 (예: 냄비 바닥 탄 자국 3분 만에 베이킹소다로 없애는 법)", "title": "유튜브 업로드용 후킹 제목 (예: 탄 냄비 버리지 마세요! 3분 만에 새것 만드는 마법)"}`;
+          `1. 위 교과/교육 분야에 부합하면서, 학생들이 1분 안에 핵심 원리를 명확히 이해할 수 있는 수업 쇼츠 주제 1개를 기획하세요.\n` +
+          `2. 자극적인 낚시 표현 대신 오개념 교정, 원리 비유, 시험 핵심 정리처럼 학습 효과가 높은 구체적 단원 소재여야 합니다.\n` +
+          `3. 응답은 반드시 순수 JSON 객체 포맷으로만 출력하세요 (마크다운 코드블록 없이):\n` +
+          `{"topic": "대본 생성에 쓸 구체적인 수업 주제 (예: 중2 과학 원자와 분자의 차이를 레고 비유로 설명하기)", "title": "학생용 영상 제목 (예: [중2 과학] 원자와 분자 차이, 1분 만에 완벽 구분!)"}`;
 
         const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
         const res = await fetch(url, {
@@ -7492,29 +7448,29 @@ ipcMain.handle('generate-pinned-comments', async (_, params: { topic: string; sc
 
   if (geminiKey) {
     try {
-      const prompt = `당신은 대한민국 최고 유튜브 쇼츠 알고리즘 전문가입니다.
-다음 영상 주제와 대본을 분석하여, 시청자 댓글 참여율과 체류 시간을 극대화할 수 있는 [고정 댓글 3종 세트]를 한국어로 작성해주세요.
+      const prompt = `당신은 학교·학원 수업 영상의 학생 참여와 개념 복습을 설계하는 교육 콘텐츠 전문가입니다.
+다음 수업 주제와 대본을 분석하여, 학생들이 영상을 본 직후 스스로 개념을 점검하고 댓글로 복습에 참여할 수 있는 [형성평가 & 고정 댓글 3종 세트]를 한국어로 작성해주세요.
 
-영상 주제: "${topic}"
+수업 주제: "${topic}"
 대본 요약: "${script.slice(0, 500)}"
 
 반드시 다음 JSON 배열 규격으로만 응답하세요(코드블록 없이):
 [
   {
     "type": "balance_game",
-    "question": "1번 vs 2번 밸런스 게임 질문",
-    "options": ["선택지 1", "선택지 2"],
-    "fullCommentText": "🔥 [선택의 시간] 여러분은 1번인가요 2번인가요? 댓글로 투표해주세요!\\n1. 선택지 1\\n2. 선택지 2"
+    "question": "핵심 개념 A vs B 또는 O/X 확인 퀴즈 질문",
+    "options": ["보기 1 (예: O / 개념 A)", "보기 2 (예: X / 개념 B)"],
+    "fullCommentText": "📝 [개념 비교 퀴즈] 다음 중 옳은 설명(또는 해당하는 개념)은 몇 번일까요? 댓글로 정답을 남겨보세요!\\n1. 보기 1\\n2. 보기 2"
   },
   {
     "type": "opinion_vote",
-    "question": "경험 공유형 질문",
-    "fullCommentText": "💬 여러분도 이런 경험 있으신가요? 나만의 꿀팁이나 생각을 댓글로 남겨주세요!"
+    "question": "실생활 사례 연결 질문",
+    "fullCommentText": "💬 오늘 배운 원리가 우리 주변에서는 어디에서 볼 수 있을까요? 떠오르는 사례 한 가지를 댓글로 적어 보세요!"
   },
   {
     "type": "summary_quiz",
-    "question": "핵심 요약 및 퀴즈",
-    "fullCommentText": "📌 [3초 핵심 요약]\\n영상 속 가장 유용했던 부분은 몇 번째였나요? 댓글로 남겨주시면 하트 눌러드립니다 ❤️"
+    "question": "오늘의 1분 핵심 한 줄 요약 과제",
+    "fullCommentText": "📌 [오늘 수업 한 줄 복습]\\n방금 배운 핵심 키워드를 자신의 말로 한 문장만 요약해 댓글로 남겨봅시다!"
   }
 ]`;
 
@@ -7531,23 +7487,24 @@ ipcMain.handle('generate-pinned-comments', async (_, params: { topic: string; sc
     }
   }
 
-  // High-Quality Rule-Based Fallback
+  // High-Quality Pedagogical Rule-Based Fallback
+  const topicLabel = topic || '오늘의 핵심 개념';
   const suggestions: import('../src/types').PinnedCommentSuggestion[] = [
     {
       type: 'balance_game',
-      question: `"${topic}" 여러분의 선택은?`,
-      options: ['지금 당장 시작한다', '차근차근 준비 후 시작한다'],
-      fullCommentText: `🔥 [댓글 투표] "${topic}" 관련해서 여러분은 어떤 쪽이신가요?\\n1. 지금 당장 시작한다 👍\\n2. 신중하게 준비 후 시작한다 💬\\n댓글로 솔직한 생각을 남겨주세요!`,
+      question: `"${topicLabel}" 핵심 개념 O·X 확인 퀴즈`,
+      options: ['O (핵심 원리에 부합한다)', 'X (자주 헷갈리는 오개념이다)'],
+      fullCommentText: `📝 [3초 형성평가 O·X 퀴즈] "${topicLabel}" 핵심 원리, 정확히 이해했나요?\n1. O — 오늘 배운 원리 그대로 이해했다\n2. X — 아직 헷갈리는 부분이 있어 다시 보고 싶다\n정답 번호와 이유를 댓글로 남겨보세요!`,
     },
     {
       type: 'opinion_vote',
-      question: '나만의 노하우 공유',
-      fullCommentText: `💬 여러분만의 특별한 꿀팁이나 경험이 있다면 댓글로 자유롭게 공유해주세요! 좋은 의견에는 고정 핀을 달아드립니다 ✨`,
+      question: '실생활 예시 연결하기',
+      fullCommentText: `💬 "${topicLabel}" 원리를 우리 일상생활에서 찾아본다면 어떤 예시가 있을까요? 떠오르는 사례를 댓글로 공유하면 복습 효과가 배가 됩니다!`,
     },
     {
       type: 'summary_quiz',
-      question: '3초 퀴즈 & 복습',
-      fullCommentText: `📌 [오늘의 1분 핵심 정리]\\n놓치면 손해 보는 이 내용, 주변 친구에게도 공유해보세요! 여러분의 생각은 어떠신가요? ❤️`,
+      question: '오늘의 1분 핵심 한 줄 정리',
+      fullCommentText: `📌 [오늘 수업 한 줄 요약 과제]\n영상 속 핵심 개념을 내 노트에 적듯 단 한 문장으로 요약해 댓글로 남겨보세요! 확인 후 좋아요(하트)를 눌러드립니다.`,
     },
   ];
 

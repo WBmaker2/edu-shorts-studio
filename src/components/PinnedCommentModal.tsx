@@ -60,46 +60,46 @@ export const PinnedCommentModal: React.FC<PinnedCommentModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="bg-white rounded-3xl shadow-2xl border border-slate-200 max-w-xl w-full flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#14213D]/60 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="bg-[#FFFDF8] rounded-2xl shadow-2xl border border-[#CFC6AE] max-w-xl w-full flex flex-col overflow-hidden animate-in zoom-in-95 duration-200">
         {/* Header */}
-        <div className="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-gradient-to-r from-pink-50/50 via-white to-rose-50/50">
+        <div className="px-6 py-4 border-b border-[#E5DEC9] flex items-center justify-between bg-[#FAF8F3]">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-600 shadow-inner">
+            <div className="w-10 h-10 rounded-xl bg-[#FEF3C7] border border-[#FCD34D] flex items-center justify-center text-[#B45309]">
               <MessageSquare className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="text-base font-black text-slate-900">
-                  AI 시청자 투표 & 고정 댓글 최적화기
+                <h3 className="text-base font-black text-[#14213D]">
+                  형성평가 퀴즈 & 복습 고정 댓글 생성기
                 </h3>
-                <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-rose-100 text-rose-700 border border-rose-200">
-                  알고리즘 가중치 극대화
+                <span className="text-[10px] font-extrabold px-2 py-0.5 rounded bg-[#FEF3C7] text-[#78350F] border border-[#FCD34D]">
+                  수업 참여 유도
                 </span>
               </div>
-              <p className="text-xs text-slate-500 font-medium">
-                쇼츠 시청 후 댓글 작성률을 3배 이상 유도하여 탐색 피드 노출을 촉진합니다.
+              <p className="text-xs text-[#5C6B85] font-medium">
+                영상 시청 직후 학생이 스스로 정답을 확인하고 핵심을 한 줄 요약하도록 돕는 고정 댓글을 만듭니다.
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-slate-400 hover:text-slate-600 rounded-xl hover:bg-slate-100 transition-colors"
+            className="p-2 text-[#5C6B85] hover:text-[#14213D] rounded-lg hover:bg-[#F2EFE6] transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Body */}
-        <div className="p-6 space-y-4 max-h-[70vh] overflow-y-auto">
+        <div className="p-6 space-y-4 max-h-[70vh] overflow-y-auto bg-[#FFFDF8]">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-extrabold text-slate-700">
-              알고리즘 추천 고정 댓글 3종 세트
+            <span className="text-xs font-extrabold text-[#14213D]">
+              AI 추천 수업 고정 댓글 3종 세트
             </span>
             <button
               onClick={fetchSuggestions}
               disabled={isLoading}
-              className="text-xs font-bold text-rose-600 hover:text-rose-700 flex items-center gap-1.5 transition-colors disabled:opacity-40"
+              className="text-xs font-bold text-[#1E40AF] hover:underline flex items-center gap-1.5 transition-colors disabled:opacity-40"
             >
               <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? 'animate-spin' : ''}`} />
               <span>새로운 질문 생성</span>
@@ -108,9 +108,9 @@ export const PinnedCommentModal: React.FC<PinnedCommentModalProps> = ({
 
           {isLoading ? (
             <div className="flex flex-col items-center justify-center py-12 space-y-3">
-              <div className="w-8 h-8 border-2 border-rose-500/20 border-t-rose-600 rounded-full animate-spin" />
-              <p className="text-xs text-slate-500 font-bold animate-pulse">
-                대본 내용을 분석하여 바이럴 유도 질문을 도출 중입니다...
+              <div className="w-8 h-8 border-2 border-[#BFDBFE] border-t-[#1E40AF] rounded-full animate-spin" />
+              <p className="text-xs text-[#5C6B85] font-bold animate-pulse">
+                수업 대본을 분석하여 형성평가 확인 질문 3종을 작성하고 있습니다...
               </p>
             </div>
           ) : (
@@ -119,32 +119,32 @@ export const PinnedCommentModal: React.FC<PinnedCommentModalProps> = ({
                 const isCopied = copiedIdx === idx;
                 const typeBadge =
                   s.type === 'balance_game'
-                    ? { name: '🔥 밸런스 게임 투표형', color: 'bg-amber-100 text-amber-800 border-amber-200' }
+                    ? { name: '개념 비교 · O/X 확인 퀴즈', color: 'bg-[#FEF3C7] text-[#78350F] border-[#FCD34D]' }
                     : s.type === 'opinion_vote'
-                    ? { name: '💬 시청자 경험 공유형', color: 'bg-blue-100 text-blue-800 border-blue-200' }
-                    : { name: '📌 3초 핵심 요약 & 퀴즈형', color: 'bg-emerald-100 text-emerald-800 border-emerald-200' };
+                    ? { name: '실생활 사례 탐구 질문', color: 'bg-[#EFF6FF] text-[#1E40AF] border-[#BFDBFE]' }
+                    : { name: '오늘의 1분 핵심 요약 과제', color: 'bg-[#DCFCE7] text-[#14532D] border-[#86EFAC]' };
 
                 return (
                   <div
                     key={idx}
-                    className="p-4 rounded-2xl border border-slate-200/90 bg-slate-50/70 hover:bg-slate-50 transition-all space-y-2.5 shadow-sm"
+                    className="p-4 rounded-xl border border-[#E5DEC9] bg-[#FAF8F3] hover:bg-white transition-colors space-y-2.5"
                   >
                     <div className="flex items-center justify-between">
-                      <span className={`text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border ${typeBadge.color}`}>
+                      <span className={`text-[10px] font-extrabold px-2.5 py-0.5 rounded border ${typeBadge.color}`}>
                         {typeBadge.name}
                       </span>
                       <div className="flex items-center gap-1.5">
                         <button
                           onClick={() => handleCopy(s.fullCommentText, idx)}
-                          className="px-2.5 py-1 rounded-lg border border-slate-200 bg-white hover:bg-slate-100 text-[11px] font-bold text-slate-700 flex items-center gap-1 transition-all"
+                          className="px-2.5 py-1 rounded-md border border-[#CFC6AE] bg-white hover:bg-[#F2EFE6] text-[11px] font-bold text-[#14213D] flex items-center gap-1 transition-colors"
                         >
-                          {isCopied ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3 text-slate-400" />}
+                          {isCopied ? <Check className="w-3 h-3 text-[#15803D]" /> : <Copy className="w-3 h-3 text-[#5C6B85]" />}
                           <span>{isCopied ? '복사됨!' : '댓글 복사'}</span>
                         </button>
                         {onSelectComment && (
                           <button
                             onClick={() => handleApply(s.fullCommentText)}
-                            className="px-2.5 py-1 rounded-lg bg-rose-600 hover:bg-rose-500 text-white text-[11px] font-extrabold shadow-sm transition-all"
+                            className="px-2.5 py-1 rounded-md bg-[#1E40AF] hover:bg-[#1E3A8A] text-white text-[11px] font-extrabold transition-colors"
                           >
                             적용하기
                           </button>
@@ -152,11 +152,11 @@ export const PinnedCommentModal: React.FC<PinnedCommentModalProps> = ({
                       </div>
                     </div>
 
-                    <p className="text-xs font-bold text-slate-800 leading-snug">
+                    <p className="text-xs font-bold text-[#14213D] leading-snug">
                       {s.question}
                     </p>
 
-                    <div className="bg-white p-3 rounded-xl border border-slate-200/80 text-[11px] text-slate-600 font-mono whitespace-pre-line leading-relaxed select-text">
+                    <div className="bg-white p-3 rounded-lg border border-[#E5DEC9] text-[11px] text-[#3D4B66] font-mono whitespace-pre-line leading-relaxed select-text">
                       {s.fullCommentText}
                     </div>
                   </div>
@@ -167,13 +167,13 @@ export const PinnedCommentModal: React.FC<PinnedCommentModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 border-t border-slate-100 bg-slate-50/50 flex items-center justify-between">
-          <span className="text-[11px] text-slate-400 font-medium">
-            유튜브 업로드 시 첫 댓글로 등록하고 핀(Pin)으로 상단 고정하면 시청자 참여율이 극대화됩니다.
+        <div className="px-6 py-3.5 border-t border-[#E5DEC9] bg-[#FAF8F3] flex items-center justify-between">
+          <span className="text-[11px] text-[#5C6B85] font-medium">
+            수업 채널 업로드 시 첫 댓글로 등록하고 상단 고정하면 학생들의 복습 참여가 높아집니다.
           </span>
           <button
             onClick={onClose}
-            className="px-4 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-bold transition-colors"
+            className="px-4 py-1.5 rounded-lg bg-[#E5DEC9] hover:bg-[#CFC6AE] text-[#14213D] text-xs font-bold transition-colors"
           >
             닫기
           </button>

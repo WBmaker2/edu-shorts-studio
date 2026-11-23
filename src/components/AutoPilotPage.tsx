@@ -29,46 +29,46 @@ import { TEMPLATES } from './TemplateSelector';
 
 export const HOOK_PRESETS = [
   {
-    id: 'tips',
-    name: '⚡ 놓치면 손해 3초 꿀팁',
-    title: '⚡ 놓치면 손해 3초 꿀팁 ⚡',
-    subtitle: '끝까지 보면 인생이 바뀝니다',
-    badge: '🔥 1위',
+    id: 'ox_quiz',
+    name: '수업 시작 전 3초 O/X 점검',
+    title: '잠깐! 이건 O일까요 X일까요?',
+    subtitle: '시험에서 가장 자주 헷갈리는 핵심 개념',
+    badge: '오개념 진단',
   },
   {
-    id: 'breaking',
-    name: '🚨 긴급 속보! 충격 주의',
-    title: '🚨 긴급 속보! 충격 주의 🚨',
-    subtitle: '지금 바로 확인하지 않으면 후회합니다',
-    badge: '🚨 클릭률',
+    id: 'one_min',
+    name: '핵심 원리 1분 요약 노트',
+    title: '단원 핵심 개념 1분 총정리',
+    subtitle: '수업 도입 예습 · 시험 직전 복습',
+    badge: '핵심 요약',
   },
   {
-    id: 'secret',
-    name: '🤫 99%는 모르는 비밀',
-    title: '🤫 99%는 절대 모르는 비밀 🤫',
-    subtitle: '상위 1%만 아는 현실 전격 공개',
-    badge: '💡 호기심',
+    id: 'daily_why',
+    name: '일상 속 교과 원리 탐구',
+    title: '왜 우리 일상에서는 이런 일이 일어날까?',
+    subtitle: '친숙한 비유로 바로 이해하는 원리',
+    badge: '실생활 비유',
   },
   {
-    id: 'curiosity',
-    name: '❓ 혹시 나도 해당될까?',
-    title: '❓ 혹시 나도 해당될까? ❓',
-    subtitle: '1초 만에 자가진단 해보세요',
-    badge: '📌 공감',
+    id: 'compare',
+    name: '헷갈리는 개념 A vs B 비교',
+    title: '비슷해 보이지만 완전히 다른 두 개념',
+    subtitle: '기준 한 줄로 명확하게 구분하기',
+    badge: '개념 비교',
   },
   {
-    id: 'money',
-    name: '💰 돈 버는 사람들의 특징',
-    title: '💰 돈 버는 사람들의 특징 💰',
-    subtitle: '이것 모르면 평생 손해봅니다',
-    badge: '💵 재테크',
+    id: 'exam_point',
+    name: '수능 · 내신 빈출 포인트',
+    title: '출제자가 가장 자주 묻는 단원 함정',
+    subtitle: '놓치기 쉬운 조건까지 1분 점검',
+    badge: '시험 대비',
   },
   {
     id: 'custom',
-    name: '✏️ 직접 입력 (커스텀 문구)',
+    name: '직접 입력 (교사 커스텀 문구)',
     title: '',
     subtitle: '',
-    badge: '자유',
+    badge: '자유 입력',
   },
 ];
 
@@ -79,31 +79,20 @@ interface AutoPilotPageProps {
 }
 
 const PRESET_NICHES = [
-  { label: '😱 공포 실화 & 미스터리 괴담', value: '등골이 오싹한 실제 경험담 공포 실화와 소름 돋는 미스터리 괴담' },
-  { label: '🛸 초자연 현상 & UFO/외계인', value: '현대 과학으로 설명 불가능한 불가사의한 초자연 현상과 기이한 사건' },
-  { label: '🕵️ 스릴러 & 미제 범죄 사건', value: '전 세계를 경악하게 만든 풀리지 않은 미스터리 미제 사건과 스릴러 비화' },
-  { label: '💡 생활 꿀팁 & 살림 비법', value: '일상 생활에서 즉시 써먹는 놀라운 살림 꿀팁과 지혜' },
-  { label: '📜 역사 미스터리 & 썰', value: '역사 속 충격적이고 흥미진진한 비화 및 미스터리' },
-  { label: '🌿 건강 상식 & 일상 습관', value: '의사들도 챙겨하는 기적의 일상 건강 및 식습관 상식' },
-  { label: '💰 부자 습관 & 재테크', value: '상위 1% 성공한 사람들과 부자들의 결정적인 일상 습관' },
-  { label: '🧠 실전 심리학 & 인간관계', value: '사람의 마음을 읽고 말 한마디로 호감을 얻는 실전 심리학' },
-  { label: '💼 직장인 공감 & 칼퇴 팁', value: '직장 생활 스트레스 극복 및 시간 관리 생산성 꿀팁' },
-  { label: '📱 IT & 스마트폰 꿀기능', value: '아이폰/갤럭시와 컴퓨터의 숨겨진 유용한 치트키 및 무료 사이트' },
-  { label: '🐾 반려동물(강아지/고양이)', value: '반려견과 반려묘의 신비한 행동 심리와 건강 상식' },
-  { label: '🍳 초간단 3분 요리 & 레시피', value: '전자레인지와 에어프라이어로 만드는 초간단 꿀맛 레시피' },
-  { label: '🌌 우주 과학 & 신비한 자연', value: '블랙홀, 심해 생물 등 상상을 초월하는 신비한 과학 팩트' },
-  { label: '🚗 자동차 관리 & 운전 꿀팁', value: '기름값 아끼는 법과 안전 운전 및 차량 관리 필수 지식' },
-  { label: '✈️ 여행 꿀팁 & 항공권 예매', value: '항공권 30% 저렴하게 예매하는 법과 여행 패킹 꿀팁' },
-  { label: '🧙 도시전설 & 기괴한 진실', value: '인터넷과 전 세계에 떠도는 소름 끼치는 도시전설과 그 이면' },
-  { label: '📰 실시간 핫이슈 & 뉴스 브리핑', value: '오늘 꼭 알아야 할 1분 실시간 핵심 핫이슈와 경제/사회 속보' },
-  { label: '💬 커뮤니티 & 블라인드 레전드 썰', value: '익명 커뮤니티(블라인드, 판, 에펨)를 발칵 뒤집은 역대급 사연 레전드' },
-  { label: '🏋️ 홈트 & 체형 교정 1분 운동', value: '거북목과 뱃살을 타파하는 하루 1분 초간단 홈트 루틴' },
-  { label: '🎬 영화/드라마 숨은 비하인드', value: '명작 영화 속에 숨겨진 소름 돋는 복선과 촬영장 비하인드' },
-  { label: '🗣️ 원어민 영어 회화 & 슬랭', value: '미드에 매일 나오는 원어민 실전 표현과 뉘앙스 차이' },
-  { label: '🤯 인체 & 뇌과학 반전 팩트', value: '의사들도 놀란 인체와 뇌의 기이한 반응 및 흑역사/수면 심리' },
-  { label: '🌍 세계의 충격 문화 & 황당 법률', value: '외국인이 들으면 경악하는 전 세계의 기상천외한 법률과 문화 충격' },
-  { label: '💎 억만장자 & 천재 마케팅 비화', value: '애플, 스타벅스, 나이키 등 글로벌 1위 기업들의 소름 돋는 마케팅 수법과 부의 비밀' },
-  { label: '🤖 미래 사회 & AI 충격 진실', value: '2030 사라질 직업과 인공지능이 바꿀 미래의 충격적인 모습' },
+  { label: '중등 · 고등 물리 & 역학', value: '중고등 물리 교과 원리와 관성·부력·베르누이 법칙 등 생활 속 과학 탐구' },
+  { label: '화학 · 물질의 구성', value: '원자와 분자, 이온 결합, 산과 염기 등 교과 화학 개념의 쉬운 시각화' },
+  { label: '생명과학 · 세포 & 생태', value: '식물의 광합성과 호흡, 세포 구조, 인체 면역 등 생명과학 핵심 개념' },
+  { label: '지구과학 · 우주 & 기후', value: '지진파, 판 구조론, 태양계, 기후 변화 등 지구과학 원리 해설' },
+  { label: '한국사 · 주요 사료 & 사건', value: '고조선 8조법, 훈민정음, 삼국통일 등 한국사 교과 핵심 흐름 요약' },
+  { label: '세계사 · 문명 & 근현대사', value: '고대 문명부터 근현대 세계사의 주요 전환점과 인과 관계 정리' },
+  { label: '통합사회 · 경제 기초', value: '기회비용과 매몰비용, 수요·공급, 인플레이션 등 사회·경제 필수 개념' },
+  { label: '수학 · 도형 & 확률 논리', value: '피타고라스 정리, 함수 그래프, 확률과 통계의 직관적 원리 설명' },
+  { label: '국어 · 문해력 & 문학 비유', value: '비문학 핵심 주장 파악 전략, 품사와 문학 표현 기법 1분 정리' },
+  { label: '영어 · 핵심 구문 & 뉘앙스', value: '능동태·수동태, 시제, 교과서 핵심 영문법과 어휘 구분법' },
+  { label: '정보 · AI & 알고리즘 기초', value: '이진 탐색, 자료구조, 생성형 AI의 토큰·확률 원리 디지털 소양 수업' },
+  { label: '학습 뇌과학 · 메타인지 공부법', value: '에빙하우스 망각곡선, 분산 인출 연습, 숙면과 기억 강화 원리' },
+  { label: '초등 생활과학 · 호기심 탐구', value: '초등학생 눈높이에서 일상 현상을 관찰하며 배우는 기초 과학' },
+  { label: '시민 · 환경 & 미디어 리터러시', value: '기후 위기 대응, 합리적 소비, 정보 판별 능력을 기르는 시민 교육' },
 ];
 
 function formatTimeLabel(timeStr: string): string {
@@ -156,18 +145,18 @@ export const AutoPilotPage: React.FC<AutoPilotPageProps> = ({ settings, onNaviga
     scheduleTime: '18:00',
     frequency: 'daily',
     customIntervalValue: 4,
-    channelNiche: '일상 생활에서 즉시 써먹는 놀라운 살림 꿀팁과 지혜',
+    channelNiche: '중고등 물리 교과 원리와 관성·부력·베르누이 법칙 등 생활 속 과학 탐구',
     customInstruction: '',
     durationSeconds: 55,
     titleStyleId: 'yellow_tape',
-    subtitleStyleId: 'mrbeast',
+    subtitleStyleId: 'samul_1min',
     enableHookIntro: true,
-    hookIntroPreset: 'tips',
-    hookTitleText: '⚡ 놓치면 손해 3초 꿀팁 ⚡',
-    hookSubtitleText: '끝까지 보면 인생이 바뀝니다',
+    hookIntroPreset: 'ox_quiz',
+    hookTitleText: '잠깐! 이건 O일까요 X일까요?',
+    hookSubtitleText: '시험에서 가장 자주 헷갈리는 핵심 개념',
     autoUploadYoutube: true,
     autoComment: true,
-    commentText: settings.youtubeCommentText || '📌 더 많은 꿀팁과 상세 정보는 프로필 링크를 확인해주세요! 구독과 좋아요는 큰 힘이 됩니다.',
+    commentText: settings.youtubeCommentText || '📌 오늘 수업 핵심 정리 학습지 & 형성평가 퀴즈 링크를 확인하고, 헷갈리는 점은 댓글로 질문해 보세요!',
     history: [],
   });
 
@@ -205,11 +194,11 @@ export const AutoPilotPage: React.FC<AutoPilotPageProps> = ({ settings, onNaviga
             ...prev,
             ...loaded,
             titleStyleId: loaded.titleStyleId || prev.titleStyleId || settings.defaultTitleStyleId || 'yellow_tape',
-            subtitleStyleId: loaded.subtitleStyleId || prev.subtitleStyleId || settings.defaultSubtitleStyleId || 'mrbeast',
+            subtitleStyleId: loaded.subtitleStyleId || prev.subtitleStyleId || settings.defaultSubtitleStyleId || 'samul_1min',
             enableHookIntro: loaded.enableHookIntro ?? prev.enableHookIntro ?? true,
-            hookIntroPreset: loaded.hookIntroPreset || prev.hookIntroPreset || 'tips',
-            hookTitleText: loaded.hookTitleText || prev.hookTitleText || '⚡ 놓치면 손해 3초 꿀팁 ⚡',
-            hookSubtitleText: loaded.hookSubtitleText || prev.hookSubtitleText || '끝까지 보면 인생이 바뀝니다',
+            hookIntroPreset: loaded.hookIntroPreset || prev.hookIntroPreset || 'ox_quiz',
+            hookTitleText: loaded.hookTitleText || prev.hookTitleText || '잠깐! 이건 O일까요 X일까요?',
+            hookSubtitleText: loaded.hookSubtitleText || prev.hookSubtitleText || '시험에서 가장 자주 헷갈리는 핵심 개념',
             commentText: loaded.commentText || settings.youtubeCommentText || prev.commentText,
           }));
         }
@@ -380,20 +369,20 @@ export const AutoPilotPage: React.FC<AutoPilotPageProps> = ({ settings, onNaviga
   return (
     <div className="space-y-6 max-w-5xl mx-auto pb-16 animate-in fade-in duration-200">
       {/* Header Bar */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-4 border-b border-slate-200">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-4 border-b border-[#E5DEC9]">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-600 border border-purple-200 flex items-center justify-center text-white shadow-md shadow-purple-500/20">
+          <div className="w-10 h-10 rounded-xl bg-[#EFF6FF] border border-[#BFDBFE] flex items-center justify-center text-[#1E40AF]">
             <Zap className="w-5 h-5" />
           </div>
           <div>
-            <h1 className="text-xl font-black text-slate-900 flex items-center gap-2">
-              <span>AI 오토파일럿(Auto-Pilot) 완전 자동 예약 발행</span>
-              <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 border border-purple-200">
-                100% 무인 자동화
+            <h1 className="text-xl font-black text-[#14213D] flex items-center gap-2">
+              <span>정기 복습 · 단원 클립 자동 예약 발행</span>
+              <span className="text-[10px] font-extrabold px-2 py-0.5 rounded bg-[#FEF3C7] text-[#78350F] border border-[#FCD34D]">
+                학기 스케줄러
               </span>
             </h1>
-            <p className="text-xs text-slate-500 font-medium">
-              인공지능이 주제 발굴부터 대본 작성, 음성/영상 렌더링, 유튜브 업로드 및 첫 댓글까지 예약된 시간에 알아서 수행합니다.
+            <p className="text-xs text-[#5C6B85] font-medium">
+              지정한 교과 단원의 예습·복습 쇼츠를 정해진 시간에 맞춰 교안 생성부터 영상 합성, 학급 채널 발행까지 자동으로 진행합니다.
             </p>
           </div>
         </div>
@@ -402,17 +391,17 @@ export const AutoPilotPage: React.FC<AutoPilotPageProps> = ({ settings, onNaviga
           {/* Refresh Button */}
           <button
             onClick={() => fetchConfig(true)}
-            className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 text-xs font-bold transition-all active:scale-95 shadow-sm"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#FAF8F3] hover:bg-[#F2EFE6] text-[#14213D] border border-[#CFC6AE] text-xs font-bold transition-colors"
             title="스케줄 상태 및 발행 이력 새로고침"
           >
-            <RefreshCw className={`w-3.5 h-3.5 text-slate-600 ${isRefreshing ? 'animate-spin text-purple-600' : ''}`} />
+            <RefreshCw className={`w-3.5 h-3.5 text-[#3D4B66] ${isRefreshing ? 'animate-spin text-[#1E40AF]' : ''}`} />
             <span>새로고침</span>
           </button>
 
           {/* Save Button */}
           <button
             onClick={() => handleSaveConfig()}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-md shadow-blue-500/20 transition-all active:scale-95"
+            className="flex items-center gap-2 px-5 py-2 rounded-lg bg-[#1E40AF] hover:bg-[#1E3A8A] text-white text-xs font-bold transition-colors"
           >
             {saved ? <Check className="w-4 h-4" /> : <Save className="w-4 h-4" />}
             <span>{saved ? '설정 저장 완료' : '설정 저장'}</span>
@@ -421,36 +410,38 @@ export const AutoPilotPage: React.FC<AutoPilotPageProps> = ({ settings, onNaviga
       </div>
 
       {/* Main Status & Action Hero Banner */}
-      <div className={`p-6 rounded-2xl border transition-all ${
+      <div className={`p-6 rounded-xl border transition-colors ${
         config.enabled
-          ? 'bg-gradient-to-r from-purple-900 via-indigo-900 to-slate-900 text-white border-purple-500/30 shadow-xl shadow-purple-900/10'
-          : 'bg-white text-slate-900 border-slate-200 shadow-sm'
+          ? 'bg-[#14213D] text-white border-[#1C2E52]'
+          : 'bg-[#FFFDF8] text-[#14213D] border-[#E5DEC9]'
       }`}>
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-5">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <div className={`w-3.5 h-3.5 rounded-full ${config.enabled ? 'bg-emerald-400 animate-ping' : 'bg-slate-300'}`} />
-              <span className={`text-xs font-extrabold uppercase tracking-wider ${config.enabled ? 'text-purple-200' : 'text-slate-500'}`}>
-                {config.enabled ? '오토파일럿 가동 중 (활성화)' : '오토파일럿 대기 중 (비활성화)'}
+              <div className={`w-3 h-3 rounded-full ${config.enabled ? 'bg-[#4ADE80] animate-ping' : 'bg-[#CFC6AE]'}`} />
+              <span className={`text-xs font-extrabold uppercase tracking-wider ${config.enabled ? 'text-[#FDE68A]' : 'text-[#5C6B85]'}`}>
+                {config.enabled ? '정기 수업 발행 가동 중' : '정기 수업 발행 대기 중'}
               </span>
-              <span className="text-slate-400 text-xs">• 현재 시각: <b className="text-white font-mono">{currentTime || '--:--:--'}</b></span>
+              <span className={`text-xs ${config.enabled ? 'text-[#9FB2D4]' : 'text-[#5C6B85]'}`}>
+                • 현재 시각: <b className={`font-mono ${config.enabled ? 'text-white' : 'text-[#14213D]'}`}>{currentTime || '--:--:--'}</b>
+              </span>
             </div>
 
             <h2 className="text-xl md:text-2xl font-black tracking-tight">
               {config.enabled
-                ? `${formatTimeLabel(config.scheduleTime)} 기준, 설정된 주기에 맞춰 새로운 쇼츠가 전자동 발행됩니다.`
-                : '스케줄러를 켜면 AI가 지정된 시간에 스스로 쇼츠를 발행합니다.'}
+                ? `${formatTimeLabel(config.scheduleTime)} 기준, 설정된 주기에 맞춰 단원 복습 쇼츠가 자동 발행됩니다.`
+                : '스케줄러를 켜면 지정된 시간에 맞춰 새로운 교과 개념 쇼츠를 자동 발행합니다.'}
             </h2>
 
-            <div className={`text-xs flex items-center gap-4 font-medium flex-wrap ${config.enabled ? 'text-slate-300' : 'text-slate-500'}`}>
-              <span className="flex items-center gap-1.5 bg-white/10 px-3 py-1 rounded-lg">
-                <Clock className="w-3.5 h-3.5 text-yellow-300" />
+            <div className={`text-xs flex items-center gap-4 font-medium flex-wrap ${config.enabled ? 'text-[#E8EEF7]' : 'text-[#5C6B85]'}`}>
+              <span className={`flex items-center gap-1.5 px-3 py-1 rounded-lg ${config.enabled ? 'bg-[#1C2E52]' : 'bg-[#FAF8F3] border border-[#E5DEC9]'}`}>
+                <Clock className={`w-3.5 h-3.5 ${config.enabled ? 'text-[#FDE68A]' : 'text-[#B45309]'}`} />
                 <span>다음 발행: <b>{config.nextRunAt ? new Date(config.nextRunAt).toLocaleString() : '미정'}</b></span>
-                <span className="text-yellow-300 font-bold ml-1">({getTimeUntilNextRun(config.nextRunAt)})</span>
+                <span className={`font-bold ml-1 ${config.enabled ? 'text-[#FDE68A]' : 'text-[#1E40AF]'}`}>({getTimeUntilNextRun(config.nextRunAt)})</span>
               </span>
               {config.lastRunAt && (
                 <span className="flex items-center gap-1">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#15803D]" />
                   <span>최근 실행: {new Date(config.lastRunAt).toLocaleTimeString()}</span>
                 </span>
               )}
@@ -462,18 +453,18 @@ export const AutoPilotPage: React.FC<AutoPilotPageProps> = ({ settings, onNaviga
             <button
               onClick={handleTriggerNow}
               disabled={isExecutingNow}
-              className={`flex items-center gap-2 px-5 py-3 rounded-xl font-extrabold text-xs shadow-md transition-all active:scale-95 ${
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-extrabold text-xs transition-colors ${
                 isExecutingNow
-                  ? 'bg-slate-700 text-slate-300 cursor-not-allowed'
+                  ? 'bg-[#3D4B66] text-[#E5DEC9] cursor-not-allowed'
                   : config.enabled
-                  ? 'bg-purple-500 hover:bg-purple-400 text-white shadow-purple-500/30'
-                  : 'bg-blue-600 hover:bg-blue-700 text-white'
+                  ? 'bg-[#F59E0B] hover:bg-[#D97706] text-[#14213D]'
+                  : 'bg-[#1E40AF] hover:bg-[#1E3A8A] text-white'
               }`}
             >
               {isExecutingNow ? (
                 <>
                   <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  <span>AI 무인 제작 진행 중...</span>
+                  <span>수업 클립 제작 중...</span>
                 </>
               ) : (
                 <>
@@ -486,10 +477,10 @@ export const AutoPilotPage: React.FC<AutoPilotPageProps> = ({ settings, onNaviga
             {/* Toggle Switch */}
             <button
               onClick={handleToggleEnabled}
-              className={`px-4 py-3 rounded-xl text-xs font-black transition-all border ${
+              className={`px-4 py-2.5 rounded-lg text-xs font-black transition-colors border ${
                 config.enabled
-                  ? 'bg-emerald-500/20 text-emerald-300 border-emerald-400/40 hover:bg-emerald-500/30'
-                  : 'bg-slate-100 text-slate-700 border-slate-300 hover:bg-slate-200'
+                  ? 'bg-[#166534] text-white border-[#22C55E] hover:bg-[#15803D]'
+                  : 'bg-[#FAF8F3] text-[#14213D] border-[#CFC6AE] hover:bg-[#F2EFE6]'
               }`}
             >
               {config.enabled ? '예약 끄기' : '예약 켜기'}
@@ -630,23 +621,23 @@ export const AutoPilotPage: React.FC<AutoPilotPageProps> = ({ settings, onNaviga
             )}
           </div>
 
-          {/* Card 2: Channel Niche & AI Topic Discovery (Expanded Categories) */}
-          <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-4 shadow-sm">
-            <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+          {/* Card 2: Curriculum Niche & AI Topic Discovery */}
+          <div className="bg-[#FFFDF8] border border-[#E5DEC9] rounded-xl p-6 space-y-4">
+            <div className="flex items-center justify-between pb-2 border-b border-[#E5DEC9]">
               <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-purple-600" />
-                <h2 className="text-sm font-extrabold text-slate-900">2. 바이럴 주제 발굴 카테고리 (16개 대확장)</h2>
+                <Sparkles className="w-4 h-4 text-[#1E40AF]" />
+                <h2 className="text-sm font-extrabold text-[#14213D]">2. 교과 단원 · 수업 주제 자동 발굴 영역</h2>
               </div>
-              <span className="text-[11px] font-bold text-purple-600 bg-purple-50 px-2.5 py-0.5 rounded-full border border-purple-200">
-                기존 영상 중복 자동 제외
+              <span className="text-[11px] font-bold text-[#1E40AF] bg-[#EFF6FF] px-2.5 py-0.5 rounded border border-[#BFDBFE]">
+                기존 수업 주제 중복 자동 제외
               </span>
             </div>
 
             <div className="space-y-3">
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-700 flex items-center justify-between">
-                  <span>원클릭 카테고리 프리셋 (총 16개 인기 장르)</span>
-                  <span className="text-purple-600 text-[10px] font-bold">클릭 시 자동 적용</span>
+                <label className="text-xs font-bold text-[#14213D] flex items-center justify-between">
+                  <span>교과 · 학습 영역 프리셋 (클릭 시 즉시 적용)</span>
+                  <span className="text-[#1E40AF] text-[10px] font-bold">원클릭 커리큘럼 선택</span>
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
                   {PRESET_NICHES.map((preset) => (
@@ -654,10 +645,10 @@ export const AutoPilotPage: React.FC<AutoPilotPageProps> = ({ settings, onNaviga
                       key={preset.label}
                       type="button"
                       onClick={() => setConfig({ ...config, channelNiche: preset.value })}
-                      className={`px-2.5 py-2 rounded-xl text-left text-[11px] font-bold transition-all border leading-snug ${
+                      className={`px-2.5 py-2 rounded-lg text-left text-[11px] font-bold transition-colors border leading-snug ${
                         config.channelNiche === preset.value
-                          ? 'bg-purple-50 border-purple-500 text-purple-700 shadow-sm ring-1 ring-purple-300'
-                          : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                          ? 'bg-[#14213D] border-[#14213D] text-[#FDE68A]'
+                          : 'bg-[#FAF8F3] border-[#E5DEC9] text-[#3D4B66] hover:bg-[#F2EFE6] hover:text-[#14213D]'
                       }`}
                     >
                       {preset.label}
@@ -667,27 +658,27 @@ export const AutoPilotPage: React.FC<AutoPilotPageProps> = ({ settings, onNaviga
               </div>
 
               <div className="space-y-1.5 pt-2">
-                <label className="text-xs font-bold text-slate-700">채널 메인 테마 / 다루고 싶은 주제 설명 (직접 수정 가능)</label>
+                <label className="text-xs font-bold text-[#14213D]">수업 채널 주제 / 학기 커리큘럼 설명 (직접 수정 가능)</label>
                 <input
                   type="text"
                   value={config.channelNiche}
                   onChange={(e) => setConfig({ ...config, channelNiche: e.target.value })}
-                  placeholder="예: 3040 직장인을 위한 스트레스 해소 꿀팁 및 인간관계 명언"
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs font-medium text-slate-900 focus:outline-none focus:border-purple-500 focus:bg-white"
+                  placeholder="예: 중2 과학 1학기 물질의 구성~전기와 자기 핵심 1분 개념 정리"
+                  className="w-full bg-[#FAF8F3] border border-[#CFC6AE] rounded-lg px-3.5 py-2.5 text-xs font-medium text-[#14213D] focus:outline-none focus:border-[#1E40AF] focus:bg-white"
                 />
-                <p className="text-[10px] text-slate-400 font-medium">
-                  AI가 이 분야를 바탕으로 과거에 이미 다룬 주제들을 제외한 채 가장 바이럴될 만한 새로운 주제를 스스로 기획합니다.
+                <p className="text-[10px] text-[#5C6B85] font-medium">
+                  AI가 선택한 교과 영역을 바탕으로 이미 제작한 단원을 제외한 새로운 차시 개념을 자동으로 기획합니다.
                 </p>
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-700">AI 추가 기획 지침 (선택 사항)</label>
+                <label className="text-xs font-bold text-[#14213D]">교수법 · 말투 추가 지침 (선택 사항)</label>
                 <textarea
                   value={config.customInstruction || ''}
                   onChange={(e) => setConfig({ ...config, customInstruction: e.target.value })}
                   rows={2}
-                  placeholder="예: 항상 첫 1초에 충격적인 질문으로 시작해줘, 20대 타깃의 트렌디하고 빠른 말투로 작성해줘 등"
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-xs font-medium text-slate-900 focus:outline-none focus:border-purple-500 focus:bg-white"
+                  placeholder="예: 중학생 눈높이에 맞춰 일상 비유로 설명하고, 마지막에 O/X 확인 퀴즈 문장으로 끝내주세요."
+                  className="w-full bg-[#FAF8F3] border border-[#CFC6AE] rounded-lg px-3.5 py-2 text-xs font-medium text-[#14213D] focus:outline-none focus:border-[#1E40AF] focus:bg-white"
                 />
               </div>
 

@@ -1,10 +1,10 @@
 <div align="center">
 
-# 🎬 K-Shorts Studio
+# 📚 Edu-Shorts Studio (에듀쇼츠 스튜디오)
 
-**주제 한 줄 → 대본 · 한국어 음성 · 장면 이미지 · 자막 · 배경음악까지 9:16 쇼츠 한 편**
+**교과 단원 한 줄 → 4단계 수업 교안 · 한국어 교사 성우 · 장면 삽화/영상 · 핵심 강조 자막 · 배경음까지 9:16 교육용 쇼츠 한 편**
 
-Windows 데스크톱 프로그램 · Electron + React + TypeScript · FFmpeg / libass
+학교 교사·학원 강사를 위한 1분 개념 정리 / 거꾸로 수업(Flipped Learning) 쇼츠 제작 데스크톱 스튜디오 · Electron + React + TypeScript · FFmpeg / libass
 
 ![version](https://img.shields.io/badge/version-1.4.15-2563eb)
 ![platform](https://img.shields.io/badge/platform-Windows%2010%2F11%20x64-0ea5e9)

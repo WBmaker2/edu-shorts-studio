@@ -40,7 +40,7 @@ type PlatformTab = 'youtube' | 'monetization' | 'instagram' | 'tiktok' | 'naver'
 export const PublishPage: React.FC<PublishPageProps> = ({ settings, onSaveSettings }) => {
   const [activeTab, setActiveTab] = useState<PlatformTab>('youtube');
 
-  // Monetization & Affiliate Links Settings
+  // Lesson Resource Links & Chapters Settings (maintains existing settings keys for compatibility)
   const [enableAutoChapters, setEnableAutoChapters] = useState<boolean>(settings.enableAutoChapters ?? true);
   const [enableAffiliateLinks, setEnableAffiliateLinks] = useState<boolean>(settings.enableAffiliateLinks ?? true);
   const [affiliateLinks, setAffiliateLinks] = useState<AffiliateLinkItem[]>(
@@ -49,24 +49,24 @@ export const PublishPage: React.FC<PublishPageProps> = ({ settings, onSaveSettin
       : [
           {
             id: 'aff_1',
-            keyword: '주방, 살림, 냄비, 청소',
-            label: '영상 속 초강력 만능 살림 청소포 최저가',
-            url: 'https://link.coupang.com/a/example1',
+            keyword: '과학, 원자, 분자, 광합성',
+            label: '[학습지] 중등 과학 핵심 개념 정리 PDF & 확인 퀴즈',
+            url: 'https://classroom.google.com/',
             isDefault: true,
           },
           {
             id: 'aff_2',
-            keyword: '신발, 옷, 패딩, 곰팡이',
-            label: '세탁소 사장님 추천 얼룩제거 펜',
-            url: 'https://link.coupang.com/a/example2',
+            keyword: '역사, 고조선, 한국사, 사회',
+            label: '[심화 자료] 단원 사료 읽기 & 복습 노트 워크시트',
+            url: 'https://www.ebsi.co.kr/',
           },
         ]
   );
   const [affiliateDisclaimer, setAffiliateDisclaimer] = useState<string>(
-    settings.affiliateDisclaimer || '※ 이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.'
+    settings.affiliateDisclaimer || '※ 본 영상은 학교·학원 수업 보조 및 학생 자율 복습을 위한 교육용 학습 클립입니다.'
   );
 
-  // New Affiliate Link Input Form
+  // New Resource Link Input Form
   const [newKeyword, setNewKeyword] = useState('');
   const [newLabel, setNewLabel] = useState('');
   const [newUrl, setNewUrl] = useState('');
@@ -80,7 +80,7 @@ export const PublishPage: React.FC<PublishPageProps> = ({ settings, onSaveSettin
   const [youtubeAutoComment, setYoutubeAutoComment] = useState<boolean>(settings.youtubeAutoComment ?? true);
   const [youtubeCommentMode, setYoutubeCommentMode] = useState<'custom' | 'ai_smart'>(settings.youtubeCommentMode || 'custom');
   const [youtubeCommentText, setYoutubeCommentText] = useState<string>(
-    settings.youtubeCommentText || '📌 영상 속 상세 정보 및 추천 링크 👉 https://...\n구독과 좋아요는 다음 영상 제작에 큰 힘이 됩니다! 궁금한 점은 댓글로 남겨주세요 ✨'
+    settings.youtubeCommentText || '📌 오늘 수업 핵심 정리 학습지 & 형성평가 퀴즈 👉 https://classroom.google.com/\n수업 내용 중 헷갈리는 질문은 댓글로 남기면 다음 시간에 함께 풀어봅시다!'
   );
 
   // Instagram Settings
@@ -88,11 +88,11 @@ export const PublishPage: React.FC<PublishPageProps> = ({ settings, onSaveSettin
   const [instagramAccountId, setInstagramAccountId] = useState(settings.instagramAccountId || '');
   const [instagramAutoUpload, setInstagramAutoUpload] = useState<boolean>(settings.instagramAutoUpload || false);
   const [instagramDefaultTags, setInstagramDefaultTags] = useState(
-    settings.instagramDefaultTags || '#릴스 #추천 #일상 #꿀팁 #쇼츠 #foryou #reels'
+    settings.instagramDefaultTags || '#교육쇼츠 #1분개념정리 #수업자료 #학습클립 #공부법'
   );
   const [instagramAutoComment, setInstagramAutoComment] = useState<boolean>(settings.instagramAutoComment || false);
   const [instagramCommentText, setInstagramCommentText] = useState(
-    settings.instagramCommentText || '💡 더 많은 꿀팁과 정보는 프로필 링크에서 확인하세요! 팔로우 & 저장은 필수 ❤️'
+    settings.instagramCommentText || '오늘 배운 핵심 개념을 노트에 한 줄로 요약해 보고 저장해 두세요!'
   );
 
   // TikTok Settings
@@ -101,7 +101,7 @@ export const PublishPage: React.FC<PublishPageProps> = ({ settings, onSaveSettin
   const [tiktokAccessToken, setTiktokAccessToken] = useState(settings.tiktokAccessToken || '');
   const [tiktokAutoUpload, setTiktokAutoUpload] = useState<boolean>(settings.tiktokAutoUpload || false);
   const [tiktokDefaultTags, setTiktokDefaultTags] = useState(
-    settings.tiktokDefaultTags || '#fyp #추천 #쇼츠 #viral #tiktokkorea #꿀팁'
+    settings.tiktokDefaultTags || '#교육쇼츠 #1분수업 #핵심개념 #공부자극 #학습노트'
   );
 
   // Naver Clip Settings
@@ -110,7 +110,7 @@ export const PublishPage: React.FC<PublishPageProps> = ({ settings, onSaveSettin
   const [naverClipChannelId, setNaverClipChannelId] = useState(settings.naverClipChannelId || '');
   const [naverAutoUpload, setNaverAutoUpload] = useState<boolean>(settings.naverAutoUpload ?? true);
   const [naverDefaultTags, setNaverDefaultTags] = useState(
-    settings.naverDefaultTags || ('#클립 #' + PORTAL_KO + '클립 #정보 #꿀팁 #일상')
+    settings.naverDefaultTags || ('#클립 #' + PORTAL_KO + '클립 #교육 #1분개념 #수업영상')
   );
   const [naverBlogLink, setNaverBlogLink] = useState(
     settings.naverBlogLink || 'https://blog.naver.com/'
@@ -217,22 +217,22 @@ export const PublishPage: React.FC<PublishPageProps> = ({ settings, onSaveSettin
     const presets: AffiliateLinkItem[] = [
       {
         id: `aff_cp_${Date.now()}_1`,
-        keyword: '주방, 살림, 청소, 냄비',
-        label: '✨ 영상 속 초강력 만능 살림 청소포 최저가',
-        url: 'https://link.coupang.com/a/example_clean',
+        keyword: '과학, 실험, 원자, 광합성',
+        label: '[Google 클래스룸] 오늘 단원 개념 요약 노트 & 학습지',
+        url: 'https://classroom.google.com/',
         isDefault: true,
       },
       {
         id: `aff_cp_${Date.now()}_2`,
-        keyword: '신발, 운동화, 패딩, 옷',
-        label: '👟 세탁소 사장님 추천 프리미엄 백화점용 얼룩제거제',
-        url: 'https://link.coupang.com/a/example_stain',
+        keyword: '역사, 한국사, 고조선, 경제',
+        label: '[패들렛] 수업 후 1분 형성평가 & 질문 게시판',
+        url: 'https://padlet.com/',
       },
       {
         id: `aff_cp_${Date.now()}_3`,
-        keyword: '생활, 욕실, 곰팡이, 배수구',
-        label: '🛁 1분 만에 뻥 뚫리는 배수구 캡슐 클리너',
-        url: 'https://link.coupang.com/a/example_drain',
+        keyword: '수학, 영어, 국어, 공부법',
+        label: '[EBS 학습자료실] 관련 심화 강의 및 단원 평가 문제',
+        url: 'https://www.ebsi.co.kr/',
       },
     ];
     setAffiliateLinks((prev) => [...prev, ...presets]);
@@ -397,7 +397,7 @@ export const PublishPage: React.FC<PublishPageProps> = ({ settings, onSaveSettin
       if (window.electronAPI?.publishToInstagram) {
         const res = await window.electronAPI.publishToInstagram({
           videoPath: 'sample_video.mp4',
-          caption: 'K-Shorts 자동 발행 테스트 릴스 #shorts #reels',
+          caption: 'Edu-Shorts 자동 발행 테스트 수업 릴스 #교육쇼츠 #1분개념',
           accountId: instagramAccountId.trim(),
           accessToken: instagramAccessToken.trim(),
         });
@@ -425,7 +425,7 @@ export const PublishPage: React.FC<PublishPageProps> = ({ settings, onSaveSettin
       if (window.electronAPI?.publishToTikTok) {
         const res = await window.electronAPI.publishToTikTok({
           videoPath: 'sample_video.mp4',
-          title: 'K-Shorts 자동 포스팅 테스트 쇼츠 #tiktok #viral',
+          title: 'Edu-Shorts 자동 포스팅 테스트 수업 클립 #교육 #1분수업',
           accessToken: tiktokAccessToken.trim(),
         });
         setTiktokPublishResult({
@@ -457,27 +457,27 @@ export const PublishPage: React.FC<PublishPageProps> = ({ settings, onSaveSettin
   return (
     <div className="space-y-6 max-w-5xl mx-auto pb-16 animate-in fade-in duration-200">
       {/* Header Bar */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-[#E5DEC9]">
         <div className="flex items-center gap-3">
-          <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-red-500 via-pink-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-red-500/20">
+          <div className="w-10 h-10 rounded-xl bg-[#EFF6FF] border border-[#BFDBFE] flex items-center justify-center text-[#1E40AF]">
             <Share2 className="w-5 h-5" />
           </div>
           <div>
-            <h1 className="text-xl font-black text-slate-900 flex items-center gap-2">
-              <span>유튜브 쇼츠 & 발행 연동 세팅</span>
-              <span className="text-[11px] px-2 py-0.5 rounded-md bg-red-50 text-red-700 font-bold border border-red-200">
-                쇼츠 전용 모드
+            <h1 className="text-xl font-black text-[#14213D] flex items-center gap-2">
+              <span>학급 유튜브 · 수업 채널 발행 연동</span>
+              <span className="text-[11px] px-2 py-0.5 rounded bg-[#FEF3C7] text-[#78350F] font-bold border border-[#FCD34D]">
+                수업 배포 설정
               </span>
             </h1>
-            <p className="text-xs text-slate-500 font-medium">
-              유튜브 쇼츠 & 첫 댓글 자동화 API 연동에 집중 설정합니다. (인스타그램, 틱톡, {PORTAL_KO}클립, 제휴링크는 추후 지원 예정)
+            <p className="text-xs text-[#5C6B85] font-medium">
+              교사용 유튜브 채널 자동 업로드와 형성평가 첫 댓글 등록 API를 연동합니다.
             </p>
           </div>
         </div>
 
         <button
           onClick={handleSave}
-          className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-md shadow-blue-500/20 transition-all active:scale-95 shrink-0"
+          className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#1E40AF] hover:bg-[#1E3A8A] text-white text-xs font-bold transition-colors shrink-0"
         >
           {saved ? <Check className="w-4 h-4" /> : <Save className="w-4 h-4" />}
           <span>{saved ? '전체 설정 저장 완료' : '설정 저장'}</span>
@@ -941,195 +941,195 @@ export const PublishPage: React.FC<PublishPageProps> = ({ settings, onSaveSettin
                   <ShoppingBag className="w-5 h-5" />
                 </div>
                 <div>
-                  <h2 className="text-sm font-black text-slate-900 flex items-center gap-2">
-                    <span>쇼츠 무인 수익화 & 쿠팡 파트너스 자동 연동</span>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-200 text-amber-900 font-bold">
-                      매출 극대화
-                    </span>
-                  </h2>
-                  <p className="text-xs text-slate-600 font-medium">
-                    영상 주제 키워드에 따라 맞춤형 상품 제휴 링크와 공정위 문구를 설명란 및 첫 댓글에 자동 기재합니다.
-                  </p>
-                </div>
-              </div>
-
-              <button
-                onClick={handleApplyCoupangPreset}
-                className="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-300 hover:text-white text-xs font-bold transition-all shadow-xs flex items-center gap-1.5 shrink-0"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                <span>살림/생활 꿀팁 추천 링크 3종 불러오기</span>
-              </button>
-            </div>
-
-            {/* Two Master Switches */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
-              <div className="flex items-center justify-between p-3.5 rounded-xl bg-white border border-amber-200/80 shadow-xs">
-                <div className="space-y-0.5">
-                  <span className="text-xs font-bold text-slate-900">유튜브 SEO 자동 챕터(타임스탬프) 생성</span>
-                  <p className="text-[11px] text-slate-500">
-                    설명란에 0:00, 0:12 등 구간 타임라인을 자동 기재하여 알고리즘 탐색 탭 노출을 높입니다.
-                  </p>
-                </div>
-                <label className="relative inline-flex items-center cursor-pointer shrink-0 ml-3">
-                  <input
-                    type="checkbox"
-                    checked={enableAutoChapters}
-                    onChange={(e) => setEnableAutoChapters(e.target.checked)}
-                    className="sr-only peer"
-                  />
-                  <div className="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-500"></div>
-                </label>
-              </div>
-
-              <div className="flex items-center justify-between p-3.5 rounded-xl bg-white border border-amber-200/80 shadow-xs">
-                <div className="space-y-0.5">
-                  <span className="text-xs font-bold text-slate-900">수익화 제휴 링크 자동 삽입</span>
-                  <p className="text-[11px] text-slate-500">
-                    영상 설명란 및 첫 고정 댓글에 주제 맞춤 추천 상품 링크와 안내를 자동 부착합니다.
-                  </p>
-                </div>
-                <label className="relative inline-flex items-center cursor-pointer shrink-0 ml-3">
-                  <input
-                    type="checkbox"
-                    checked={enableAffiliateLinks}
-                    onChange={(e) => setEnableAffiliateLinks(e.target.checked)}
-                    className="sr-only peer"
-                  />
-                  <div className="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-500"></div>
-                </label>
-              </div>
-            </div>
-          </div>
-
-          {/* Registered Affiliate Links List */}
-          <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="text-sm font-extrabold text-slate-900 flex items-center gap-1.5">
-                  <span>등록된 제휴 마케팅 링크 목록</span>
-                  <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
-                    {affiliateLinks.length}개
-                  </span>
-                </h3>
-                <p className="text-xs text-slate-500">
-                  영상 제목이나 대본에 해당 키워드가 포함되면 일치하는 링크가 우선 삽입되며, 일치하는 키워드가 없으면 [기본 링크]가 삽입됩니다.
-                </p>
-              </div>
-            </div>
-
-            {affiliateLinks.length === 0 ? (
-              <div className="p-8 text-center bg-slate-50 rounded-xl border border-dashed border-slate-200 text-slate-400 text-xs">
-                아직 등록된 수익화 링크가 없습니다. 상단의 [추천 링크 3종 불러오기]를 누르거나 아래에서 직접 추가해보세요!
-              </div>
-            ) : (
-              <div className="divide-y divide-slate-100 border border-slate-200 rounded-xl overflow-hidden">
-                {affiliateLinks.map((link) => (
-                  <div key={link.id} className="p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-slate-50/80 transition-colors">
-                    <div className="space-y-1 min-w-0">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        {link.isDefault && (
-                          <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-200">
-                            기본 링크 (상시 노출)
-                          </span>
-                        )}
-                        <span className="text-xs font-extrabold text-slate-900">{link.label}</span>
-                        <span className="text-[11px] px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-mono">
-                          키워드: {link.keyword}
-                        </span>
-                      </div>
-                      <p className="text-[11px] text-blue-600 font-mono truncate hover:underline">
-                        {link.url}
-                      </p>
-                    </div>
-
-                    <button
-                      type="button"
-                      onClick={() => handleDeleteAffiliateLink(link.id)}
-                      className="p-2 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors shrink-0 self-end sm:self-center"
-                      title="삭제"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
+                    <h2 className="text-sm font-black text-[#14213D] flex items-center gap-2">
+                      <span>수업 구간 타임스탬프 & 학습자료 링크 자동 연동</span>
+                      <span className="text-[10px] px-2 py-0.5 rounded bg-[#FEF3C7] text-[#78350F] font-bold">
+                        수업 연계
+                      </span>
+                    </h2>
+                    <p className="text-xs text-[#5C6B85] font-medium">
+                      수업 단원 키워드에 따라 Google 클래스룸·학습지 PDF·형성평가 링크와 구간 타임라인을 설명란·첫 댓글에 자동 기재합니다.
+                    </p>
                   </div>
-                ))}
-              </div>
-            )}
-
-            {/* Add New Affiliate Link Input Box */}
-            <div className="pt-4 border-t border-slate-100 space-y-3">
-              <h4 className="text-xs font-bold text-slate-800 flex items-center gap-1.5">
-                <Plus className="w-4 h-4 text-blue-600" />
-                <span>새 수익화 제휴 링크 등록</span>
-              </h4>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 text-xs">
-                <div className="space-y-1">
-                  <label className="text-[11px] font-bold text-slate-600">매칭 키워드 (쉼표 구분)</label>
-                  <input
-                    type="text"
-                    value={newKeyword}
-                    onChange={(e) => setNewKeyword(e.target.value)}
-                    placeholder="예: 주방, 냄비, 청소, 세제"
-                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-amber-500 focus:bg-white"
-                  />
                 </div>
-
-                <div className="space-y-1">
-                  <label className="text-[11px] font-bold text-slate-600">상품/링크 명칭 (라벨)</label>
-                  <input
-                    type="text"
-                    value={newLabel}
-                    onChange={(e) => setNewLabel(e.target.value)}
-                    placeholder="예: 영상 속 만능 얼룩제거제 최저가"
-                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-amber-500 focus:bg-white"
-                  />
-                </div>
-
-                <div className="space-y-1">
-                  <label className="text-[11px] font-bold text-slate-600">제휴 링크 URL</label>
-                  <input
-                    type="url"
-                    value={newUrl}
-                    onChange={(e) => setNewUrl(e.target.value)}
-                    placeholder="https://link.coupang.com/..."
-                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs font-mono focus:outline-none focus:border-amber-500 focus:bg-white"
-                  />
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
-                <label className="flex items-center gap-2 cursor-pointer text-xs text-slate-600 font-medium">
-                  <input
-                    type="checkbox"
-                    checked={newIsDefault}
-                    onChange={(e) => setNewIsDefault(e.target.checked)}
-                    className="rounded border-slate-300 text-amber-600 focus:ring-amber-500"
-                  />
-                  <span>키워드가 일치하지 않을 때도 상시 기본으로 노출할 링크로 지정</span>
-                </label>
 
                 <button
-                  type="button"
-                  onClick={handleAddAffiliateLink}
-                  className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold shadow-xs transition-all active:scale-95 flex items-center justify-center gap-1.5"
+                  onClick={handleApplyCoupangPreset}
+                  className="px-3.5 py-2 rounded-lg bg-[#14213D] hover:bg-[#1C2E52] text-[#FDE68A] text-xs font-bold transition-colors flex items-center gap-1.5 shrink-0"
                 >
-                  <Plus className="w-3.5 h-3.5" />
-                  <span>제휴 링크 추가하기</span>
+                  <Sparkles className="w-3.5 h-3.5 text-[#FDE68A]" />
+                  <span>교육용 학습자료 링크 3종 불러오기</span>
                 </button>
               </div>
-            </div>
-          </div>
 
-          {/* Legal Disclaimer Box */}
-          <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2.5">
-            <h3 className="text-xs font-extrabold text-slate-900 flex items-center gap-1.5">
-              <span>공정위 필수 문구 (제휴 마케팅 법적 고지)</span>
-              <span className="text-[10px] px-2 py-0.5 rounded bg-red-50 text-red-600 font-bold">필수 표기</span>
-            </h3>
-            <p className="text-[11px] text-slate-500">
-              쿠팡 파트너스 및 제휴 링크를 노출할 때 공정거래위원회 지침에 따라 설명란 하단에 자동 포함되는 문구입니다.
-            </p>
+              {/* Two Master Switches */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
+                <div className="flex items-center justify-between p-3.5 rounded-xl bg-white border border-amber-200/80 shadow-xs">
+                  <div className="space-y-0.5">
+                    <span className="text-xs font-bold text-slate-900">수업 단계별 챕터(타임스탬프) 자동 생성</span>
+                    <p className="text-[11px] text-slate-500">
+                      설명란에 도입·개념·비유·퀴즈 구간 타임라인을 자동 기재해 학생들이 원하는 지점을 바로 복습할 수 있게 합니다.
+                    </p>
+                  </div>
+                  <label className="relative inline-flex items-center cursor-pointer shrink-0 ml-3">
+                    <input
+                      type="checkbox"
+                      checked={enableAutoChapters}
+                      onChange={(e) => setEnableAutoChapters(e.target.checked)}
+                      className="sr-only peer"
+                    />
+                    <div className="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-500"></div>
+                  </label>
+                </div>
+
+                <div className="flex items-center justify-between p-3.5 rounded-xl bg-white border border-amber-200/80 shadow-xs">
+                  <div className="space-y-0.5">
+                    <span className="text-xs font-bold text-slate-900">학습자료 · 클래스룸 링크 자동 삽입</span>
+                    <p className="text-[11px] text-slate-500">
+                      영상 설명란 및 첫 고정 댓글에 단원 키워드 맞춤 학습지·과제 링크를 자동 부착합니다.
+                    </p>
+                  </div>
+                  <label className="relative inline-flex items-center cursor-pointer shrink-0 ml-3">
+                    <input
+                      type="checkbox"
+                      checked={enableAffiliateLinks}
+                      onChange={(e) => setEnableAffiliateLinks(e.target.checked)}
+                      className="sr-only peer"
+                    />
+                    <div className="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-500"></div>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            {/* Registered Resource Links List */}
+            <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-sm font-extrabold text-slate-900 flex items-center gap-1.5">
+                    <span>등록된 학습 참고자료 링크 목록</span>
+                    <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
+                      {affiliateLinks.length}개
+                    </span>
+                  </h3>
+                  <p className="text-xs text-slate-500">
+                    수업 제목이나 대본에 해당 단원 키워드가 포함되면 일치하는 학습자료가 우선 삽입되며, 없으면 [기본 링크]가 삽입됩니다.
+                  </p>
+                </div>
+              </div>
+
+              {affiliateLinks.length === 0 ? (
+                <div className="p-8 text-center bg-slate-50 rounded-xl border border-dashed border-slate-200 text-slate-400 text-xs">
+                  아직 등록된 학습자료 링크가 없습니다. 상단의 [교육용 학습자료 링크 3종 불러오기]를 누르거나 아래에서 직접 추가해보세요!
+                </div>
+              ) : (
+                <div className="divide-y divide-slate-100 border border-slate-200 rounded-xl overflow-hidden">
+                  {affiliateLinks.map((link) => (
+                    <div key={link.id} className="p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-slate-50/80 transition-colors">
+                      <div className="space-y-1 min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          {link.isDefault && (
+                            <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-200">
+                              기본 링크 (상시 노출)
+                            </span>
+                          )}
+                          <span className="text-xs font-extrabold text-slate-900">{link.label}</span>
+                          <span className="text-[11px] px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-mono">
+                            키워드: {link.keyword}
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-blue-600 font-mono truncate hover:underline">
+                          {link.url}
+                        </p>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteAffiliateLink(link.id)}
+                        className="p-2 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors shrink-0 self-end sm:self-center"
+                        title="삭제"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Add New Resource Link Input Box */}
+              <div className="pt-4 border-t border-slate-100 space-y-3">
+                <h4 className="text-xs font-bold text-slate-800 flex items-center gap-1.5">
+                  <Plus className="w-4 h-4 text-blue-600" />
+                  <span>새 학습자료 링크 등록</span>
+                </h4>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 text-xs">
+                  <div className="space-y-1">
+                    <label className="text-[11px] font-bold text-slate-600">단원 매칭 키워드 (쉼표 구분)</label>
+                    <input
+                      type="text"
+                      value={newKeyword}
+                      onChange={(e) => setNewKeyword(e.target.value)}
+                      placeholder="예: 원자, 분자, 광합성, 한국사"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-amber-500 focus:bg-white"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[11px] font-bold text-slate-600">학습자료 명칭 (라벨)</label>
+                    <input
+                      type="text"
+                      value={newLabel}
+                      onChange={(e) => setNewLabel(e.target.value)}
+                      placeholder="예: 2단원 복습 학습지 PDF 다운로드"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs focus:outline-none focus:border-amber-500 focus:bg-white"
+                    />
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-[11px] font-bold text-slate-600">참고자료 / 클래스룸 URL</label>
+                    <input
+                      type="url"
+                      value={newUrl}
+                      onChange={(e) => setNewUrl(e.target.value)}
+                      placeholder="https://classroom.google.com/..."
+                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs font-mono focus:outline-none focus:border-amber-500 focus:bg-white"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
+                  <label className="flex items-center gap-2 cursor-pointer text-xs text-slate-600 font-medium">
+                    <input
+                      type="checkbox"
+                      checked={newIsDefault}
+                      onChange={(e) => setNewIsDefault(e.target.checked)}
+                      className="rounded border-slate-300 text-amber-600 focus:ring-amber-500"
+                    />
+                    <span>일치 키워드가 없을 때 기본 학습자료로 노출</span>
+                  </label>
+
+                  <button
+                    type="button"
+                    onClick={handleAddAffiliateLink}
+                    className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold shadow-xs transition-all active:scale-95 flex items-center justify-center gap-1.5"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                    <span>학습자료 링크 추가</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Educational Notice Box */}
+            <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2.5">
+              <h3 className="text-xs font-extrabold text-slate-900 flex items-center gap-1.5">
+                <span>수업 저작권 및 학습 안내 문구</span>
+                <span className="text-[10px] px-2 py-0.5 rounded bg-blue-50 text-blue-700 font-bold">자동 첨부</span>
+              </h3>
+              <p className="text-[11px] text-slate-500">
+                학습 자료 링크와 함께 영상 설명란 하단에 자동 표기되는 안내 문구입니다.
+              </p>
             <textarea
               value={affiliateDisclaimer}
               onChange={(e) => setAffiliateDisclaimer(e.target.value)}

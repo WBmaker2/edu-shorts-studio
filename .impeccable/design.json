@@ -1,0 +1,313 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-22T23:38:00Z",
+  "title": "Design System: Edu-Shorts Studio (에듀쇼츠 스튜디오)",
+  "extensions": {
+    "colorMeta": {
+      "oxford-cobalt": {
+        "role": "primary",
+        "displayName": "Oxford Cobalt",
+        "canonical": "#1E40AF",
+        "tonalRamp": ["#0D1B4D", "#142970", "#1A3590", "#1E40AF", "#2B54D4", "#5579E6", "#93B0F5", "#EFF6FF"]
+      },
+      "oxford-cobalt-deep": {
+        "role": "primary",
+        "displayName": "Oxford Cobalt Deep",
+        "canonical": "#1E3A8A",
+        "tonalRamp": ["#0B163B", "#122359", "#182F73", "#1E3A8A", "#284DB5", "#4D72D6", "#8BA7ED", "#DBEAFE"]
+      },
+      "cobalt-wash": {
+        "role": "primary",
+        "displayName": "Cobalt Wash",
+        "canonical": "#EFF6FF",
+        "tonalRamp": ["#172554", "#1E3A8A", "#1D4ED8", "#3B82F6", "#60A5FA", "#93C5FD", "#DBEAFE", "#EFF6FF"]
+      },
+      "cobalt-rule": {
+        "role": "primary",
+        "displayName": "Cobalt Rule",
+        "canonical": "#BFDBFE",
+        "tonalRamp": ["#172554", "#1E3A8A", "#1E40AF", "#2563EB", "#60A5FA", "#93C5FD", "#BFDBFE", "#EFF6FF"]
+      },
+      "highlighter-amber": {
+        "role": "secondary",
+        "displayName": "Highlighter Amber",
+        "canonical": "#B45309",
+        "tonalRamp": ["#3B1A02", "#5C2904", "#78350F", "#92400E", "#B45309", "#D97706", "#F59E0B", "#FEF3C7"]
+      },
+      "highlighter-amber-bright": {
+        "role": "secondary",
+        "displayName": "Highlighter Amber Bright",
+        "canonical": "#F59E0B",
+        "tonalRamp": ["#451A03", "#78350F", "#92400E", "#B45309", "#D97706", "#F59E0B", "#FBBF24", "#FEF3C7"]
+      },
+      "highlighter-wash": {
+        "role": "secondary",
+        "displayName": "Highlighter Wash",
+        "canonical": "#FEF3C7",
+        "tonalRamp": ["#451A03", "#78350F", "#B45309", "#D97706", "#F59E0B", "#FBBF24", "#FDE68A", "#FEF3C7"]
+      },
+      "highlighter-rule": {
+        "role": "secondary",
+        "displayName": "Highlighter Rule",
+        "canonical": "#FCD34D",
+        "tonalRamp": ["#451A03", "#78350F", "#B45309", "#D97706", "#F59E0B", "#FBBF24", "#FCD34D", "#FEF3C7"]
+      },
+      "highlighter-ink": {
+        "role": "secondary",
+        "displayName": "Highlighter Ink",
+        "canonical": "#78350F",
+        "tonalRamp": ["#290F02", "#451A03", "#5E260A", "#78350F", "#92400E", "#B45309", "#D97706", "#FDE68A"]
+      },
+      "chalkboard-pine": {
+        "role": "tertiary",
+        "displayName": "Chalkboard Pine",
+        "canonical": "#15803D",
+        "tonalRamp": ["#052E16", "#0A4723", "#14532D", "#166534", "#15803D", "#16A34A", "#4ADE80", "#DCFCE7"]
+      },
+      "pine-wash": {
+        "role": "tertiary",
+        "displayName": "Pine Wash",
+        "canonical": "#DCFCE7",
+        "tonalRamp": ["#052E16", "#14532D", "#166534", "#15803D", "#22C55E", "#4ADE80", "#86EFAC", "#DCFCE7"]
+      },
+      "pine-rule": {
+        "role": "tertiary",
+        "displayName": "Pine Rule",
+        "canonical": "#86EFAC",
+        "tonalRamp": ["#052E16", "#14532D", "#166534", "#15803D", "#22C55E", "#4ADE80", "#86EFAC", "#DCFCE7"]
+      },
+      "pine-ink": {
+        "role": "tertiary",
+        "displayName": "Pine Ink",
+        "canonical": "#14532D",
+        "tonalRamp": ["#052E16", "#0B3D1E", "#14532D", "#166534", "#15803D", "#22C55E", "#86EFAC", "#DCFCE7"]
+      },
+      "crimson-alert": {
+        "role": "tertiary",
+        "displayName": "Crimson Alert",
+        "canonical": "#B91C1C",
+        "tonalRamp": ["#450A0A", "#7F1D1D", "#991B1B", "#B91C1C", "#DC2626", "#EF4444", "#FCA5A5", "#FEE2E2"]
+      },
+      "study-paper": {
+        "role": "neutral",
+        "displayName": "Study Paper",
+        "canonical": "#FAF8F3",
+        "tonalRamp": ["#2C2921", "#4F493B", "#78705C", "#A39980", "#CFC6AE", "#E5DEC9", "#F2EFE6", "#FAF8F3"]
+      },
+      "ivory-sheet": {
+        "role": "neutral",
+        "displayName": "Ivory Sheet",
+        "canonical": "#FFFDF8",
+        "tonalRamp": ["#2E2B22", "#544E3F", "#807760", "#ABA187", "#D6CEB8", "#EBE5D5", "#F7F4EC", "#FFFDF8"]
+      },
+      "recessed-vellum": {
+        "role": "neutral",
+        "displayName": "Recessed Vellum",
+        "canonical": "#F2EFE6",
+        "tonalRamp": ["#2A271F", "#4A4537", "#706854", "#998F75", "#C2B89D", "#DDD6C1", "#F2EFE6", "#FAF8F3"]
+      },
+      "stone-hairline": {
+        "role": "neutral",
+        "displayName": "Stone Hairline",
+        "canonical": "#E5DEC9",
+        "tonalRamp": ["#2B271E", "#4D4636", "#736952", "#9C8F70", "#C4B899", "#E5DEC9", "#F2EFE6", "#FAF8F3"]
+      },
+      "stone-rule-strong": {
+        "role": "neutral",
+        "displayName": "Stone Rule Strong",
+        "canonical": "#CFC6AE",
+        "tonalRamp": ["#29251C", "#474131", "#6B614B", "#918567", "#B3A788", "#CFC6AE", "#E5DEC9", "#FAF8F3"]
+      },
+      "textbook-ink-navy": {
+        "role": "neutral",
+        "displayName": "Textbook Ink Navy",
+        "canonical": "#14213D",
+        "tonalRamp": ["#0B1324", "#14213D", "#1E3158", "#2B4478", "#3D5B99", "#6482BD", "#9FB2D4", "#E8EEF7"]
+      },
+      "navy-rail-header": {
+        "role": "neutral",
+        "displayName": "Navy Rail Header",
+        "canonical": "#0F1930",
+        "tonalRamp": ["#080E1C", "#0F1930", "#162442", "#21345E", "#314B82", "#5370AB", "#8FA7D4", "#E2EAF7"]
+      },
+      "navy-rail-card": {
+        "role": "neutral",
+        "displayName": "Navy Rail Card",
+        "canonical": "#1A2B4E",
+        "tonalRamp": ["#0D1629", "#14213D", "#1A2B4E", "#243B6B", "#345291", "#5877B8", "#94ACD9", "#E6ECF8"]
+      },
+      "navy-rail-border": {
+        "role": "neutral",
+        "displayName": "Navy Rail Border",
+        "canonical": "#24365C",
+        "tonalRamp": ["#0F182B", "#182542", "#24365C", "#31497A", "#44629E", "#6B88C2", "#A3B7E0", "#EBF0FA"]
+      },
+      "slate-graphite": {
+        "role": "neutral",
+        "displayName": "Slate Graphite",
+        "canonical": "#3D4B66",
+        "tonalRamp": ["#151B26", "#222B3B", "#2F3B52", "#3D4B66", "#546585", "#7687A6", "#A6B3C9", "#E8ECF2"]
+      },
+      "muted-margin-slate": {
+        "role": "neutral",
+        "displayName": "Muted Margin Slate",
+        "canonical": "#5C6B85",
+        "tonalRamp": ["#181D26", "#272F3D", "#384357", "#4A5770", "#5C6B85", "#7D8CA6", "#ABB6C9", "#ECEFF4"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Educator study-room greeting headline on the top dashboard workbook sheet."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Top 64px lesson-context header announcing the active studio workspace."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Workbook sheet headers, lesson archetype titles, and primary lesson topic textarea input."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Standard studio control copy, scene narration lines, button labels, ledger rows, and teacher prep tips."
+      },
+      "label": {
+        "displayName": "Label (Tabular)",
+        "purpose": "Pedagogical stage pills, cumulative scene timecodes, duration counters, token balances, and version tags."
+      }
+    },
+    "shadows": [
+      {
+        "name": "floating-toast",
+        "value": "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)",
+        "purpose": "Transient viewport-level notifications such as the network connectivity resilience banner."
+      },
+      {
+        "name": "chalkboard-text-outline",
+        "value": "-2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000",
+        "purpose": "Hard 4-corner text stroke inside the 9:16 classroom stage simulating libass burned-in subtitles."
+      }
+    ],
+    "motion": [
+      {
+        "name": "color-transition",
+        "value": "color 150ms cubic-bezier(0.4, 0, 0.2, 1), background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), border-color 150ms cubic-bezier(0.4, 0, 0.2, 1)",
+        "purpose": "Crisp, zero-lift state transitions for workbook buttons, preset tiles, timeline cue rows, and inputs."
+      },
+      {
+        "name": "stage-scrubber",
+        "value": "width 200ms cubic-bezier(0.4, 0, 0.2, 1), transform 200ms cubic-bezier(0.4, 0, 0.2, 1)",
+        "purpose": "9:16 preview progress bar fill and subtitle scale switching."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Primary Oxford Cobalt studio commitment button for script generation and 9:16 MP4 lesson rendering.",
+      "html": "<button type=\"button\" class=\"ds-btn-primary\"><svg class=\"ds-btn-primary__icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m22 8-6 4 6 4V8Z\"/><rect width=\"14\" height=\"12\" x=\"2\" y=\"6\" rx=\"2\" ry=\"2\"/></svg><span>9:16 수업 영상 렌더링</span></button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 16px; border-radius: 8px; background-color: var(--brand-color, #1E40AF); color: #FFFFFF; font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif; font-size: 12px; font-weight: 800; line-height: 1.3; border: 1px solid transparent; cursor: pointer; transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), opacity 150ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-primary__icon { width: 14px; height: 14px; flex-shrink: 0; } .ds-btn-primary:hover { background-color: #1E3A8A; } .ds-btn-primary:focus-visible { outline: 2px solid var(--brand-color, #1E40AF); outline-offset: 2px; } .ds-btn-primary:active { background-color: #172554; } .ds-btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }"
+    },
+    {
+      "name": "Secondary Workbook Button",
+      "kind": "button",
+      "refersTo": "button-secondary-workbook",
+      "description": "Bordered study-paper utility button for batch lesson creation, video analysis tools, and scene re-splitting.",
+      "html": "<button type=\"button\" class=\"ds-btn-secondary\"><svg class=\"ds-btn-secondary__icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z\"/><path d=\"m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65\"/><path d=\"m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65\"/></svg><span>단원 일괄 제작</span></button>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 8px 14px; border-radius: 8px; background-color: var(--bg-paper, #FAF8F3); color: var(--ink-primary, #14213D); border: 1px solid var(--border-strong, #CFC6AE); font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif; font-size: 12px; font-weight: 700; line-height: 1.3; cursor: pointer; transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), border-color 150ms cubic-bezier(0.4, 0, 0.2, 1), color 150ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-secondary__icon { width: 14px; height: 14px; color: var(--brand-color, #1E40AF); flex-shrink: 0; } .ds-btn-secondary:hover { background-color: var(--bg-recessed, #F2EFE6); border-color: #B3A788; } .ds-btn-secondary:focus-visible { outline: 2px solid var(--brand-color, #1E40AF); outline-offset: 2px; } .ds-btn-secondary:active { background-color: #E5DEC9; }"
+    },
+    {
+      "name": "Curriculum Stage Chip",
+      "kind": "chip",
+      "refersTo": "chip-curriculum-stage",
+      "description": "Pedagogical phase badge coding each scene or lesson archetype by instructional stage.",
+      "html": "<div class=\"ds-stage-chip-group\"><span class=\"ds-stage-chip ds-stage-chip--intro\">도입 질문</span><span class=\"ds-stage-chip ds-stage-chip--concept\">핵심 개념</span><span class=\"ds-stage-chip ds-stage-chip--summary\">요약 정리</span></div>",
+      "css": ".ds-stage-chip-group { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; } .ds-stage-chip { display: inline-block; padding: 2px 8px; border-radius: 4px; font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif; font-size: 11px; font-weight: 800; line-height: 1.25; text-align: center; white-space: nowrap; } .ds-stage-chip--intro { background-color: var(--accent-amber-bg, #FEF3C7); color: #78350F; border: 1px solid #FCD34D; } .ds-stage-chip--concept { background-color: #EFF6FF; color: var(--brand-color, #1E40AF); border: 1px solid #BFDBFE; } .ds-stage-chip--summary { background-color: #DCFCE7; color: #14532D; border: 1px solid #86EFAC; }"
+    },
+    {
+      "name": "Lesson Topic Input",
+      "kind": "input",
+      "refersTo": "input-lesson-topic",
+      "description": "Workbook lesson topic and core inquiry question textarea with IME-safe Ctrl+Enter hint.",
+      "html": "<div class=\"ds-field\"><label class=\"ds-field__label\" for=\"ds-lesson-topic\"><span>수업 주제 / 핵심 질문</span><span class=\"ds-field__hint\">Ctrl+Enter로 즉시 교안 대본 생성</span></label><textarea id=\"ds-lesson-topic\" class=\"ds-field__textarea\" rows=\"2\" placeholder=\"예: 원자와 분자는 무엇이 다를까? 레고 블록 비유로 1분 만에 이해하기\">원자와 분자는 무엇이 다를까? 레고 블록 비유로 1분 만에 이해하기</textarea></div>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 6px; font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif; } .ds-field__label { display: flex; align-items: center; justify-content: space-between; font-size: 12px; font-weight: 800; color: var(--ink-primary, #14213D); } .ds-field__hint { font-size: 11px; font-weight: 500; color: var(--ink-muted, #5C6B85); } .ds-field__textarea { width: 100%; background-color: var(--bg-paper, #FAF8F3); border: 1px solid var(--border-strong, #CFC6AE); border-radius: 8px; padding: 10px 14px; font-family: inherit; font-size: 14px; font-weight: 600; line-height: 1.5; color: var(--ink-primary, #14213D); caret-color: var(--brand-color, #1E40AF); resize: vertical; transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), border-color 150ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-field__textarea::placeholder { color: var(--ink-muted, #5C6B85); } .ds-field__textarea:hover { border-color: #B3A788; } .ds-field__textarea:focus, .ds-field__textarea:focus-visible { outline: 2px solid var(--brand-color, #1E40AF); outline-offset: 1px; border-color: var(--brand-color, #1E40AF); background-color: #FFFFFF; }"
+    },
+    {
+      "name": "Navigation Rail Item",
+      "kind": "nav",
+      "refersTo": "nav-rail-item",
+      "description": "Textbook Ink-Navy curriculum rail navigation button with left amber pill indicator and tabular duration badge.",
+      "html": "<div class=\"ds-nav-rail\"><button type=\"button\" class=\"ds-nav-item ds-nav-item--active\"><span class=\"ds-nav-item__main\"><span class=\"ds-nav-item__bar\"></span><svg class=\"ds-nav-item__icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z\"/><path d=\"M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z\"/></svg><span class=\"ds-nav-item__label\">단원 수업 쇼츠 제작</span></span><span class=\"ds-nav-item__badge\">60초</span></button><button type=\"button\" class=\"ds-nav-item\"><span class=\"ds-nav-item__main\"><span class=\"ds-nav-item__bar\"></span><svg class=\"ds-nav-item__icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\"/><path d=\"M7 3v18\"/><path d=\"M3 7.5h4\"/><path d=\"M3 12h18\"/><path d=\"M3 16.5h4\"/><path d=\"M17 3v18\"/><path d=\"M17 7.5h4\"/><path d=\"M17 16.5h4\"/></svg><span class=\"ds-nav-item__label\">강의·영상 분석 쇼츠</span></span><span class=\"ds-nav-item__badge\">NEW</span></button></div>",
+      "css": ".ds-nav-rail { background-color: var(--rail-bg, #14213D); padding: 10px; border-radius: 10px; width: 240px; display: flex; flex-direction: column; gap: 4px; font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif; } .ds-nav-item { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; border-radius: 8px; background-color: transparent; color: #B6C7E6; border: 1px solid transparent; font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer; transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1), color 150ms cubic-bezier(0.4, 0, 0.2, 1), border-color 150ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-nav-item__main { display: inline-flex; align-items: center; gap: 10px; min-width: 0; } .ds-nav-item__bar { width: 4px; height: 14px; border-radius: 9999px; background-color: transparent; transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-nav-item__icon { width: 16px; height: 16px; color: var(--rail-muted, #9FB2D4); flex-shrink: 0; } .ds-nav-item__label { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } .ds-nav-item__badge { font-size: 10px; font-weight: 700; font-variant-numeric: tabular-nums; padding: 2px 6px; border-radius: 4px; background-color: #1C2E52; color: #C6D6F2; border: 1px solid #2C4475; } .ds-nav-item:hover { background-color: #1C2E52; color: #FFFFFF; } .ds-nav-item:hover .ds-nav-item__bar { background-color: #3B5998; } .ds-nav-item:hover .ds-nav-item__icon { color: #FFFFFF; } .ds-nav-item:focus-visible { outline: 2px solid #FBBF24; outline-offset: 2px; } .ds-nav-item--active, .ds-nav-item--active:hover { background-color: var(--brand-color, #1E40AF); color: #FFFFFF; border-color: #3B63D6; font-weight: 700; } .ds-nav-item--active .ds-nav-item__bar, .ds-nav-item--active:hover .ds-nav-item__bar { background-color: #FBBF24; } .ds-nav-item--active .ds-nav-item__icon, .ds-nav-item--active:hover .ds-nav-item__icon { color: #FDE68A; } .ds-nav-item--active .ds-nav-item__badge { background-color: #14213D; color: #FDE68A; border-color: transparent; }"
+    },
+    {
+      "name": "Scene Timeline Cue Row",
+      "kind": "custom",
+      "refersTo": "row-scene-timeline-cue",
+      "description": "Signature 4-column pedagogical cue-sheet row with cumulative tabular timecode, stage pill, narration line, and duration-proportional progress bar.",
+      "html": "<div class=\"ds-cue-sheet\"><div class=\"ds-cue-row ds-cue-row--selected\" tabindex=\"0\"><span class=\"ds-cue-row__time\">00:00–00:08</span><span class=\"ds-cue-row__stage ds-cue-row__stage--intro\">도입 질문</span><p class=\"ds-cue-row__text\">물 한 방울을 끝까지 쪼개면 레고 블록 한 조각 같은 기본 입자가 나옵니다.</p><div class=\"ds-cue-row__meta\"><div class=\"ds-cue-row__track\"><div class=\"ds-cue-row__fill ds-cue-row__fill--selected\" style=\"width: 62%;\"></div></div><span class=\"ds-cue-row__dur\">8s</span><span class=\"ds-cue-row__media\"><svg viewBox=\"0 0 24 24\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\"/><circle cx=\"9\" cy=\"9\" r=\"2\"/><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\"/></svg></span></div></div><div class=\"ds-cue-row\" tabindex=\"0\"><span class=\"ds-cue-row__time\">00:08–00:19</span><span class=\"ds-cue-row__stage ds-cue-row__stage--concept\">핵심 개념</span><p class=\"ds-cue-row__text\">더 이상 쪼개지지 않는 물질의 기본 입자를 바로 원자라고 부릅니다.</p><div class=\"ds-cue-row__meta\"><div class=\"ds-cue-row__track\"><div class=\"ds-cue-row__fill\" style=\"width: 85%;\"></div></div><span class=\"ds-cue-row__dur\">11s</span><span class=\"ds-cue-row__media\"><svg viewBox=\"0 0 24 24\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\" ry=\"2\"/><circle cx=\"9\" cy=\"9\" r=\"2\"/><path d=\"m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21\"/></svg></span></div></div></div>",
+      "css": ".ds-cue-sheet { border: 1px solid var(--border-hairline, #E5DEC9); border-radius: 8px; overflow: hidden; background-color: var(--bg-sheet, #FFFDF8); font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif; } .ds-cue-row { display: grid; grid-template-columns: 88px 86px 1fr 126px; align-items: center; gap: 10px; padding: 10px 14px; background-color: var(--bg-sheet, #FFFDF8); color: var(--ink-primary, #14213D); border-bottom: 1px solid var(--border-hairline, #E5DEC9); cursor: pointer; transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-cue-row:last-child { border-bottom: none; } .ds-cue-row:hover { background-color: var(--bg-paper, #FAF8F3); } .ds-cue-row:focus-visible { outline: 2px solid var(--brand-color, #1E40AF); outline-offset: -2px; } .ds-cue-row--selected, .ds-cue-row--selected:hover { background-color: #EFF6FF; } .ds-cue-row__time { font-size: 12px; font-weight: 800; color: var(--ink-secondary, #3D4B66); font-variant-numeric: tabular-nums; } .ds-cue-row__stage { font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 4px; text-align: center; white-space: nowrap; } .ds-cue-row__stage--intro { background-color: #FEF3C7; color: #78350F; border: 1px solid #FCD34D; } .ds-cue-row__stage--concept { background-color: #EFF6FF; color: #1E40AF; border: 1px solid #BFDBFE; } .ds-cue-row__text { margin: 0; font-size: 12px; font-weight: 600; color: var(--ink-primary, #14213D); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } .ds-cue-row__meta { display: flex; align-items: center; justify-content: flex-end; gap: 8px; } .ds-cue-row__track { width: 64px; height: 8px; background-color: var(--border-hairline, #E5DEC9); border-radius: 9999px; overflow: hidden; flex-shrink: 0; } .ds-cue-row__fill { height: 100%; border-radius: 9999px; background-color: var(--accent-amber, #B45309); } .ds-cue-row__fill--selected { background-color: var(--brand-color, #1E40AF); } .ds-cue-row__dur { font-size: 11px; font-weight: 700; color: var(--ink-secondary, #3D4B66); font-variant-numeric: tabular-nums; width: 26px; text-align: right; } .ds-cue-row__media { display: inline-flex; align-items: center; justify-content: center; padding: 4px; border-radius: 4px; background-color: var(--bg-paper, #FAF8F3); color: var(--brand-color, #1E40AF); border: 1px solid #BFDBFE; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Korean Study Guide & Margin Note System (단원 개념 노트 스튜디오)",
+    "overview": "Edu-Shorts Studio pairs an educator's structured lesson-prep workbook with a live 9:16 classroom stage side-by-side. Tailored for Korean school teachers and academy instructors preparing 60-second micro-lesson Shorts between classes, the interface treats video creation as curriculum authoring rather than social-media content hacking. Every surface feels like a well-typeset Korean reference book (`개념서`) and teacher's margin-note planner: tactile warm paper grounds, crisp ruled hairlines, authoritative textbook ink-navy typography, and deliberate pedagogical stage tags (`도입 질문`, `핵심 개념`, `원리 · 사례`, `확인 · 비교`, `요약 정리`).\n\nThe visual world explicitly rejects the generic viral creator-SaaS dashboard aesthetic of dark neon gradients, clickbait badges, and stacked metric cards. Information density is high yet calm, organized through flat workbook sheets, structured ledger dividers, and duration-proportional cue rows that keep script text, voice timing, and 1080×1920 vertical framing legible at a glance.",
+    "keyCharacteristics": [
+      "Warm uncoated study-paper canvas (`#FAF8F3`) paired with elevated ivory workbook sheets (`#FFFDF8`) and 1px stone hairlines (`#E5DEC9`).",
+      "High-contrast textbook ink-navy left navigation rail (`#14213D`) anchored by an amber graduation emblem (`#F59E0B`) and cobalt active indicators (`#1E40AF`).",
+      "Pedagogical stage pills and highlighter-amber margin accents (`#FEF3C7` / `#B45309`) that structure every 60-second clip into classroom teaching phases.",
+      "Persistent right-docked 9:16 classroom screen stage (`244px` max frame width, `22px` bezel radius, `4px` ink-navy frame) synchronized with a compact lesson spec ledger.",
+      "Strict tabular numeral discipline (`font-variant-numeric: tabular-nums`) across cumulative scene timecodes, duration bars, character counts, and version badges."
+    ],
+    "rules": [
+      {
+        "name": "The Paper-and-Ink Polarity Rule",
+        "body": "Keep the dark Textbook Ink Navy (`#14213D`) strictly confined to the left navigation rail, the 9:16 phone bezel/stage interior, and dark media drawers; the authoring workspace itself must remain light, warm Study Paper (`#FAF8F3`) and Ivory Sheet (`#FFFDF8`) with zero dark-mode SaaS cards.",
+        "section": "colors"
+      },
+      {
+        "name": "The Pedagogical Highlighter Rule",
+        "body": "Highlighter Wash (`#FEF3C7`) with Highlighter Ink (`#78350F`) and Highlighter Rule (`#FCD34D`) is reserved for pedagogical stages, learning objectives, and teacher tips—never use it as a generic decorative background.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tabular Timecode Rule",
+        "body": "Every numeric counter, cumulative timecode range (`00:08–00:19`), scene duration (`11s`), character count (`178자`), version tag, and token balance must enforce `font-variant-numeric: tabular-nums` so columns never jitter during script editing or playback simulation.",
+        "section": "typography"
+      },
+      {
+        "name": "The No-Kicker Heading Rule",
+        "body": "Workbook sheet headings open directly with a functional icon badge and an extra-bold Korean title (`14px`–`24px`, weight `800`–`900`), never preceded by uppercase English marketing kickers or decorative eyebrows.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Sheet Discipline Rule",
+        "body": "Workbook panels, preset cards, and ledger tables never cast box shadows or lift with vertical hover transforms; state changes are communicated strictly through border shifts (`#E5DEC9` → `#CFC6AE` or `#1E40AF`) and tonal background washes (`#FFFDF8` → `#FAF8F3` or `#EFF6FF`).",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do build every workspace panel on Study Paper (`#FAF8F3`) and Ivory Sheet (`#FFFDF8`) with `1px` Stone Hairlines (`#E5DEC9`) and stronger `#CFC6AE` borders on interactive controls.",
+      "Do apply `tabular-nums` (`font-variant-numeric: tabular-nums`) to every timecode (`00:00–00:08`), duration readout (`55초`), character count, version badge, and token counter.",
+      "Do tag lesson scenes and presets with the 5 pedagogical stage badges (`도입 질문`, `핵심 개념`, `원리 · 사례`, `확인 · 비교`, `요약 정리`) using their designated semantic washes.",
+      "Do keep the 9:16 Classroom Screen Stage (`max-w-[244px]`, `rounded-[22px]`, `border-[4px] border-[#14213D]`) docked in the right `336px` studio column alongside the compact 2-column lesson spec ledger.",
+      "Do guard Korean text inputs and textareas against IME composition (`!event.nativeEvent.isComposing`) on keyboard shortcuts (`Ctrl+Enter` / `Enter`)."
+    ],
+    "donts": [
+      "Don't introduce dark-mode slate/zinc cards, neon purple/cyan gradients, glassmorphism (`backdrop-blur`), or glowing box shadows into the paper workbook workspace.",
+      "Don't stack 4 equal KPI metric cards in a row at the top of the dashboard; consolidate operational counts and engine readiness into the single bordered `<dl>` studio ledger.",
+      "Don't place uppercase English marketing kickers or decorative eyebrow labels above Korean section headings.",
+      "Don't use viral clickbait or monetization jargon (\"떡상\", \"어그로\", \"수익화 폭격\") in labels, presets, or helper copy; always use classroom-oriented educator terminology (`단원 학습 주제`, `교안 프리셋`, `수업 도입 질문`).",
+      "Don't animate cards or buttons with vertical lift transforms (`-translate-y-*` or `scale-*`) on hover; rely on crisp border and background color transitions."
+    ]
+  }
+}

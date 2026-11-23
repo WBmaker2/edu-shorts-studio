@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { LICENSE_KEY_LENGTH, normalizeLicenseInput } from '../constants/license';
 import {
-  Sparkles,
+  GraduationCap,
   ArrowRight,
   ShieldCheck,
   Key,
@@ -25,8 +25,6 @@ interface LoginScreenProps {
   onLogin: (data: LoginSuccessData) => void;
 }
 
-// 관리자 키 검증값은 소스에 두지 않는다. 빌드할 때 저장소 밖 파일(admin.local.json) 또는
-// 환경 변수 KSHORTS_ADMIN_FNV에서 읽어 넣으며, 값이 없거나 구매자 빌드면 0이 되어 관리자 로그인이 꺼진다.
 function verifyAdminKey(input: string): boolean {
   if (!__ADMIN_KEY_FNV__) return false;
   const trimmed = input.trim();
@@ -48,7 +46,6 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
   const [isChecking, setIsChecking] = useState<boolean>(false);
 
   const cleanRawKey = authKeyInput.trim();
-  // 구매자 빌드에서는 관리자 로그인 코드가 번들에서 통째로 제거된다.
   const isAdminAuthorized = !__BUYER_BUILD__ && verifyAdminKey(cleanRawKey);
 
   const handleSubmit = (e?: React.FormEvent) => {
@@ -60,25 +57,20 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
       return;
     }
 
-    // STRICT ACCESS CONTROL:
-    // Only the authorized master admin code is permitted.
-    // Any other input is unconditionally rejected.
     if (isAdminAuthorized) {
       setIsSuccess(true);
-      // Immediately clear raw input from component state to eliminate memory traces
       setAuthKeyInput('');
       setTimeout(() => {
         onLogin({
-          userName: creatorName.trim() || '마스터 관리자',
+          userName: creatorName.trim() || '마스터 교사',
           licenseKey: 'KSH-MASTER-ADMIN-SESSION',
           isAdmin: true,
-          tokens: 999999999, // Infinite tokens for Admin
+          tokens: 999999999,
         });
       }, 400);
       return;
     }
 
-    // 정품 키: 판매자가 발급한 16자리 키. 확인은 메인 프로세스가 라이선스 서버와 직접 한다.
     const normalized = normalizeLicenseInput(cleanRawKey);
     if (normalized.length !== LICENSE_KEY_LENGTH) {
       setErrorMessage(`키 ${LICENSE_KEY_LENGTH}자리를 모두 입력해 주세요. (현재 ${normalized.length}자)`);
@@ -95,7 +87,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
             setAuthKeyInput('');
             setTimeout(() => {
               onLogin({
-                userName: creatorName.trim() || '정품 크리에이터',
+                userName: creatorName.trim() || '교사 크리에이터',
                 licenseKey: res.status!.keyHint,
                 isAdmin: false,
                 tokens: res.status!.tokens,
@@ -112,176 +104,161 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
       return;
     }
 
-    // Rejection for any unauthorized input
     setErrorMessage('유효하지 않은 인증 키입니다. 확인 후 다시 입력해주세요.');
   };
 
   return (
-    <div className="flex h-screen w-full bg-[#0f172a] text-slate-100 select-none overflow-hidden relative">
-      {/* Background Glow Accents */}
-      <div className="absolute -top-40 -left-40 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/10 rounded-full blur-[120px] pointer-events-none" />
-
-      {/* Main Login Card */}
-      <div className="m-auto w-full max-w-md p-6 relative z-10">
-        <div className="bg-slate-900/95 backdrop-blur-2xl border border-slate-700/80 rounded-3xl p-8 shadow-2xl shadow-black/60 space-y-6">
-          {/* Logo & App Title */}
-          <div className="text-center space-y-2">
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-blue-500 shadow-lg shadow-purple-600/30 mb-1 text-white">
-              <Sparkles className="w-7 h-7" />
+    <div className="flex h-screen w-full bg-[#FAF8F3] text-[#14213D] overflow-hidden">
+      <div className="m-auto w-full max-w-md p-6">
+        <div className="bg-[#FFFDF8] border border-[#CFC6AE] rounded-2xl overflow-hidden shadow-md">
+          {/* Top Ink-Navy Book Header */}
+          <div className="bg-[#14213D] px-7 py-6 text-white border-b border-[#24365C] flex items-center gap-3.5">
+            <div className="w-11 h-11 rounded-xl bg-[#F59E0B] text-[#14213D] flex items-center justify-center shrink-0">
+              <GraduationCap className="w-6 h-6 stroke-[2.2]" />
             </div>
-            <h1 className="text-2xl font-black tracking-tight text-white flex items-center justify-center gap-2">
-              K-Shorts Studio
-            </h1>
-            <p className="text-xs text-slate-400 font-medium">
-              한국어 AI 쇼츠 자동화 제작 & 관리 솔루션
-            </p>
+            <div>
+              <h1 className="text-lg font-black tracking-tight text-white">
+                Edu-Shorts Studio
+              </h1>
+              <p className="text-xs text-[#9FB2D4] font-medium">
+                에듀쇼츠 스튜디오 · 교사용 9:16 수업 쇼츠 제작 워크북
+              </p>
+            </div>
           </div>
 
-          {/* Security Status Badge Box */}
-          <div className="p-3.5 rounded-2xl bg-slate-800/90 border border-slate-700/80 flex items-center justify-between text-xs">
-            <div className="flex items-center gap-2">
-              <Lock className="w-4 h-4 text-purple-400" />
-              <span className="font-bold text-slate-300">정품 라이센스 인증</span>
-            </div>
-            {isAdminAuthorized ? (
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-amber-500/20 text-amber-300 border border-amber-500/40 flex items-center gap-1">
-                <Crown className="w-3 h-3" />
-                인증 확인됨
-              </span>
-            ) : (
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-700/80 text-slate-400 border border-slate-600">
-                인증 대기
-              </span>
-            )}
-          </div>
-
-          {/* Strict Form with Autocomplete and Autofill Prevention */}
-          <form
-            onSubmit={handleSubmit}
-            autoComplete="off"
-            noValidate
-            className="space-y-4"
-          >
-            {/* Master Key Input */}
-            <div className="space-y-1.5 text-left">
-              <label className="text-xs font-bold text-slate-300 flex items-center justify-between">
-                <span className="flex items-center gap-1.5">
-                  <Key className="w-3.5 h-3.5 text-purple-400" />
-                  <span>인증 키</span>
-                </span>
-                <span className="text-[10px] text-slate-400 font-mono">
-                  {`${normalizeLicenseInput(cleanRawKey).length} / ${LICENSE_KEY_LENGTH}자`}
-                </span>
-              </label>
-              <div className="relative">
-                <input
-                  type={showKey ? 'text' : 'password'}
-                  name="kshorts_secure_auth_token"
-                  id="kshorts_secure_auth_token"
-                  maxLength={40}
-                  value={authKeyInput}
-                  onChange={(e) => {
-                    const sliced = e.target.value.slice(0, 40);
-                    setAuthKeyInput(sliced);
-                    setErrorMessage('');
-                  }}
-                  placeholder="구매하신 정품 키 16자리 (XXXX XXXX XXXX XXXX)"
-                  autoFocus
-                  autoComplete="new-password"
-                  autoCorrect="off"
-                  autoCapitalize="off"
-                  spellCheck={false}
-                  data-lpignore="true"
-                  data-1p-ignore="true"
-                  data-form-type="other"
-                  aria-autocomplete="none"
-                  className={`w-full bg-slate-800/90 border rounded-xl pl-4 pr-12 py-3 text-sm text-white placeholder-slate-500 focus:outline-none transition-all font-mono tracking-wider ${
-                    isAdminAuthorized
-                      ? 'border-amber-500 focus:ring-2 focus:ring-amber-500/30 text-amber-300 font-bold'
-                      : errorMessage
-                      ? 'border-red-500 focus:ring-2 focus:ring-red-500/30'
-                      : 'border-slate-700 focus:border-purple-500 focus:ring-2 focus:ring-purple-500/30'
-                  }`}
-                />
-                
-                {/* Visibility Toggle Button */}
-                <div className="absolute right-3 top-3 flex items-center gap-1.5">
-                  <button
-                    type="button"
-                    tabIndex={-1}
-                    onClick={() => setShowKey(!showKey)}
-                    className="p-1 text-slate-400 hover:text-slate-200 transition-colors rounded"
-                    title={showKey ? '입력값 숨기기' : '입력값 보기'}
-                  >
-                    {showKey ? (
-                      <EyeOff className="w-4 h-4" />
-                    ) : (
-                      <Eye className="w-4 h-4" />
-                    )}
-                  </button>
-                </div>
+          <div className="p-7 space-y-5">
+            {/* License Status Strip */}
+            <div className="p-3 rounded-lg bg-[#FAF8F3] border border-[#E5DEC9] flex items-center justify-between text-xs">
+              <div className="flex items-center gap-2">
+                <Lock className="w-4 h-4 text-[#1E40AF]" />
+                <span className="font-extrabold text-[#14213D]">교사용 라이선스 인증</span>
               </div>
-
-              {/* Error Alert */}
-              {errorMessage && (
-                <div className="flex items-center gap-1.5 text-red-400 text-[11px] font-medium pt-1 animate-in fade-in">
-                  <AlertCircle className="w-3.5 h-3.5 shrink-0" />
-                  <span>{errorMessage}</span>
-                </div>
+              {isAdminAuthorized ? (
+                <span className="px-2.5 py-0.5 rounded text-[10px] font-extrabold bg-[#FEF3C7] text-[#78350F] border border-[#FCD34D] flex items-center gap-1">
+                  <Crown className="w-3 h-3 text-[#B45309]" />
+                  마스터 확인됨
+                </span>
+              ) : (
+                <span className="px-2.5 py-0.5 rounded text-[10px] font-bold bg-[#EFF6FF] text-[#1E40AF] border border-[#BFDBFE]">
+                  인증 대기
+                </span>
               )}
             </div>
 
-            {/* Creator Nickname (Optional) */}
-            <div className="space-y-1.5 text-left">
-              <label className="text-xs font-bold text-slate-300 flex items-center gap-1.5">
-                <User className="w-3.5 h-3.5 text-indigo-400" />
-                <span>크리에이터 명칭 (선택)</span>
-              </label>
-              <input
-                type="text"
-                name="creator_display_name"
-                autoComplete="off"
-                spellCheck={false}
-                value={creatorName}
-                onChange={(e) => setCreatorName(e.target.value)}
-                placeholder="마스터 관리자"
-                className="w-full bg-slate-800/90 border border-slate-700 focus:border-indigo-500 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 transition-all font-medium"
-              />
-            </div>
+            <form
+              onSubmit={handleSubmit}
+              autoComplete="off"
+              noValidate
+              className="space-y-4"
+            >
+              <div className="space-y-1.5 text-left">
+                <label htmlFor="kshorts_secure_auth_token" className="text-xs font-extrabold text-[#14213D] flex items-center justify-between">
+                  <span className="flex items-center gap-1.5">
+                    <Key className="w-3.5 h-3.5 text-[#1E40AF]" />
+                    <span>인증 키</span>
+                  </span>
+                  <span className="text-[11px] text-[#5C6B85] tabular-nums font-bold">
+                    {`${normalizeLicenseInput(cleanRawKey).length} / ${LICENSE_KEY_LENGTH}자`}
+                  </span>
+                </label>
+                <div className="relative">
+                  <input
+                    type={showKey ? 'text' : 'password'}
+                    name="kshorts_secure_auth_token"
+                    id="kshorts_secure_auth_token"
+                    maxLength={40}
+                    value={authKeyInput}
+                    onChange={(e) => {
+                      const sliced = e.target.value.slice(0, 40);
+                      setAuthKeyInput(sliced);
+                      setErrorMessage('');
+                    }}
+                    placeholder="발급받은 정품 키 16자리 (XXXX XXXX XXXX XXXX)"
+                    autoFocus
+                    autoComplete="new-password"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    data-lpignore="true"
+                    data-1p-ignore="true"
+                    data-form-type="other"
+                    aria-autocomplete="none"
+                    className={`w-full bg-[#FAF8F3] border rounded-lg pl-3.5 pr-11 py-2.5 text-sm text-[#14213D] placeholder-[#5C6B85] focus:outline-none transition-colors tracking-wider tabular-nums ${
+                      isAdminAuthorized
+                        ? 'border-[#B45309] bg-[#FEF3C7]/40 text-[#78350F] font-extrabold'
+                        : errorMessage
+                        ? 'border-[#B91C1C] bg-[#FEE2E2]/30'
+                        : 'border-[#CFC6AE] focus:border-[#1E40AF] focus:bg-white'
+                    }`}
+                  />
 
-            {/* Submit Button */}
-            <div className="pt-2">
-              <button
-                type="submit"
-                disabled={isSuccess || isChecking}
-                className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl font-black text-sm shadow-lg transition-all active:scale-[0.98] bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white shadow-purple-600/30"
-              >
-                {isChecking ? (
-                  <span className="flex items-center gap-2">
-                    <span>라이선스 서버 확인 중…</span>
-                  </span>
-                ) : isSuccess ? (
-                  <span className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 animate-bounce text-emerald-300" />
-                    <span>인증 성공! 대시보드 입장 중...</span>
-                  </span>
-                ) : (
-                  <span className="flex items-center gap-2">
-                    <ShieldCheck className="w-4 h-4" />
-                    <span>라이센스 인증 & 대시보드 시작</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </span>
+                  <div className="absolute right-2.5 top-2.5 flex items-center">
+                    <button
+                      type="button"
+                      tabIndex={-1}
+                      onClick={() => setShowKey(!showKey)}
+                      className="p-1 text-[#5C6B85] hover:text-[#14213D] transition-colors rounded"
+                      title={showKey ? '입력값 숨기기' : '입력값 보기'}
+                    >
+                      {showKey ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    </button>
+                  </div>
+                </div>
+
+                {errorMessage && (
+                  <div className="flex items-center gap-1.5 text-[#B91C1C] text-[11px] font-bold pt-1">
+                    <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                    <span>{errorMessage}</span>
+                  </div>
                 )}
-              </button>
-            </div>
-          </form>
+              </div>
 
-          {/* Footer note */}
-          <div className="text-center pt-2 text-[11px] text-slate-500 flex items-center justify-center gap-1.5">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-            <span>상업적 이용 가능 • 4대 SNS 원클릭 퍼블리시 지원</span>
+              <div className="space-y-1.5 text-left">
+                <label htmlFor="creator_display_name" className="text-xs font-extrabold text-[#14213D] flex items-center gap-1.5">
+                  <User className="w-3.5 h-3.5 text-[#1E40AF]" />
+                  <span>교사 · 강사 호칭 (선택)</span>
+                </label>
+                <input
+                  id="creator_display_name"
+                  type="text"
+                  name="creator_display_name"
+                  autoComplete="off"
+                  spellCheck={false}
+                  value={creatorName}
+                  onChange={(e) => setCreatorName(e.target.value)}
+                  placeholder="예: 과학 김선생님"
+                  className="w-full bg-[#FAF8F3] border border-[#CFC6AE] focus:border-[#1E40AF] focus:bg-white rounded-lg px-3.5 py-2.5 text-sm text-[#14213D] placeholder-[#5C6B85] focus:outline-none transition-colors font-semibold"
+                />
+              </div>
+
+              <div className="pt-1">
+                <button
+                  type="submit"
+                  disabled={isSuccess || isChecking}
+                  className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-extrabold text-sm transition-colors bg-[#1E40AF] hover:bg-[#1E3A8A] text-white disabled:opacity-50"
+                >
+                  {isChecking ? (
+                    <span>라이선스 서버 확인 중…</span>
+                  ) : isSuccess ? (
+                    <span className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-[#86EFAC]" />
+                      <span>인증 완료! 수업 연구실 입장 중...</span>
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-2">
+                      <ShieldCheck className="w-4 h-4" />
+                      <span>연구실 입장하기</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </span>
+                  )}
+                </button>
+              </div>
+            </form>
+
+            <div className="text-center pt-2 border-t border-[#E5DEC9] text-[11px] text-[#5C6B85] flex items-center justify-center gap-1.5 font-semibold">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#15803D]" />
+              <span>로컬 무료 Edge-TTS · FFmpeg 9:16 수업 영상 합성 내장</span>
+            </div>
           </div>
         </div>
       </div>

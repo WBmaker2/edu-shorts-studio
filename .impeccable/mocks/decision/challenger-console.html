@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1440px;height:900px;overflow:hidden;font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:#111317;color:#E5E7EB;display:grid;grid-template-columns:210px 1fr 370px}
+aside{background:#111317;border-right:1px solid #262A33;padding:18px 14px;display:flex;flex-direction:column;justify-content:space-between}
+.head{font-size:13px;font-weight:800;color:#F9FAFB;padding-bottom:14px;border-bottom:1px solid #262A33;display:flex;justify-content:space-between;align-items:center}
+.dot{color:#2DD4BF;font-size:11px}
+.nav{margin-top:12px;display:flex;flex-direction:column;gap:2px}
+.n{padding:9px 10px;font-size:12px;font-weight:600;color:#9CA3AF;border-radius:4px}
+.n.on{background:#1B1F26;color:#2DD4BF;border:1px solid #2D333F}
+.mid{display:grid;grid-template-rows:52px 140px 1fr 56px;border-right:1px solid #262A33}
+.bar{padding:0 20px;border-bottom:1px solid #262A33;display:flex;align-items:center;justify-content:space-between;background:#15181E}
+.lbl{font-size:11px;font-weight:700;letter-spacing:.06em;color:#9CA3AF;text-transform:uppercase}
+.prompt-pane{padding:16px 20px;border-bottom:1px solid #262A33;background:#111317;display:flex;flex-direction:column;justify-content:space-between}
+.input{background:#1B1F26;border:1px solid #2D333F;padding:12px;font-size:14px;color:#F9FAFB;border-radius:4px}
+.timeline{padding:16px 20px;display:flex;flex-direction:column;gap:6px}
+.row{display:grid;grid-template-columns:80px 80px 1fr 90px;gap:12px;align-items:center;padding:10px 12px;background:#171A21;border:1px solid #262A33;font-size:13px}
+.row.on{border-color:#2DD4BF;background:#182224}
+.foot-bar{padding:0 20px;border-top:1px solid #262A33;display:flex;align-items:center;justify-content:space-between;background:#15181E}
+.btn-teal{background:#2DD4BF;color:#0F172A;border:none;padding:8px 16px;font-size:12px;font-weight:800;border-radius:4px}
+.btn-del{background:transparent;color:#F87171;border:1px solid #7F1D1D;padding:8px 12px;font-size:12px;border-radius:4px}
+.mon{padding:20px;background:#0D0F12;display:flex;flex-direction:column;align-items:center;justify-content:space-between}
+.frame{width:280px;height:498px;border:1px solid #2D333F;background:#171A21;padding:16px;display:flex;flex-direction:column;justify-content:space-between}
+</style>
+</head>
+<body>
+<aside>
+  <div>
+    <div class="head"><span>EDU-SHORTS</span><span class="dot">● READY</span></div>
+    <div class="nav">
+      <div class="n">DASHBOARD / 개요</div>
+      <div class="n on">STUDIO / 수업 제작</div>
+      <div class="n">CUTTER / 강의 발췌</div>
+      <div class="n">PRESETS / 템플릿</div>
+      <div class="n">ARCHIVE / 보관함</div>
+      <div class="n">ENGINE / 설정</div>
+    </div>
+  </div>
+  <div style="font-size:11px;color:#6B7280;font-variant-numeric:tabular-nums">FFMPEG NVENC · EDGE-TTS</div>
+</aside>
+<section class="mid">
+  <div class="bar"><span class="lbl">LESSON STUDIO · 중3 역사 · 삼국 통일 과정</span><span style="font-size:12px;color:#2DD4BF;font-variant-numeric:tabular-nums">00:54 / 5 SCENES</span></div>
+  <div class="prompt-pane">
+    <span class="lbl">학습 목표 프롬프트</span>
+    <div class="input">신라의 삼국 통일 과정을 나당동맹부터 매소성 전투까지 1분 핵심 흐름으로 정리</div>
+  </div>
+  <div class="timeline">
+    <span class="lbl" style="margin-bottom:6px">SCENE TIMELINE</span>
+    <div class="row on"><span style="font-variant-numeric:tabular-nums;color:#2DD4BF">00:00.0</span><span style="color:#F59E0B">INTRO</span><span>삼국 중 가장 늦게 발전한 신라는 어떻게 통일을 이뤘을까요?</span><span style="font-variant-numeric:tabular-nums;text-align:right">09.5s</span></div>
+    <div class="row"><span style="font-variant-numeric:tabular-nums;color:#9CA3AF">00:09.5</span><span style="color:#2DD4BF">STEP 1</span><span>648년 김춘추는 당나라와 손잡고 나당동맹을 맺습니다.</span><span style="font-variant-numeric:tabular-nums;text-align:right">11.0s</span></div>
+    <div class="row"><span style="font-variant-numeric:tabular-nums;color:#9CA3AF">00:20.5</span><span style="color:#2DD4BF">STEP 2</span><span>백제와 고구려를 차례로 무너뜨렸지만 당은 한반도 전체를 노렸죠.</span><span style="font-variant-numeric:tabular-nums;text-align:right">13.0s</span></div>
+    <div class="row"><span style="font-variant-numeric:tabular-nums;color:#9CA3AF">00:33.5</span><span style="color:#F59E0B">SUMMARY</span><span>매소성·기벌포 승리로 당군을 몰아내고 676년 삼국 통일을 완성합니다.</span><span style="font-variant-numeric:tabular-nums;text-align:right">20.5s</span></div>
+  </div>
+  <div class="foot-bar">
+    <button class="btn-del">초기화</button>
+    <button class="btn-teal">9:16 렌더링 실행</button>
+  </div>
+</section>
+<section class="mon">
+  <div style="width:100%;display:flex;justify-content:space-between"><span class="lbl">9:16 MONITOR</span><span class="lbl">1080×1920</span></div>
+  <div class="frame">
+    <div style="background:#F59E0B;color:#111317;font-weight:900;font-size:12px;padding:6px;text-align:center">중3 역사 · 신라의 삼국 통일</div>
+    <div style="text-align:center;font-size:12px;color:#9CA3AF">장면 1 지도 시각 자료<br/>(7세기 한반도 형세도)</div>
+    <div style="background:#111317;border:1px solid #2DD4BF;padding:10px;text-align:center;font-size:14px;font-weight:800">가장 늦게 발전한 <span style="color:#2DD4BF">신라</span>의<br/>삼국 통일 비결</div>
+  </div>
+  <div style="width:100%;font-size:11px;color:#9CA3AF;display:flex;justify-content:space-between"><span>VOICE: 인준 (남성)</span><span>SUB: 형광 강조</span></div>
+</section>
+</body>
+</html>

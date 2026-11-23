@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useEscapeKey } from '../hooks/useEscapeKey';
 import {
-  Sparkles,
+  BookOpen,
   BookmarkPlus,
   Trash2,
   Check,
@@ -10,6 +10,11 @@ import {
   Mic,
   Music,
   Type,
+  HelpCircle,
+  Highlighter,
+  Compass,
+  GraduationCap,
+  Bookmark,
 } from 'lucide-react';
 import {
   type ShortsPreset,
@@ -40,6 +45,14 @@ interface PresetBarProps {
 
 const STORAGE_KEY = 'kshorts_custom_presets';
 
+const PRESET_ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
+  preset_knowledge_1min: BookOpen,
+  preset_ssul_legend: HelpCircle,
+  preset_mrbeast_viral: Highlighter,
+  preset_mystery_horror: Compass,
+  preset_vlog_aesthetic: GraduationCap,
+};
+
 export const PresetBar: React.FC<PresetBarProps> = ({
   currentVoiceId,
   currentTemplateId,
@@ -63,12 +76,12 @@ export const PresetBar: React.FC<PresetBarProps> = ({
     }
   });
 
-  const [activePresetId, setActivePresetId] = useState<string | null>(null);
+  const [activePresetId, setActivePresetId] = useState<string | null>('preset_knowledge_1min');
   const [isModalOpen, setIsModalOpen] = useState(false);
   useEscapeKey(isModalOpen, () => setIsModalOpen(false));
   const [newPresetName, setNewPresetName] = useState('');
   const [newPresetDesc, setNewPresetDesc] = useState('');
-  const [newPresetIcon, setNewPresetIcon] = useState('✨');
+  const [newPresetIcon, setNewPresetIcon] = useState('교안');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const allPresets = [...DEFAULT_PRESETS, ...customPresets];
@@ -81,7 +94,7 @@ export const PresetBar: React.FC<PresetBarProps> = ({
   const handleSelectPreset = (preset: ShortsPreset) => {
     setActivePresetId(preset.id);
     onApplyPreset(preset);
-    showToast(`'${preset.name}' 프리셋이 적용되었습니다!`);
+    showToast(`'${preset.name}' 교안 프리셋이 적용되었습니다.`);
   };
 
   const handleSaveCustomPreset = (e: React.FormEvent) => {
@@ -91,8 +104,8 @@ export const PresetBar: React.FC<PresetBarProps> = ({
     const newPreset: ShortsPreset = {
       id: `custom_${Date.now()}`,
       name: newPresetName.trim(),
-      description: newPresetDesc.trim() || '내가 저장한 커스텀 쇼츠 조합',
-      icon: newPresetIcon || '⭐',
+      description: newPresetDesc.trim() || '교사가 저장한 맞춤 수업 쇼츠 조합',
+      icon: newPresetIcon || '교안',
       voiceId: currentVoiceId,
       templateId: currentTemplateId,
       fontId: currentFontId,
@@ -114,12 +127,12 @@ export const PresetBar: React.FC<PresetBarProps> = ({
     setIsModalOpen(false);
     setNewPresetName('');
     setNewPresetDesc('');
-    showToast(`새 프리셋 '${newPreset.name}'이(가) 저장되었습니다.`);
+    showToast(`새 교안 프리셋 '${newPreset.name}'이(가) 저장되었습니다.`);
   };
 
   const handleDeleteCustomPreset = (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    if (!confirm('이 커스텀 프리셋을 삭제하시겠습니까?')) return;
+    if (!confirm('이 커스텀 교안 프리셋을 삭제하시겠습니까?')) return;
     const updated = customPresets.filter((p) => p.id !== id);
     setCustomPresets(updated);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
@@ -127,111 +140,103 @@ export const PresetBar: React.FC<PresetBarProps> = ({
     showToast('프리셋이 삭제되었습니다.');
   };
 
-  const emojiList = ['⚡', '🔥', '💡', '💬', '🎬', '☕', '😱', '👑', '🚀', '🎯', '✨'];
+  const tagLabels = ['개념', '퀴즈', '암기', '탐구', '복습', '실험', '과학', '역사', '수학', '영어'];
 
   return (
-    <div className="bg-white border border-slate-200/90 rounded-2xl p-4 shadow-sm space-y-3">
-      {/* Toast */}
+    <section className="bg-[#FFFDF8] border border-[#E5DEC9] rounded-xl p-3.5 space-y-2.5">
       {toastMessage && (
-        <div className="fixed top-5 right-5 z-50 bg-slate-900 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-lg animate-in fade-in slide-in-from-top-2 flex items-center gap-2">
-          <Check className="w-4 h-4 text-emerald-400" />
+        <div className="fixed top-5 right-5 z-50 bg-[#14213D] text-white text-xs font-bold px-4 py-2.5 rounded-lg border border-[#293E6D] flex items-center gap-2">
+          <Check className="w-4 h-4 text-[#4ADE80]" />
           <span>{toastMessage}</span>
         </div>
       )}
 
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-2.5">
-        <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold">
-            <Sparkles className="w-4 h-4" />
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#E5DEC9] pb-2">
+        <div className="flex items-center gap-2 flex-wrap">
+          <div className="w-6 h-6 rounded bg-[#FEF3C7] border border-[#FCD34D] text-[#B45309] flex items-center justify-center font-bold shrink-0">
+            <BookOpen className="w-3.5 h-3.5" />
           </div>
-          <div>
-            <h3 className="text-xs font-black text-slate-900 flex items-center gap-2">
-              <span>원클릭 쇼츠 템플릿 프리셋</span>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-700 font-extrabold">
-                빠른 세팅
-              </span>
-            </h3>
-            <p className="text-[11px] text-slate-400 font-medium">
-              화풍, 폰트, 자막 애니메이션, 성우 보이스, BGM을 최적의 공식 조합으로 한 번에 적용합니다.
-            </p>
-          </div>
+          <h3 className="text-xs font-extrabold text-[#14213D]">교과 수업 원클릭 프리셋</h3>
+          <span className="text-[10px] px-2 py-0.5 rounded bg-[#EFF6FF] text-[#1E40AF] border border-[#BFDBFE] font-extrabold">
+            표준 교안 세팅
+          </span>
+          <span className="text-[11px] text-[#5C6B85] font-medium hidden xl:inline">
+            수업 단계에 맞춰 성우·칠판 자막·화풍·배경음을 한 번에 적용합니다
+          </span>
         </div>
 
         <button
           type="button"
           onClick={() => setIsModalOpen(true)}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-indigo-50 text-slate-700 hover:text-indigo-600 text-xs font-bold transition-all shrink-0 self-start sm:self-auto border border-slate-200 hover:border-indigo-200"
+          className="flex items-center gap-1 px-2.5 py-1 rounded-md bg-[#FAF8F3] hover:bg-[#EFF6FF] text-[#14213D] hover:text-[#1E40AF] text-[11px] font-bold transition-colors shrink-0 self-start sm:self-auto border border-[#CFC6AE] hover:border-[#BFDBFE]"
         >
-          <BookmarkPlus className="w-3.5 h-3.5 text-indigo-500" />
-          <span>현재 설정 프리셋으로 저장</span>
+          <BookmarkPlus className="w-3 h-3 text-[#1E40AF]" />
+          <span>현재 교안 세팅 저장</span>
         </button>
       </div>
 
-      {/* Horizontal Preset Carousel / Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-2.5">
+      {/* Horizontal Workbook Strip */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2">
         {allPresets.map((preset) => {
           const isSelected = activePresetId === preset.id;
-          const voiceName = VOICES.find((v) => v.id === preset.voiceId)?.name || '선희';
+          const PresetIcon = PRESET_ICON_MAP[preset.id] || Bookmark;
+          const voiceName = VOICES.find((v) => v.id === preset.voiceId)?.name?.split('(')[0]?.trim() || '선희';
           const matchedFont = FONTS.find(
             (f) =>
               f.id === preset.fontId ||
               f.id.replace(/\s+/g, '').toLowerCase() === (preset.fontId || '').replace(/\s+/g, '').toLowerCase()
           );
           const fontName = matchedFont?.name ? matchedFont.name.split('(')[0].trim() : (preset.fontId || '프리탠다드');
-          const templateName = TEMPLATES.find((t) => t.id === preset.templateId)?.name || '기본';
-          const matchedSub = SUBTITLE_STYLES.find((s) => s.id === preset.subtitleStyleId);
-          const subtitleName = matchedSub?.name ? matchedSub.name.split('&')[0].trim() : (preset.subtitleStyleId || '기본');
 
           return (
             <div
               key={preset.id}
               onClick={() => handleSelectPreset(preset)}
-              className={`relative text-left p-3 rounded-xl border transition-all cursor-pointer group flex flex-col justify-between ${
+              className={`relative text-left p-2.5 rounded-lg border transition-colors cursor-pointer group flex flex-col justify-between gap-1.5 ${
                 isSelected
-                  ? 'bg-indigo-50/70 border-indigo-500 shadow-xs ring-2 ring-indigo-500/20'
-                  : 'bg-slate-50/60 hover:bg-white border-slate-200/80 hover:border-slate-300 hover:shadow-2xs'
+                  ? 'bg-[#EFF6FF] border-[#1E40AF]'
+                  : 'bg-[#FAF8F3] hover:bg-[#FFFDF8] border-[#E5DEC9] hover:border-[#CFC6AE]'
               }`}
             >
-              <div className="space-y-1.5">
-                <div className="flex items-center justify-between">
-                  <span className="text-xl">{preset.icon}</span>
-                  {!preset.isBuiltin ? (
+              <div className="space-y-1">
+                <div className="flex items-center justify-between gap-1">
+                  <div className="flex items-center gap-1.5 min-w-0">
+                    <span
+                      className={`w-5 h-5 rounded flex items-center justify-center shrink-0 ${
+                        isSelected
+                          ? 'bg-[#1E40AF] text-white'
+                          : 'bg-[#FFFDF8] text-[#14213D] border border-[#CFC6AE]'
+                      }`}
+                    >
+                      <PresetIcon className="w-3 h-3" />
+                    </span>
+                    <h4 className="text-xs font-extrabold truncate text-[#14213D]">
+                      {preset.name}
+                    </h4>
+                  </div>
+                  {!preset.isBuiltin && (
                     <button
                       type="button"
                       onClick={(e) => handleDeleteCustomPreset(preset.id, e)}
-                      className="p-1 rounded-md text-slate-300 hover:text-red-500 hover:bg-red-50 transition-colors"
+                      className="p-0.5 rounded text-[#5C6B85] hover:text-[#B91C1C]"
                       title="프리셋 삭제"
                     >
-                      <Trash2 className="w-3.5 h-3.5" />
+                      <Trash2 className="w-3 h-3" />
                     </button>
-                  ) : (
-                    <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-200/60 text-slate-600">
-                      추천
-                    </span>
                   )}
                 </div>
-
-                <div>
-                  <h4 className={`text-xs font-black line-clamp-1 ${isSelected ? 'text-indigo-950' : 'text-slate-900'}`}>
-                    {preset.name}
-                  </h4>
-                  <p className="text-[10px] text-slate-500 line-clamp-1 mt-0.5 font-medium">
-                    {preset.description}
-                  </p>
-                </div>
+                <p className="text-[10px] text-[#3D4B66] line-clamp-1 font-medium">
+                  {preset.description}
+                </p>
               </div>
 
-              {/* Tag summary */}
-              <div className="mt-2.5 pt-2 border-t border-slate-200/50 flex flex-wrap gap-1 text-[9px] font-bold">
-                <span className="px-1.5 py-0.5 rounded bg-white text-slate-700 border border-slate-200/60">
+              <div className="flex items-center gap-1 text-[10px] font-bold">
+                <span className="px-1.5 py-0.5 rounded bg-[#FFFDF8] text-[#14213D] border border-[#E5DEC9]">
                   {voiceName}
                 </span>
-                <span className="px-1.5 py-0.5 rounded bg-white text-indigo-700 border border-indigo-100">
+                <span className="px-1.5 py-0.5 rounded bg-[#FFFDF8] text-[#1E40AF] border border-[#BFDBFE] truncate">
                   {fontName}
-                </span>
-                <span className="px-1.5 py-0.5 rounded bg-white text-pink-700 border border-pink-100">
-                  {subtitleName}
                 </span>
               </div>
             </div>
@@ -241,16 +246,17 @@ export const PresetBar: React.FC<PresetBarProps> = ({
 
       {/* Save Preset Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-150">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div className="fixed inset-0 z-50 bg-[#14213D]/60 flex items-center justify-center p-4">
+          <div className="bg-[#FFFDF8] rounded-xl max-w-md w-full p-6 border border-[#CFC6AE] space-y-4">
+            <div className="flex items-center justify-between border-b border-[#E5DEC9] pb-3">
               <div className="flex items-center gap-2">
-                <BookmarkPlus className="w-5 h-5 text-indigo-600" />
-                <h3 className="text-sm font-black text-slate-900">현재 설정을 새 프리셋으로 저장</h3>
+                <BookmarkPlus className="w-5 h-5 text-[#1E40AF]" />
+                <h3 className="text-sm font-extrabold text-[#14213D]">현재 수업 세팅을 프리셋으로 저장</h3>
               </div>
               <button
+                type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+                className="p-1.5 rounded-lg text-[#5C6B85] hover:text-[#14213D] hover:bg-[#F2EFE6] transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -258,83 +264,88 @@ export const PresetBar: React.FC<PresetBarProps> = ({
 
             <form onSubmit={handleSaveCustomPreset} className="space-y-4 text-xs">
               <div className="space-y-1">
-                <label className="text-slate-700 font-bold">프리셋 명칭</label>
+                <label htmlFor="preset-name-input" className="text-[#14213D] font-bold block">
+                  교안 프리셋 명칭
+                </label>
                 <input
+                  id="preset-name-input"
                   type="text"
                   value={newPresetName}
                   onChange={(e) => setNewPresetName(e.target.value)}
-                  placeholder="예: 내 시그니처 썰 쇼츠 세팅"
+                  placeholder="예: 중2 과학 실험 정리 세팅"
                   required
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-indigo-500 focus:bg-white font-medium"
+                  className="w-full bg-[#FAF8F3] border border-[#CFC6AE] rounded-lg px-3 py-2 text-xs text-[#14213D] focus:outline-none focus:border-[#1E40AF] focus:bg-white font-medium"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-slate-700 font-bold">간단 설명</label>
+                <label htmlFor="preset-desc-input" className="text-[#14213D] font-bold block">
+                  수업 용도 메모
+                </label>
                 <input
+                  id="preset-desc-input"
                   type="text"
                   value={newPresetDesc}
                   onChange={(e) => setNewPresetDesc(e.target.value)}
-                  placeholder="예: 빠른 템포의 유머와 G마켓 폰트 조합"
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-indigo-500 focus:bg-white font-medium"
+                  placeholder="예: 선희 성우 + 형광펜 자막 + 차분한 배경음"
+                  className="w-full bg-[#FAF8F3] border border-[#CFC6AE] rounded-lg px-3 py-2 text-xs text-[#14213D] focus:outline-none focus:border-[#1E40AF] focus:bg-white font-medium"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-slate-700 font-bold">아이콘 (이모지 선택)</label>
+                <span className="text-[#14213D] font-bold block">분류 태그 선택</span>
                 <div className="flex items-center gap-1.5 flex-wrap">
-                  {emojiList.map((emoji) => (
+                  {tagLabels.map((lbl) => (
                     <button
-                      key={emoji}
+                      key={lbl}
                       type="button"
-                      onClick={() => setNewPresetIcon(emoji)}
-                      className={`w-8 h-8 rounded-lg text-sm flex items-center justify-center transition-all ${
-                        newPresetIcon === emoji
-                          ? 'bg-indigo-600 text-white shadow-xs scale-110'
-                          : 'bg-slate-100 hover:bg-slate-200 text-slate-800'
+                      onClick={() => setNewPresetIcon(lbl)}
+                      className={`px-2.5 py-1 rounded-md text-xs font-bold transition-colors ${
+                        newPresetIcon === lbl
+                          ? 'bg-[#1E40AF] text-white'
+                          : 'bg-[#FAF8F3] hover:bg-[#F2EFE6] text-[#14213D] border border-[#CFC6AE]'
                       }`}
                     >
-                      {emoji}
+                      {lbl}
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* Current Settings Snapshot Preview */}
-              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
-                <span className="text-[11px] font-extrabold text-slate-700 block">저장될 구성 세부정보:</span>
-                <div className="grid grid-cols-2 gap-1.5 text-[11px] text-slate-600">
+              <div className="p-3 bg-[#FAF8F3] rounded-lg border border-[#E5DEC9] space-y-1.5">
+                <span className="text-[11px] font-extrabold text-[#14213D] block">저장될 수업 구성:</span>
+                <div className="grid grid-cols-2 gap-1.5 text-[11px] text-[#3D4B66]">
                   <div className="flex items-center gap-1">
-                    <Mic className="w-3 h-3 text-blue-500" />
-                    <span>보이스: {VOICES.find((v) => v.id === currentVoiceId)?.name || currentVoiceId}</span>
+                    <Mic className="w-3 h-3 text-[#1E40AF]" />
+                    <span>성우: {VOICES.find((v) => v.id === currentVoiceId)?.name || currentVoiceId}</span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <Type className="w-3 h-3 text-indigo-500" />
-                    <span>폰트: {currentFontId}</span>
+                    <Type className="w-3 h-3 text-[#1E40AF]" />
+                    <span>서체: {currentFontId}</span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <Palette className="w-3 h-3 text-pink-500" />
+                    <Palette className="w-3 h-3 text-[#B45309]" />
                     <span>자막: {currentSubtitleStyleId}</span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <Music className="w-3 h-3 text-emerald-500" />
-                    <span>BGM: {currentBgmMood} ({Math.round(currentBgmVolume * 100)}%)</span>
+                    <Music className="w-3 h-3 text-[#15803D]" />
+                    <span>배경음: {currentBgmMood} ({Math.round(currentBgmVolume * 100)}%)</span>
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-2 border-t border-[#E5DEC9]">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 rounded-xl text-slate-600 hover:bg-slate-100 font-bold text-xs"
+                  className="px-4 py-2 rounded-lg text-[#3D4B66] hover:bg-[#F2EFE6] font-bold text-xs"
                 >
                   취소
                 </button>
                 <button
                   type="submit"
                   disabled={!newPresetName.trim()}
-                  className="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-md shadow-indigo-500/20 disabled:opacity-50"
+                  className="px-5 py-2 rounded-lg bg-[#1E40AF] hover:bg-[#1E3A8A] text-white font-bold text-xs disabled:opacity-50"
                 >
                   프리셋 저장하기
                 </button>
@@ -343,6 +354,6 @@ export const PresetBar: React.FC<PresetBarProps> = ({
           </div>
         </div>
       )}
-    </div>
+    </section>
   );
 };

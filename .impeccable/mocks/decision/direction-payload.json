@@ -1,0 +1,162 @@
+{
+  "title": "에듀쇼츠 스튜디오 비주얼 방향 선택",
+  "question": "교육용 쇼츠 제작 스튜디오(Edu-Shorts Studio)의 디자인 시스템을 선택해 주세요. 기본 제안안을 선택하거나, 다른 후보/리롤로 방향을 바꿀 수 있습니다.",
+  "options": [
+    {
+      "id": "assigned",
+      "kind": "assigned",
+      "kicker": "THE ROLL",
+      "label": "전시 캡션 & 커리큘럼 스튜디오 (Exhibition Placard)",
+      "lineage": "국립과학관·박물관 전시 캡션 및 큐레이션 보드",
+      "thesis": "차분한 전시 석고(#F4F3EE)와 깊은 짙은 슬레이트 레일(#1C2127) 위에 짙은 청록(#0F766E)과 황토 강조(#B45309)로 수업 설계와 9:16 교실 미리보기를 나란히 배치합니다.",
+      "palette": ["#F4F3EE", "#1C2127", "#0F766E", "#B45309"],
+      "materials": ["무광 석고 보드", "1px 아카이브 헤어라인", "신호 청록 포커스"],
+      "viewport": "좌측 교과 내비게이션 레일, 상단 단원·학년 컨텍스트 바, 중앙 단계별 수업 대본·장면 타임라인, 우측 상시 고정 9:16 교실 스크린 미리보기가 한 화면에 정렬됩니다.",
+      "risk": "톤이 지나치게 차분하면 제작 도구의 활기가 줄어 보일 수 있어 신호 청록과 황토 하이라이트로 수업 흐름을 선명하게 잡습니다.",
+      "raised": [
+        {
+          "from": "challenger-zoo-map",
+          "raise": "그라데이션과 네온 그림자를 덜어내고, 교과·단계별 평면 컬러 블록으로 영역 경계를 단번에 구분합니다."
+        },
+        {
+          "from": "challenger-vertical-feed",
+          "raise": "9:16 세로 미리보기를 하단에 묻지 않고 작업실 우측 고정 무대(Stage)로 끌어올려 자막·제목 안전 영역을 즉시 확인합니다."
+        },
+        {
+          "from": "challenger-labanotation",
+          "raise": "장면 타임라인 행에 발화 길이 비례 타임바와 현재 편집 장면 하이라이트 밴드를 적용합니다."
+        },
+        {
+          "from": "challenger-ikeda",
+          "raise": "모든 타임코드(00:00), 예상 분량(초), 렌더링 진행률에 고정폭 숫자(tabular-nums) 정렬을 강제합니다."
+        }
+      ],
+      "html": ".impeccable/mocks/decision/assigned.html"
+    },
+    {
+      "id": "model-pick",
+      "kind": "pick",
+      "kicker": "IMPECCABLE’S PICK",
+      "label": "단원 개념 노트 스튜디오 (Study Guide & Margin)",
+      "lineage": "한국 참고서 단원 정리 및 교사 교안 노트",
+      "thesis": "따뜻한 학습지 미색(#FAF8F3)과 진한 잉크 네이비(#14213D)를 바탕으로 형광펜 앰버(#D97706)를 핵심 개념·퀴즈 강조에만 집중 배치합니다.",
+      "palette": ["#FAF8F3", "#14213D", "#1E40AF", "#D97706"],
+      "materials": ["미색 모조지", "잉크 네이비 레일", "형광펜 앰버 띠"],
+      "viewport": "좌측 수업 도구 레일, 상단 교과·학년·성취기준 필터 스트립, 중앙 개념/퀴즈 대본 편집기, 우측 9:16 미리보기로 구성됩니다.",
+      "risk": "한국 교육 서비스에서 가장 친숙한 정석 방향이므로 새롭기보다 즉시 익숙하고 안정적인 인상을 줍니다.",
+      "html": ".impeccable/mocks/decision/model-pick.html"
+    },
+    {
+      "id": "challenger-lexicon",
+      "kind": "challenger",
+      "catalogId": "rw-lexicon-shoulder-and-plate",
+      "label": "백과 도판 & 숄더 스튜디오 (Lexicon Shoulder & Plate)",
+      "verdict": "competitive",
+      "lineage": "19세기 사전 숄더 인덱스 및 유채색 도판 분할",
+      "thesis": "비코팅 크림 지면(#F6F2E8)과 먹색 본문을 유지하고 모든 영상·이미지 컬러를 우측 테두리 도판(Plate) 안에만 격리합니다.",
+      "palette": ["#F6F2E8", "#18181B", "#B91C1C", "#0F766E"],
+      "materials": ["비코팅 크림 지면", "숄더 인덱스 레일", "테두리 컬러 도판"],
+      "viewport": "좌측 좁은 숄더 인덱스, 상단 현재 단원 범위 가이드바, 중앙 고정폭 대본 칼럼, 우측 독립 테두리 도판에 9:16 미리보기를 담습니다.",
+      "case": "교사의 사전·교과서 탐색 습관과 잘 맞고 영상 미리보기 집중도가 높지만, 편집 화면 밀도가 다소 고전적일 수 있습니다.",
+      "risk": "출판물 규율이 느슨해지면 일반 베이지 테마로 흐를 위험이 있습니다.",
+      "hero": "https://impeccable.style/worlds/cards/rw-lexicon-shoulder-and-plate-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/rw-lexicon-shoulder-and-plate.webp",
+      "html": ".impeccable/mocks/decision/challenger-lexicon.html"
+    },
+    {
+      "id": "challenger-console",
+      "kind": "challenger",
+      "catalogId": "digital-design-canon-dark-first-developer-console",
+      "label": "다크 정밀 편집 콘솔 (Graphite Studio Console)",
+      "verdict": "competitive",
+      "lineage": "1px 헤어라인 분할 기반 다크 워크스테이션",
+      "thesis": "짙은 그래파이트(#111317) 작업면 위에서 그림자 없이 1px 경계선으로 패널을 나누고, 9:16 영상 색감과 자막 가독성을 최우선으로 띄웁니다.",
+      "palette": ["#111317", "#1B1F26", "#2DD4BF", "#F59E0B"],
+      "materials": ["무광 그래파이트", "1px 헤어라인 심", "고대비 시그널 틸"],
+      "viewport": "고정형 3단 도킹 레이아웃(좌측 메뉴 / 중앙 대본·장면 타임라인 / 우측 9:16 모니터)으로 영상 제작 집중도를 극대화합니다.",
+      "case": "영상·자막 편집 도구로서 작업 효율과 명료성이 매우 높지만, 밝은 교무실 환경의 교사에게는 다소 기술적·개발자풍으로 보일 수 있습니다.",
+      "risk": "교육용 따뜻함보다 전문 NLE 편집기 인상이 강합니다.",
+      "hero": "https://impeccable.style/worlds/cards/digital-design-canon-dark-first-developer-console-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/digital-design-canon-dark-first-developer-console.webp",
+      "html": ".impeccable/mocks/decision/challenger-console.html"
+    },
+    {
+      "id": "challenger-zoo-map",
+      "kind": "challenger",
+      "catalogId": "aww2-zoo-gardens-guide-map",
+      "label": "유기적 컬러 로브 가이드 (Zoo & Gardens Guide Map)",
+      "verdict": "declined",
+      "lineage": "크림 지면 위 평면 컬러 로브와 해안선 구획",
+      "thesis": "자유곡선 컬러 영역과 캡슐 버튼으로 교과 영역을 지도처럼 나눕니다.",
+      "palette": ["#F5F1E4", "#8ED462", "#2C2E2A", "#FF705D"],
+      "materials": ["평면 크림 지면", "유기적 SVG 경계", "캡슐 태그"],
+      "case": "공공 안내 지도 문법은 교사의 다단계 영상 제작·타임라인 편집 작업과 맞지 않아 작업 명료성이 떨어집니다.",
+      "kept": "그라데이션 없는 단색 면 분할로 교과·단계 구분을 선명하게 처리하는 규율",
+      "risk": "폼·타임라인 작업 화면에서는 놀이공원 지도처럼 보일 수 있습니다.",
+      "hero": "https://impeccable.style/worlds/cards/aww2-zoo-gardens-guide-map-hero.webp"
+    },
+    {
+      "id": "challenger-vertical-feed",
+      "kind": "challenger",
+      "catalogId": "pop-culture-shelf-vertical-video-feed-surface",
+      "label": "풀블리드 세로 피드 (Vertical Video Feed Surface)",
+      "verdict": "declined",
+      "lineage": "전체 화면 세로 영상과 우측 액션 레일",
+      "thesis": "화면 전체를 9:16 영상으로 채우고 우측 글리프 레일로 제어합니다.",
+      "palette": ["#0B0B0D", "#FFFFFF", "#F43F5E"],
+      "materials": ["풀블리드 미디어", "하단 스크림", "우측 글리프 스택"],
+      "case": "소비자용 스와이프 피드 구조는 대본 작성, 장면 분할, 음성·자막 설정을 동시에 다루는 교사 제작 도구와 충돌합니다.",
+      "kept": "9:16 세로 결과물을 부가 요소가 아닌 상시 고정 주 무대(Stage)로 대우하는 우선순위",
+      "risk": "편집 기능이 오버레이에 가려 탐색이 어려워집니다.",
+      "hero": "https://impeccable.style/worlds/cards/pop-culture-shelf-vertical-video-feed-surface-hero.webp"
+    },
+    {
+      "id": "challenger-labanotation",
+      "kind": "challenger",
+      "catalogId": "notation-diagram-systems-labanotation",
+      "label": "라바노테이션 스코어 (Labanotation Score)",
+      "verdict": "declined",
+      "lineage": "중앙 수직 보표와 길이 비례 동작 블록",
+      "thesis": "아래에서 위로 흐르는 대칭 수직 악보 위에 시간 길이를 블록 높이로 표기합니다.",
+      "palette": ["#FFFFFF", "#111111", "#E5E7EB"],
+      "materials": ["백색 보표", "해칭/도트 블록", "수직 중심축"],
+      "case": "상향식 대칭 무보 구조는 한국어 좌우 읽기 흐름과 교사용 숏폼 스튜디오 UX에 부자연스럽습니다.",
+      "kept": "각 장면의 실제 발화 시간(초)을 비례 막대와 활성 밴드로 직관화하는 규율",
+      "risk": "일반 사용자가 읽기 방향을 익히는 데 학습 비용이 큽니다.",
+      "hero": "https://impeccable.style/worlds/cards/notation-diagram-systems-labanotation-hero.webp"
+    },
+    {
+      "id": "challenger-ikeda",
+      "kind": "challenger",
+      "catalogId": "ikeda-datamatics",
+      "label": "데이터매틱스 격자 (Data-Sublime Field)",
+      "verdict": "declined",
+      "lineage": "순수 흑백 바코드 열과 사인 격자",
+      "thesis": "고밀도 고정폭 숫자와 흑백 수직 바 필드로 데이터 리듬을 만듭니다.",
+      "palette": ["#000000", "#FFFFFF"],
+      "materials": ["순흑백 바 필드", "고정폭 테이블", "반전 프레임"],
+      "case": "점멸하는 흑백 데이터 아트는 교실 수업 준비 도구로서 시각적 피로가 크고 컬러 미디어 편집을 방해합니다.",
+      "kept": "타임코드와 장면 수치를 고정폭 숫자(tabular-nums)로 빈틈없이 정렬하는 정밀성",
+      "risk": "교육용 도구에서 지나치게 실험적이고 차갑게 보입니다.",
+      "hero": "https://impeccable.style/worlds/cards/ikeda-datamatics-hero.webp"
+    }
+  ],
+  "reroll": {
+    "registers": ["safer", "bolder"]
+  },
+  "buildPath": {
+    "value": "code"
+  },
+  "canon": true,
+  "canonCard": {
+    "kind": "canon",
+    "label": "표준 에듀테크 SaaS 레이아웃",
+    "thesis": "일반적인 밝은 카드 대시보드와 블루 액센트 기반의 표준 교육 제작 툴 구성입니다.",
+    "palette": ["#FFFFFF", "#0F172A", "#2563EB"],
+    "materials": ["화이트 카드", "블루 CTA", "표준 사이드바"],
+    "viewport": "익숙한 좌측 다크 사이드바와 상단 배너 + 4열 지표 카드 + 하단 스튜디오 폼 구조입니다.",
+    "risk": "깔끔하지만 기존 K-Shorts 및 시중 SaaS 도구와 시각적으로 크게 구분되지 않습니다.",
+    "html": ".impeccable/mocks/decision/canon.html"
+  },
+  "steer": true
+}

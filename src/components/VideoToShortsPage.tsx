@@ -256,36 +256,34 @@ export const VideoToShortsPage: React.FC<VideoToShortsPageProps> = ({
     <div className="p-6 md:p-8 max-w-6xl mx-auto space-y-8 animate-in fade-in duration-300">
       <audio ref={audioRef} onEnded={() => setPlayingBgm(null)} className="hidden" />
 
-      {/* Header Banner */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 p-8 border border-slate-800 shadow-2xl">
-        <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gradient-to-r from-pink-500/20 to-purple-500/20 border border-pink-500/30 text-pink-300 text-xs font-black tracking-wide">
-              <Film className="w-3.5 h-3.5" />
-              <span>AI Video-to-Shorts Studio</span>
-              <span className="px-1.5 py-0.2 rounded-full bg-pink-500 text-white text-[9px] font-black uppercase">NEW</span>
+      {/* Header Sheet (No eyebrow/kicker above heading) */}
+      <div className="rounded-xl bg-[#FFFDF8] p-6 border border-[#E5DEC9]">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
+          <div className="space-y-1.5">
+            <div className="flex items-center gap-2.5 flex-wrap">
+              <h1 className="text-xl md:text-2xl font-black text-[#14213D] tracking-tight">
+                강의 · 수업 영상 분석 &amp; 9:16 하이라이트 쇼츠 제작
+              </h1>
+              <span className="px-2.5 py-0.5 rounded bg-[#FEF3C7] border border-[#FCD34D] text-[#78350F] text-xs font-extrabold">
+                16:9 강의 → 9:16 세로 변환
+              </span>
             </div>
-            <h1 className="text-2xl md:text-3xl font-black text-white tracking-tight">
-              사용자 영상 분석 & 9:16 쇼츠 자동 제작
-            </h1>
-            <p className="text-sm text-slate-300 max-w-2xl leading-relaxed">
-              보유하신 영상을 올리면 AI가 하이라이트 구간을 정밀 분석하고, <strong className="text-pink-300">기존 음성 제거(음소거)</strong> 및 감각적인 BGM/자막 타이틀과 함께 시선을 사로잡는 9:16 모바일 쇼츠로 즉시 변환합니다.
+            <p className="text-xs md:text-sm text-[#3D4B66] max-w-2xl leading-relaxed font-medium">
+              녹화해 둔 온라인 수업이나 실험 영상을 올리면 핵심 구간을 자동 분석하고, <strong className="text-[#14213D]">기존 음성 제거(음소거) 또는 유지</strong>, 배경음·단원 타이틀을 더해 9:16 복습 쇼츠로 변환합니다.
             </p>
           </div>
 
           <div className="flex items-center gap-3 shrink-0">
             <button
+              type="button"
               onClick={handleSelectFile}
-              className="flex items-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-black shadow-lg shadow-indigo-500/25 transition-all active:scale-95"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#1E40AF] hover:bg-[#1E3A8A] text-white text-xs font-extrabold transition-colors"
             >
               <Upload className="w-4 h-4" />
-              <span>내 PC 영상 올리기</span>
+              <span>내 PC 강의 영상 불러오기</span>
             </button>
           </div>
         </div>
-
-        {/* Ambient Glow */}
-        <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
       </div>
 
       {/* Step 1: Upload & Select Video */}
@@ -682,19 +680,20 @@ export const VideoToShortsPage: React.FC<VideoToShortsPageProps> = ({
           {/* Action Button */}
           <div className="pt-2">
             <button
+              type="button"
               onClick={handleRenderShorts}
               disabled={isRendering}
-              className="w-full py-4 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 text-white font-black text-sm shadow-xl shadow-indigo-600/20 active:scale-[0.99] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full py-3.5 rounded-xl bg-[#1E40AF] hover:bg-[#1E3A8A] text-white font-black text-sm transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
             >
               {isRendering ? (
                 <>
                   <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  <span>9:16 쇼츠 변환 렌더링 중... (잠시만 기다려주세요)</span>
+                  <span>9:16 수업 쇼츠 변환 렌더링 중... (잠시만 기다려주세요)</span>
                 </>
               ) : (
                 <>
                   <Film className="w-5 h-5" />
-                  <span>🎬 9:16 쇼츠로 변환 제작 시작</span>
+                  <span>9:16 수업 쇼츠로 변환 제작 시작</span>
                 </>
               )}
             </button>

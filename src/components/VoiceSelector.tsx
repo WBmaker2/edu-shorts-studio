@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mic, Check, Zap } from 'lucide-react';
+import { Mic, Check, Gauge } from 'lucide-react';
 import type { VoiceOption } from '../types';
 
 export const VOICES: VoiceOption[] = [
@@ -7,65 +7,64 @@ export const VOICES: VoiceOption[] = [
     id: 'ko-KR-SunHiNeural',
     name: '선희 (여성)',
     gender: 'female',
-    tag: '차분 / 지적 아나운서',
-    description: '신뢰감 있는 다큐, 뉴스, 꿀팁 정보 전달에 최적화',
+    tag: '표준 개념 강의 · 아나운서',
+    description: '또렷한 발음과 안정적인 호흡으로 교과 핵심 개념 및 요약 설명에 가장 적합합니다',
     provider: 'edge-tts',
   },
   {
     id: 'ko-KR-InJoonNeural',
     name: '인준 (남성)',
     gender: 'male',
-    tag: '신뢰 / 표준 다큐멘터리',
-    description: '차분하고 정갈한 남성 나레이션으로 몰입감 극대화',
-    provider: 'edge-tts',
-  },
-  {
-    id: 'ko-KR-BongJinNeural',
-    name: '봉진 (남성)',
-    gender: 'male',
-    tag: '괴담 / 중후한 저음',
-    description: '깊고 묵직한 보이스로 미스터리, 공포, 긴장감 유발에 특화',
-    provider: 'edge-tts',
-  },
-  {
-    id: 'ko-KR-GookMinNeural',
-    name: '국민 (남성)',
-    gender: 'male',
-    tag: '친근 / 커뮤니티 썰',
-    description: '자연스러운 억양과 구어체로 썰 쇼츠 및 일상 공감에 탁월',
+    tag: '차분한 탐구 · 다큐 해설',
+    description: '신뢰감 있는 남성 내레이션으로 과학 원리, 역사 배경, 논리적 설명에 어울립니다',
     provider: 'edge-tts',
   },
   {
     id: 'ko-KR-JiMinNeural',
     name: '지민 (여성)',
     gender: 'female',
-    tag: '상큼 / 밝은 꿀팁',
-    description: '생기 있고 에너지 넘치는 톤으로 1분 상식 및 꿀팁 전달',
+    tag: '생기 있는 수업 도입 · 퀴즈',
+    description: '밝고 경쾌한 에너지로 학생들의 주의를 깨우는 1분 도입 질문 및 퀴즈에 좋습니다',
+    provider: 'edge-tts',
+  },
+  {
+    id: 'ko-KR-GookMinNeural',
+    name: '국민 (남성)',
+    gender: 'male',
+    tag: '친근한 문답 · 사례 설명',
+    description: '자연스러운 구어체 억양으로 실생활 비유와 학생 눈높이 사례 풀이에 적합합니다',
+    provider: 'edge-tts',
+  },
+  {
+    id: 'ko-KR-BongJinNeural',
+    name: '봉진 (남성)',
+    gender: 'male',
+    tag: '중후한 역사 · 심화 다큐',
+    description: '깊이 있는 중저음으로 역사적 전환점이나 심화 탐구 주제의 몰입감을 높입니다',
     provider: 'edge-tts',
   },
   {
     id: 'ko-KR-SeoHyeonNeural',
     name: '서현 (여성)',
     gender: 'female',
-    tag: '따뜻 / 감성 에세이',
-    description: '편안하고 부드러운 목소리로 힐링, 브이로그, 명언 전달',
+    tag: '차분한 복습 · 문학 낭독',
+    description: '부드럽고 편안한 톤으로 거꾸로 수업 예습·복습 노트나 국어·문학 지문 해설에 적합합니다',
     provider: 'edge-tts',
   },
-  // ElevenLabs Emotional AI Voices
   {
     id: 'elevenlabs_21m00Tcm4TlvDq8ikWAM',
-    name: '레이첼 Rachel (감정형 여성)',
+    name: '레이첼 Rachel (여성)',
     gender: 'female',
-    tag: '👑 ElevenLabs 프리미엄',
-    description: '실제 사람 같은 생생한 숨소리와 억양, 극한의 자연스러움',
+    tag: 'ElevenLabs 다국어 · 영어',
+    description: '실제 원어민 강사 같은 자연스러운 호흡과 억양을 제공하는 프리미엄 보이스',
     provider: 'elevenlabs',
   },
   {
     id: 'elevenlabs_pNInz6obpgDQGcFmaJgB',
-    name: '아담 Adam (시네마틱 남성)',
+    name: '아담 Adam (남성)',
     gender: 'male',
-    tag: '👑 ElevenLabs 프리미엄',
-    description: '헐리우드 트레일러급 깊은 울림과 드라마틱한 몰입감',
+    tag: 'ElevenLabs 다국어 · 다큐',
+    description: '깊은 울림과 전달력을 갖춘 글로벌 교육 콘텐츠용 프리미엄 남성 보이스',
     provider: 'elevenlabs',
   },
 ];
@@ -84,58 +83,66 @@ export const VoiceSelector: React.FC<VoiceSelectorProps> = ({
   onChangeVoiceSpeed,
 }) => {
   return (
-    <div className="bg-white border border-slate-200/90 rounded-2xl p-6 space-y-4 shadow-sm">
-      <div className="flex items-center justify-between">
+    <section className="bg-[#FFFDF8] border border-[#E5DEC9] rounded-xl p-5 space-y-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#E5DEC9] pb-3">
         <div className="flex items-center gap-2.5">
-          <div className="p-2 rounded-xl bg-purple-50 text-purple-600 border border-purple-100">
-            <Mic className="w-5 h-5" />
+          <div className="p-2 rounded-lg bg-[#EFF6FF] text-[#1E40AF] border border-[#BFDBFE]">
+            <Mic className="w-4 h-4" />
           </div>
-          <h2 className="text-base font-extrabold text-slate-900 tracking-tight">3. 한국어 AI 목소리 선택</h2>
+          <div>
+            <h2 className="text-sm font-extrabold text-[#14213D] tracking-tight">
+              수업 내레이션 성우 및 발화 템포
+            </h2>
+            <p className="text-xs text-[#5C6B85] font-medium">
+              교과 분위기와 학습자 연령에 맞는 한국어 Neural TTS 성우와 설명 속도를 지정합니다
+            </p>
+          </div>
         </div>
-        <span className="text-[11px] text-slate-500 font-medium">무료 고품질 Neural TTS 엔진</span>
+        <span className="text-[11px] px-2.5 py-1 rounded bg-[#DCFCE7] text-[#14532D] border border-[#86EFAC] font-bold self-start sm:self-auto">
+          기본 6종 무료 내장
+        </span>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
         {VOICES.map((voice) => {
           const isSelected = selectedVoiceId === voice.id;
           return (
             <div
               key={voice.id}
               onClick={() => onSelectVoice(voice.id)}
-              className={`relative cursor-pointer rounded-2xl p-4 border transition-all ${
+              className={`relative cursor-pointer rounded-lg p-3.5 border transition-colors flex flex-col justify-between ${
                 isSelected
-                  ? 'bg-purple-50/80 border-purple-500 text-purple-900 shadow-md ring-2 ring-purple-100'
-                  : 'bg-slate-50 hover:bg-white border-slate-200 text-slate-600 hover:border-slate-300'
+                  ? 'bg-[#EFF6FF] border-[#1E40AF] text-[#14213D]'
+                  : 'bg-[#FAF8F3] hover:bg-[#FFFDF8] border-[#E5DEC9] text-[#3D4B66] hover:border-[#CFC6AE]'
               }`}
             >
-              <div className="flex items-start justify-between gap-2">
-                <div className="space-y-1">
-                  <div className="flex items-center gap-1.5">
-                    <span className="font-extrabold text-sm text-slate-900">{voice.name}</span>
-                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                      voice.provider === 'elevenlabs'
-                        ? 'bg-amber-100 text-amber-800 border border-amber-300 shadow-xs'
-                        : voice.gender === 'female'
-                        ? 'bg-pink-100 text-pink-700 border border-pink-200'
-                        : 'bg-blue-100 text-blue-700 border border-blue-200'
-                    }`}>
-                      {voice.tag}
-                    </span>
+              <div className="space-y-1.5">
+                <div className="flex items-start justify-between gap-2">
+                  <span className="font-extrabold text-xs text-[#14213D]">{voice.name}</span>
+                  <div
+                    className={`w-4 h-4 rounded flex items-center justify-center shrink-0 border transition-colors ${
+                      isSelected
+                        ? 'bg-[#1E40AF] border-[#1E40AF] text-white'
+                        : 'border-[#CFC6AE] bg-white text-transparent'
+                    }`}
+                  >
+                    <Check className="w-3 h-3 stroke-[3]" />
                   </div>
-                  <p className="text-xs text-slate-500 leading-relaxed font-medium">
-                    {voice.description}
-                  </p>
                 </div>
 
-                <div
-                  className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 border transition-all text-xs font-bold ${
-                    isSelected
-                      ? 'bg-purple-600 border-purple-600 text-white'
-                      : 'border-slate-300 bg-white text-transparent'
+                <span
+                  className={`inline-block text-[10px] font-extrabold px-2 py-0.5 rounded ${
+                    voice.provider === 'elevenlabs'
+                      ? 'bg-[#FEF3C7] text-[#78350F] border border-[#FCD34D]'
+                      : 'bg-[#FFFDF8] text-[#1E40AF] border border-[#BFDBFE]'
                   }`}
                 >
-                  <Check className="w-3 h-3 stroke-[3]" />
-                </div>
+                  {voice.tag}
+                </span>
+
+                <p className="text-[11px] text-[#3D4B66] leading-snug font-medium pt-0.5">
+                  {voice.description}
+                </p>
               </div>
             </div>
           );
@@ -143,31 +150,31 @@ export const VoiceSelector: React.FC<VoiceSelectorProps> = ({
       </div>
 
       {onChangeVoiceSpeed && (
-        <div className="pt-3 border-t border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div className="pt-3 border-t border-[#E5DEC9] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <div className="flex items-center gap-2">
-            <Zap className="w-4 h-4 text-amber-500" />
+            <Gauge className="w-4 h-4 text-[#B45309]" />
             <div>
-              <span className="text-xs font-bold text-slate-800">성우 발화 배속 (숏폼 텐션 조절)</span>
-              <p className="text-[11px] text-slate-500">
-                시청 지속률을 극대화하기 위해 나레이션 템포를 조절합니다. (1.1x 추천)
+              <span className="text-xs font-extrabold text-[#14213D]">교사 발화 배속 (수업 전달 속도)</span>
+              <p className="text-[11px] text-[#5C6B85]">
+                초등·기초 개념은 1.0x 정속, 중·고등 핵심 요약은 1.1x 추천 템포가 가장 명료합니다.
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5 flex-wrap">
             {[
-              { val: 1.0, label: '1.0x 표준' },
+              { val: 1.0, label: '1.0x 정속 (기초)' },
               { val: 1.1, label: '1.1x 추천' },
-              { val: 1.2, label: '1.2x 스피디' },
-              { val: 1.3, label: '1.3x 초고속' },
+              { val: 1.2, label: '1.2x 빠른 요약' },
+              { val: 1.3, label: '1.3x 속독 복습' },
             ].map((s) => (
               <button
                 key={s.val}
                 type="button"
                 onClick={() => onChangeVoiceSpeed(s.val)}
-                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
+                className={`px-3 py-1.5 rounded-md text-xs font-bold transition-colors tabular-nums ${
                   (voiceSpeed ?? 1.1) === s.val
-                    ? 'bg-purple-600 text-white shadow-sm'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                    ? 'bg-[#14213D] text-[#FDE68A]'
+                    : 'bg-[#FAF8F3] text-[#3D4B66] hover:bg-[#F2EFE6] border border-[#CFC6AE]'
                 }`}
               >
                 {s.label}
@@ -176,6 +183,6 @@ export const VoiceSelector: React.FC<VoiceSelectorProps> = ({
           </div>
         </div>
       )}
-    </div>
+    </section>
   );
 };

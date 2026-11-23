@@ -33,18 +33,18 @@ export const HelpGuidePage: React.FC<HelpGuidePageProps> = ({ onNavigate }) => {
       {/* Header Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
         <div className="flex items-center gap-3">
-          <div className="w-11 h-11 rounded-2xl bg-red-50 border border-red-200/80 flex items-center justify-center text-red-600 shadow-sm">
-            <BookOpen className="w-6 h-6" />
+          <div className="w-10 h-10 rounded-lg bg-[#EFF6FF] border border-[#BFDBFE] flex items-center justify-center text-[#1E40AF]">
+            <BookOpen className="w-5 h-5" />
           </div>
           <div>
-            <h1 className="text-xl font-black text-slate-900 flex items-center gap-2">
-              K-Shorts 완벽 가이드북
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-red-100 text-red-700 border border-red-200">
-                초보자 맞춤 안내
+            <h1 className="text-xl font-black text-[#14213D] flex items-center gap-2">
+              <span>Edu-Shorts 교사용 제작 가이드북</span>
+              <span className="px-2 py-0.5 rounded text-[10px] font-extrabold bg-[#FEF3C7] text-[#78350F] border border-[#FCD34D]">
+                수업 제작 안내
               </span>
             </h1>
-            <p className="text-xs text-slate-500 font-medium mt-0.5">
-              유튜브 자동 업로드 및 첫 댓글 자동 고정부터 쇼츠 영상 제작까지 상세히 안내합니다.
+            <p className="text-xs text-[#3D4B66] font-medium mt-0.5">
+              단원 수업 쇼츠 제작 파이프라인부터 학습 채널 자동 업로드 설정까지 단계별로 안내합니다.
             </p>
           </div>
         </div>
@@ -92,7 +92,7 @@ export const HelpGuidePage: React.FC<HelpGuidePageProps> = ({ onNavigate }) => {
                   처음 1번만 세팅하면 끝! 초등학생도 따라 하는 5단계 유튜브 연동
                 </h2>
                 <p className="text-xs text-slate-600 leading-relaxed font-medium">
-                  K-Shorts Studio는 여러분의 채널에 안전하게 영상을 올리고 첫 댓글을 고정하기 위해 구글 공식 승인 방식을 사용합니다.
+                  Edu-Shorts Studio는 교사용 채널에 안전하게 수업 영상을 올리고 형성평가 첫 댓글을 고정하기 위해 구글 공식 승인 방식을 사용합니다.
                   아래 1단계부터 5단계까지 차근차근 순서대로 따라오시면 약 5분 만에 세팅이 완료됩니다!
                 </p>
                 <div className="flex flex-wrap gap-2 pt-2">
@@ -113,7 +113,7 @@ export const HelpGuidePage: React.FC<HelpGuidePageProps> = ({ onNavigate }) => {
                   </span>
                   <ChevronRight className="w-3.5 h-3.5 text-slate-400 self-center" />
                   <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-emerald-50 border border-emerald-300 text-[11px] font-bold text-emerald-700 shadow-2xs">
-                    ⑤ K-Shorts 등록 & 댓글 설정
+                    ⑤ Edu-Shorts 등록 & 댓글 설정
                   </span>
                 </div>
               </div>
@@ -222,7 +222,7 @@ export const HelpGuidePage: React.FC<HelpGuidePageProps> = ({ onNavigate }) => {
                 <span className="font-black text-slate-400">2-3.</span>
                 <span>
                   기본 정보 3가지만 입력합니다 (나머지는 건너뜁니다):<br />
-                  • <b>앱 이름</b>: 아무거나 입력 (예: <span className="font-mono text-slate-900 bg-slate-100 px-1 rounded font-bold">K-Shorts Auto</span>)<br />
+                  • <b>앱 이름</b>: 아무거나 입력 (예: <span className="font-mono text-slate-900 bg-slate-100 px-1 rounded font-bold">Edu-Shorts Auto</span>)<br />
                   • <b>사용자 지원 이메일</b>: 본인 구글 이메일 선택<br />
                   • <b>개발자 연락처 정보</b>: 본인 구글 이메일 입력<br />
                   ➔ 맨 아래로 스크롤하여 <b>[저장 후 계속]</b>을 계속 눌러 설정을 끝마칩니다.
@@ -262,7 +262,7 @@ export const HelpGuidePage: React.FC<HelpGuidePageProps> = ({ onNavigate }) => {
                     클라이언트 ID & 클라이언트 시크릿 코드 발급받기
                   </h3>
                   <p className="text-[11px] text-slate-500 font-medium">
-                    K-Shorts 앱이 구글에 본인임을 인증할 수 있는 열쇠(Key)를 생성합니다.
+                    Edu-Shorts 앱이 구글에 본인임을 인증할 수 있는 열쇠(Key)를 생성합니다.
                   </p>
                 </div>
               </div>
@@ -440,7 +440,7 @@ export const HelpGuidePage: React.FC<HelpGuidePageProps> = ({ onNavigate }) => {
                 </span>
                 <div>
                   <h3 className="text-sm font-extrabold text-slate-900">
-                    K-Shorts Studio에 등록하고 유튜브 자동 업로드 & 첫 댓글 세팅하기
+                    Edu-Shorts Studio에 등록하고 유튜브 자동 업로드 & 첫 댓글 세팅하기
                   </h3>
                   <p className="text-[11px] text-slate-500 font-medium">
                     이제 발급받은 정보 3가지를 넣고 자동 업로드와 첫 댓글을 켜기만 하면 완성입니다.
@@ -506,7 +506,7 @@ export const HelpGuidePage: React.FC<HelpGuidePageProps> = ({ onNavigate }) => {
                         [쇼츠 비디오 렌더링 완료 즉시 자동 업로드] 토글 ON
                       </p>
                       <p className="text-[11px] text-slate-600">
-                        이 스위치를 켜두시면 K-Shorts에서 영상을 만들자마자 수동 다운로드/업로드할 필요 없이 내 유튜브 채널로 즉시 자동 전송됩니다.
+                        이 스위치를 켜두시면 Edu-Shorts에서 영상을 만들자마자 수동 다운로드/업로드할 필요 없이 내 교사용 유튜브 채널로 즉시 자동 전송됩니다.
                       </p>
                     </div>
                   </div>
@@ -521,7 +521,7 @@ export const HelpGuidePage: React.FC<HelpGuidePageProps> = ({ onNavigate }) => {
                       </p>
                       <p className="text-[11px] text-slate-600 leading-relaxed">
                         영상이 올라가자마자 1초 만에 내 채널의 첫 댓글을 달고 최상단에 고정(Pin)합니다.<br />
-                        • <b>직접 작성 모드</b>: 제휴 링크(쿠팡 파트너스, 블로그, 뉴스레터 링크 등)나 고정 멘트를 직접 적어둘 수 있습니다.<br />
+                        • <b>직접 작성 모드</b>: 학습지 링크(구글 클래스룸, 패들렛 형성평가, EBS 참고 자료 등)나 수업 안내 멘트를 직접 적어둘 수 있습니다.<br />
                         • <b>AI 스마트 댓글 모드</b>: AI가 생성된 영상의 주제와 대본 내용에 딱 맞는 공감/참여 유도 질문을 자동으로 만들어 첫 댓글로 남겨줍니다.
                       </p>
                     </div>
