@@ -133,8 +133,8 @@ export const VideoPlayerModal: React.FC<VideoPlayerModalProps> = ({
                   const title = project.title || project.prompt;
                   const desc = project.script || project.prompt;
                   const keywords = project.prompt.split(' ').filter((w) => w.length > 1).slice(0, 5);
-                  const hashtags = '#Shorts #쇼츠 #AI쇼츠 #' + (keywords.join(' #') || '꿀팁') + ' #알고리즘 #추천';
-                  const ytTags = ['Shorts', '쇼츠', 'AI쇼츠', '알고리즘', '추천', ...keywords].join(', ');
+                  const hashtags = '#Shorts #교육쇼츠 #1분개념정리 #' + (keywords.join(' #') || '수업자료') + ' #거꾸로수업';
+                  const ytTags = ['Shorts', '교육쇼츠', '1분개념정리', '수업자료', '거꾸로수업', ...keywords].join(', ');
                   const fullKit = `[제목]\n${title}\n\n[설명란]\n${desc}\n\n${hashtags}\n\n[유튜브 스튜디오 검색 태그]\n${ytTags}`;
                   navigator.clipboard.writeText(fullKit);
                   alert('제목, 설명란, 해시태그, 검색 태그가 포함된 [올인원 업로드 키트]가 복사되었습니다!');
@@ -171,7 +171,7 @@ export const VideoPlayerModal: React.FC<VideoPlayerModalProps> = ({
                   <span className="font-bold text-gray-300">영상 설명 및 대본</span>
                   <button
                     onClick={() => {
-                      const text = (project.script || project.prompt) + '\n\n#Shorts #쇼츠 #AI쇼츠 #' + (project.prompt.replace(/\s+/g, '') || '꿀팁');
+                      const text = (project.script || project.prompt) + '\n\n#Shorts #교육쇼츠 #1분개념정리 #' + (project.prompt.replace(/\s+/g, '') || '수업자료');
                       navigator.clipboard.writeText(text);
                       alert('영상 설명이 클립보드에 복사되었습니다!');
                     }}
@@ -191,7 +191,7 @@ export const VideoPlayerModal: React.FC<VideoPlayerModalProps> = ({
                   <span className="font-bold text-gray-300">추천 해시태그</span>
                   <button
                     onClick={() => {
-                      const tags = '#Shorts #쇼츠 #AI쇼츠 #' + (project.prompt.split(' ').slice(0, 3).join(' #') || '꿀팁') + ' #추천';
+                      const tags = '#Shorts #교육쇼츠 #1분개념정리 #' + (project.prompt.split(' ').slice(0, 3).join(' #') || '수업자료') + ' #거꾸로수업';
                       navigator.clipboard.writeText(tags);
                       alert('해시태그가 클립보드에 복사되었습니다!');
                     }}
@@ -202,11 +202,11 @@ export const VideoPlayerModal: React.FC<VideoPlayerModalProps> = ({
                 </div>
                 <div className="bg-gray-900 border border-gray-800 rounded-xl p-2 text-xs text-blue-400 font-mono select-all flex flex-wrap gap-1">
                   <span>#Shorts</span>
-                  <span>#쇼츠</span>
-                  <span>#AI쇼츠</span>
+                  <span>#교육쇼츠</span>
+                  <span>#1분개념정리</span>
                   <span>#{project.prompt.replace(/\s+/g, '').slice(0, 10)}</span>
-                  <span>#알고리즘</span>
-                  <span>#추천</span>
+                  <span>#수업자료</span>
+                  <span>#거꾸로수업</span>
                 </div>
               </div>
 
@@ -217,7 +217,7 @@ export const VideoPlayerModal: React.FC<VideoPlayerModalProps> = ({
                   <button
                     onClick={() => {
                       const keywords = project.prompt.split(' ').filter((w) => w.length > 1).slice(0, 5);
-                      const ytTags = ['Shorts', '쇼츠', 'AI쇼츠', '알고리즘', '추천', ...keywords].join(', ');
+                      const ytTags = ['Shorts', '교육쇼츠', '1분개념정리', '수업자료', '거꾸로수업', ...keywords].join(', ');
                       navigator.clipboard.writeText(ytTags);
                       alert('유튜브 스튜디오용 검색 태그가 복사되었습니다!');
                     }}
@@ -227,7 +227,7 @@ export const VideoPlayerModal: React.FC<VideoPlayerModalProps> = ({
                   </button>
                 </div>
                 <div className="bg-gray-900 border border-gray-800 rounded-xl p-2 text-[11px] text-emerald-400 font-mono select-all truncate">
-                  Shorts, 쇼츠, AI쇼츠, 알고리즘, 추천, {project.prompt.slice(0, 15)}...
+                  Shorts, 교육쇼츠, 1분개념정리, 수업자료, {project.prompt.slice(0, 15)}...
                 </div>
               </div>
             </div>

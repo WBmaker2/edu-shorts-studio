@@ -96,13 +96,12 @@ export function splitBrowserEduScenes(script: string, title: string = ''): Scrip
     .map((s) => s.trim())
     .filter(Boolean);
   const sliced = lines.slice(0, 8);
-  const perSceneMin = sliced.length <= 4 ? 12 : sliced.length === 5 ? 10 : 8;
   return sliced.map((text, idx) => ({
     id: idx,
     text,
     visualPrompt: `${title || '교과 핵심 개념'} 수업 시각 자료 장면 ${idx + 1}`,
     isThumbnail: idx === 0,
-    estimatedDuration: Math.max(perSceneMin, Math.round(text.length / 4.2)),
+    estimatedDuration: Math.max(8, Math.round(text.length / 6.0)),
     mediaType: 'image',
   }));
 }
